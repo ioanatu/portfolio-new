@@ -1,5 +1,6 @@
 import cloudPractitioner from '../../assets/certifications/cloud-practitioner.png'
 import aiPractitioner from '../../assets/certifications/ai-practitioner.png'
+import developerAssociate from '../../assets/certifications/developer-associate.png'
 import solutionsArchitectAssociate from '../../assets/certifications/solutions-architect-associate.png'
 import type { Certification } from '../../components/CertificationBadges'
 import { DEFAULT_PRESETS } from '../../components/WaveSurfaceMenu'
@@ -34,6 +35,11 @@ const AWS_CERTIFICATIONS: readonly Certification[] = [
     name: 'AWS Certified Solutions Architect – Associate (SAA-C03)',
     image: solutionsArchitectAssociate,
     issued: '2026-10',
+  },
+  {
+    name: 'AWS Certified Developer – Associate (DVA-C02)',
+    image: developerAssociate,
+    expected: '2026-12',
   },
 ]
 

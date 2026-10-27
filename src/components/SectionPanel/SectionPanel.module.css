@@ -11,6 +11,10 @@
   scrollbar-width: none;
 }
 
+.wide {
+  width: min(56vw, 46rem);
+}
+
 .title {
   margin: 0 0 1rem;
   font-size: clamp(2rem, 4vw, 3.5rem);

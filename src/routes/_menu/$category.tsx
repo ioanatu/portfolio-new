@@ -1,6 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { CertificationBadges } from '../../components/CertificationBadges'
-import { RiseIn } from '../../components/RiseIn'
 import { SectionPanel } from '../../components/SectionPanel'
 import { SECTION_CONTENT } from '../../features/home/content'
 
@@ -17,14 +16,17 @@ function Section() {
 
   // Keyed so the rise-in animation replays for every section
   return (
-    <SectionPanel key={category} title={title} rise={!certifications}>
+    <SectionPanel
+      key={category}
+      title={title}
+      rise={!certifications}
+      wide={!!certifications}
+    >
       {paragraphs.map((text) => (
         <p key={text}>{text}</p>
       ))}
       {certifications && (
-        <RiseIn>
-          <CertificationBadges certifications={certifications} />
-        </RiseIn>
+        <CertificationBadges certifications={certifications} />
       )}
     </SectionPanel>
   )

@@ -44,12 +44,13 @@ describe('routes', () => {
     ).toBeInTheDocument()
   })
 
-  it('shows the three AWS badges on the AWS Certifications page', async () => {
+  it('shows the four AWS badges on the AWS Certifications page', async () => {
     await renderRoute('/aws-certifications')
-    expect(await screen.findAllByRole('img')).toHaveLength(3)
+    expect(await screen.findAllByRole('img')).toHaveLength(4)
     expect(screen.getByRole('img', { name: /CLF-C02/ })).toBeInTheDocument()
     expect(screen.getByRole('img', { name: /AIF-C01/ })).toBeInTheDocument()
     expect(screen.getByRole('img', { name: /SAA-C03/ })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /DVA-C02/ })).toBeInTheDocument()
     expect(screen.getAllByText(/^(Oct 2021|Sep 2026|Oct 2026)$/)).toHaveLength(
       3,
     )
