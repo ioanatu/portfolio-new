@@ -1,19 +1,18 @@
 import type { Point, SurfaceLayout } from './waveGeometry'
 
+type DrawLayout = Pick<SurfaceLayout, 'width' | 'height' | 'portrait'>
+
 const BLEED = 40
 
-export function drawSurface(
+function traceSurface(
   ctx: CanvasRenderingContext2D,
   points: readonly Point[],
-  layout: Pick<SurfaceLayout, 'width' | 'height' | 'portrait'>,
-  fillStyle: string,
+  { width, height, portrait }: DrawLayout,
 ) {
-  const { width, height, portrait } = layout
-  ctx.clearRect(0, 0, width, height)
-  ctx.fillStyle = fillStyle
   ctx.beginPath()
   ctx.moveTo(...points[0])
 
+  // Catmull-Rom through the points for a smooth, organic edge
   for (let i = 0; i < points.length - 1; i++) {
     const p0 = points[i - 1] ?? points[i]
     const p1 = points[i]
@@ -33,5 +32,52 @@ export function drawSurface(
   ctx.lineTo(width + BLEED, height + BLEED)
   ctx.lineTo(-BLEED, height + BLEED)
   ctx.closePath()
+}
+
+/**
+ * Fill the area behind the edge with a gradient and light it like a raised
+ * surface: a soft highlight and a thin rim.
+ */
+export function drawSurface(
+  ctx: CanvasRenderingContext2D,
+  points: readonly Point[],
+  layout: DrawLayout,
+  [from, to]: readonly [string, string],
+) {
+  const { width, height } = layout
+  ctx.clearRect(0, 0, width, height)
+
+  const gradient = ctx.createLinearGradient(0, height, width, 0)
+  gradient.addColorStop(0, from)
+  gradient.addColorStop(1, to)
+
+  traceSurface(ctx, points, layout)
+  ctx.fillStyle = gradient
   ctx.fill()
+
+  ctx.save()
+  ctx.clip()
+
+  // Soft highlight, as if lit from the upper left
+  const [lightX, lightY] = [width * 0.3, height * 0.9]
+  const highlight = ctx.createRadialGradient(
+    lightX,
+    lightY,
+    0,
+    lightX,
+    lightY,
+    Math.hypot(width, height) * 0.45,
+  )
+  highlight.addColorStop(0, 'rgba(255, 255, 255, 0.35)')
+  highlight.addColorStop(1, 'rgba(255, 255, 255, 0)')
+  ctx.fillStyle = highlight
+  ctx.fillRect(0, 0, width, height)
+
+  // Thin light rim along the edge
+  ctx.lineWidth = 3
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)'
+  traceSurface(ctx, points, layout)
+  ctx.stroke()
+
+  ctx.restore()
 }

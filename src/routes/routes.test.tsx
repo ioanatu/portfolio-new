@@ -54,5 +54,7 @@ describe('routes', () => {
     expect(screen.getAllByText(/^(Oct 2021|Sep 2026|Oct 2026)$/)).toHaveLength(
       3,
     )
+    expect(screen.getByText('Expected')).toBeInTheDocument()
+    expect(screen.getByText('Dec 2026')).toBeInTheDocument()
   })
 })

@@ -3,6 +3,7 @@ import styles from './WaveSurface.module.css'
 import { drawSurface } from './drawSurface'
 import type { WavePreset } from './types'
 import { createWaveState, stepWaveState } from './waveAnimation'
+import { getGradientColors } from './surfaceGradient'
 import { getEdgePoints, toCssRgb, type SurfaceLayout } from './waveGeometry'
 
 /** Keep in sync with the media queries in the CSS modules. */
@@ -65,11 +66,12 @@ export function WaveSurface({ preset, menuRef }: WaveSurfaceProps) {
       lastTime = now
       state = stepWaveState(state, presetRef.current, dt, reduceMotion)
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+      const [from, to] = getGradientColors(state.rgb, state.drift)
       drawSurface(
         ctx,
         getEdgePoints(state.shape, state.drift, layout),
         layout,
-        toCssRgb(state.rgb),
+        [toCssRgb(from), toCssRgb(to)],
       )
       frameId = requestAnimationFrame(frame)
     }
