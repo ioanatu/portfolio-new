@@ -1,0 +1,21 @@
+.rise {
+  animation: rise 1.8s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}

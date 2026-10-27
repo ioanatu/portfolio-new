@@ -29,9 +29,11 @@ describe('routes', () => {
 
   it('switches section when a menu item is clicked', async () => {
     await renderRoute('/')
-    await userEvent.click(await screen.findByRole('link', { name: 'Nature' }))
+    await userEvent.click(
+      await screen.findByRole('link', { name: 'AWS Certifications' }),
+    )
     expect(
-      await screen.findByRole('heading', { name: 'Nature' }),
+      await screen.findByRole('heading', { name: 'AWS Certifications' }),
     ).toBeInTheDocument()
   })
 
@@ -40,5 +42,16 @@ describe('routes', () => {
     expect(
       await screen.findByRole('heading', { name: 'Hello' }),
     ).toBeInTheDocument()
+  })
+
+  it('shows the three AWS badges on the AWS Certifications page', async () => {
+    await renderRoute('/aws-certifications')
+    expect(await screen.findAllByRole('img')).toHaveLength(3)
+    expect(screen.getByRole('img', { name: /CLF-C02/ })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /AIF-C01/ })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /SAA-C03/ })).toBeInTheDocument()
+    expect(screen.getAllByText(/^(Oct 2021|Sep 2026|Oct 2026)$/)).toHaveLength(
+      3,
+    )
   })
 })

@@ -12,8 +12,8 @@ export const DEFAULT_PRESETS: readonly WavePreset[] = [
     drift: 0.5,
   },
   {
-    id: 'nature',
-    label: 'Nature',
+    id: 'aws-certifications',
+    label: 'AWS Certifications',
     color: '#DAEEEB',
     amp: 0.13,
     freq: 1.7,
