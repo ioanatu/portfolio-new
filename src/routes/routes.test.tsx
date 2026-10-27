@@ -1,18 +1,44 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderRoute } from '../test/renderWithRouter'
 
+// jsdom has no canvas; the wave surface bails out without a 2D context
+beforeEach(() => {
+  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null)
+})
+
 describe('routes', () => {
-  it('renders the home page', async () => {
+  it('renders the home page with the menu as links', async () => {
     await renderRoute('/')
     expect(
-      await screen.findByRole('heading', { name: 'Welcome' }),
+      await screen.findByRole('heading', { name: 'Hello' }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByRole('link')).toHaveLength(6)
+  })
+
+  it('shows the section of the category in the URL and marks it current', async () => {
+    await renderRoute('/film')
+    expect(
+      await screen.findByRole('heading', { name: 'Film' }),
+    ).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Film' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    )
+  })
+
+  it('switches section when a menu item is clicked', async () => {
+    await renderRoute('/')
+    await userEvent.click(await screen.findByRole('link', { name: 'Nature' }))
+    expect(
+      await screen.findByRole('heading', { name: 'Nature' }),
     ).toBeInTheDocument()
   })
 
-  it('renders the about page', async () => {
-    await renderRoute('/about')
+  it('redirects unknown categories to home', async () => {
+    await renderRoute('/nope')
     expect(
-      await screen.findByRole('heading', { name: 'About' }),
+      await screen.findByRole('heading', { name: 'Hello' }),
     ).toBeInTheDocument()
   })
 })

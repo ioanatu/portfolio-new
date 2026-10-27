@@ -1,0 +1,15 @@
+.root {
+  --paper: #fff;
+  --ink: #1f2427;
+  --ink-soft: #596166;
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    'Bricolage Grotesque', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}

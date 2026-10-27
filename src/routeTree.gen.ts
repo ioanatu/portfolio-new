@@ -9,68 +9,91 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as MenuRouteImport } from './routes/_menu'
+import { Route as MenuIndexRouteImport } from './routes/_menu/index'
+import { Route as MenuCategoryRouteImport } from './routes/_menu/$category'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const MenuRoute = MenuRouteImport.update({
+  id: '/_menu',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
+const MenuIndexRoute = MenuIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => MenuRoute,
+} as any)
+const MenuCategoryRoute = MenuCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => MenuRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/': typeof MenuIndexRoute
+  '/$category': typeof MenuCategoryRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/$category': typeof MenuCategoryRoute
+  '/': typeof MenuIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/_menu': typeof MenuRouteWithChildren
+  '/_menu/$category': typeof MenuCategoryRoute
+  '/_menu/': typeof MenuIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/$category'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/$category' | '/'
+  id: '__root__' | '/_menu' | '/_menu/$category' | '/_menu/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  MenuRoute: typeof MenuRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_menu': {
+      id: '/_menu'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof MenuRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
+    '/_menu/': {
+      id: '/_menu/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof MenuIndexRouteImport
+      parentRoute: typeof MenuRoute
+    }
+    '/_menu/$category': {
+      id: '/_menu/$category'
+      path: '/$category'
+      fullPath: '/$category'
+      preLoaderRoute: typeof MenuCategoryRouteImport
+      parentRoute: typeof MenuRoute
     }
   }
 }
 
+interface MenuRouteChildren {
+  MenuCategoryRoute: typeof MenuCategoryRoute
+  MenuIndexRoute: typeof MenuIndexRoute
+}
+
+const MenuRouteChildren: MenuRouteChildren = {
+  MenuCategoryRoute: MenuCategoryRoute,
+  MenuIndexRoute: MenuIndexRoute,
+}
+
+const MenuRouteWithChildren = MenuRoute._addFileChildren(MenuRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  MenuRoute: MenuRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
