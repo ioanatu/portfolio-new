@@ -1,0 +1,5 @@
+dist
+coverage
+.yarn
+src/routeTree.gen.ts
+yarn.lock
