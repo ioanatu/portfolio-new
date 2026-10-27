@@ -1,4 +1,4 @@
-import { getGradientColors } from './surfaceGradient'
+import { getCornerColor, getGradientColors } from './surfaceGradient'
 import type { RGB } from './waveGeometry'
 
 const nature: RGB = [218, 238, 235]
@@ -32,5 +32,16 @@ describe('getGradientColors', () => {
     const [from, to] = getGradientColors(nature, 0)
     expect(from).not.toEqual(to)
     expect(getGradientColors(nature, 3)[0]).not.toEqual(from)
+  })
+})
+
+describe('getCornerColor', () => {
+  it('has a different hue from the base color and valid channels', () => {
+    const corner = getCornerColor(nature, 0)
+    expect(corner).not.toEqual(nature)
+    for (const channel of corner) {
+      expect(channel).toBeGreaterThanOrEqual(0)
+      expect(channel).toBeLessThanOrEqual(255.0001)
+    }
   })
 })

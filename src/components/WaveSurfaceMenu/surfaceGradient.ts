@@ -2,6 +2,8 @@ import type { RGB } from './waveGeometry'
 
 const HUE_SWING_DEG = 16
 const SWING_SPEED = 0.5
+const CORNER_HUE_OFFSET_DEG = 45
+const CORNER_HUE_SWING_DEG = 12
 
 type HSL = readonly [h: number, s: number, l: number]
 
@@ -48,4 +50,18 @@ export function getGradientColors(
     hslToRgb([h + swing, s, clamp01(l + 0.045)]),
     hslToRgb([h - swing, clamp01(s + 0.075), clamp01(l - 0.065)]),
   ]
+}
+
+/**
+ * Color for the glow in the surface's bottom-right corner: the base hue turned
+ * a good way around the wheel, more saturated, and swaying slowly.
+ */
+export function getCornerColor(rgb: RGB, drift: number): RGB {
+  const [h, s, l] = rgbToHsl(rgb)
+  const swing = Math.sin(drift * SWING_SPEED + 1) * CORNER_HUE_SWING_DEG
+  return hslToRgb([
+    h + CORNER_HUE_OFFSET_DEG + swing,
+    clamp01(s + 0.25),
+    clamp01(l - 0.04),
+  ])
 }

@@ -22,8 +22,9 @@ export function hexToRgb(hex: string): RGB {
   return [r, g, b]
 }
 
-export function toCssRgb([r, g, b]: RGB): string {
-  return `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`
+export function toCssRgb([r, g, b]: RGB, alpha = 1): string {
+  const channels = `${Math.round(r)},${Math.round(g)},${Math.round(b)}`
+  return alpha === 1 ? `rgb(${channels})` : `rgba(${channels},${alpha})`
 }
 
 export function cubicBezier(

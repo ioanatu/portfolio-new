@@ -3,12 +3,13 @@ import styles from './WaveSurface.module.css'
 import { drawSurface } from './drawSurface'
 import type { WavePreset } from './types'
 import { createWaveState, stepWaveState } from './waveAnimation'
-import { getGradientColors } from './surfaceGradient'
+import { getCornerColor, getGradientColors } from './surfaceGradient'
 import { getEdgePoints, toCssRgb, type SurfaceLayout } from './waveGeometry'
 
 /** Keep in sync with the media queries in the CSS modules. */
 export const PORTRAIT_QUERY = '(max-width: 820px), (orientation: portrait)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+const CORNER_GLOW_ALPHA = 0.45
 const MAX_PIXEL_RATIO = 2
 const MAX_FRAME_SECONDS = 0.05
 
@@ -67,11 +68,17 @@ export function WaveSurface({ preset, menuRef }: WaveSurfaceProps) {
       state = stepWaveState(state, presetRef.current, dt, reduceMotion)
       ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
       const [from, to] = getGradientColors(state.rgb, state.drift)
+      const corner = getCornerColor(state.rgb, state.drift)
       drawSurface(
         ctx,
         getEdgePoints(state.shape, state.drift, layout),
         layout,
-        [toCssRgb(from), toCssRgb(to)],
+        {
+          from: toCssRgb(from),
+          to: toCssRgb(to),
+          corner: [toCssRgb(corner, CORNER_GLOW_ALPHA), toCssRgb(corner, 0)],
+        },
+        state.drift,
       )
       frameId = requestAnimationFrame(frame)
     }

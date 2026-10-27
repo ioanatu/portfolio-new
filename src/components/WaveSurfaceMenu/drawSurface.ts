@@ -1,4 +1,13 @@
+import { createPastelSweep } from './pastelSweep'
 import type { Point, SurfaceLayout } from './waveGeometry'
+
+export interface SurfaceColors {
+  /** Ends of the base gradient. */
+  from: string
+  to: string
+  /** Opaque and transparent versions of the bottom-right glow. */
+  corner: readonly [opaque: string, transparent: string]
+}
 
 type DrawLayout = Pick<SurfaceLayout, 'width' | 'height' | 'portrait'>
 
@@ -36,13 +45,14 @@ function traceSurface(
 
 /**
  * Fill the area behind the edge with a gradient and light it like a raised
- * surface: a soft highlight and a thin rim.
+ * surface: a pastel sweep, a corner glow, a soft highlight and a thin rim.
  */
 export function drawSurface(
   ctx: CanvasRenderingContext2D,
   points: readonly Point[],
   layout: DrawLayout,
-  [from, to]: readonly [string, string],
+  { from, to, corner }: SurfaceColors,
+  drift: number,
 ) {
   const { width, height } = layout
   ctx.clearRect(0, 0, width, height)
@@ -57,6 +67,23 @@ export function drawSurface(
 
   ctx.save()
   ctx.clip()
+
+  ctx.fillStyle = createPastelSweep(ctx, layout, drift)
+  ctx.fillRect(0, 0, width, height)
+
+  // Second color source glowing in the bottom-right corner
+  const glow = ctx.createRadialGradient(
+    width,
+    height,
+    0,
+    width,
+    height,
+    Math.hypot(width, height) * 0.5,
+  )
+  glow.addColorStop(0, corner[0])
+  glow.addColorStop(1, corner[1])
+  ctx.fillStyle = glow
+  ctx.fillRect(0, 0, width, height)
 
   // Soft highlight, as if lit from the upper left
   const [lightX, lightY] = [width * 0.3, height * 0.9]
