@@ -1,7 +1,15 @@
-import { CREDLY_BADGE_COUNT, IN_PROGRESS_CERTIFICATION } from '../../content/certifications';
+import {
+  CERTIFICATIONS_INTRO,
+  CERTIFICATIONS_SOURCE_NOTE,
+  CERTIFICATIONS_TITLE,
+  CREDLY_BADGE_COUNT,
+  IN_PROGRESS_CERTIFICATION,
+} from '../../content/certifications';
 import { useCredlyBadges } from '../../hooks/useCredlyBadges';
 import { CertificationCard } from '../CertificationCard/CertificationCard';
 import { CertificationCardSkeleton } from '../CertificationCard/CertificationCardSkeleton';
+import { Container } from '../Container/Container';
+import { SectionHead } from '../SectionHead/SectionHead';
 import styles from './CertificationsSection.module.css';
 
 export const CertificationsSection = () => {
@@ -9,25 +17,34 @@ export const CertificationsSection = () => {
 
   return (
     <section id="certifications" className={styles.section} aria-labelledby="certifications-title">
-      <div className={styles.grid} aria-busy={isPending}>
-        {isPending &&
-          Array.from({ length: CREDLY_BADGE_COUNT }, (_, i) => (
-            <CertificationCardSkeleton key={i} />
-          ))}
-        {earned?.map((certification) => (
-          <CertificationCard key={certification.name} certification={certification} />
-        ))}
-        <CertificationCard
-          key={IN_PROGRESS_CERTIFICATION.name}
-          certification={IN_PROGRESS_CERTIFICATION}
-          className={styles.inProgress}
+      <Container>
+        <SectionHead
+          tag="Certifications"
+          title={CERTIFICATIONS_TITLE}
+          titleId="certifications-title"
+          intro={CERTIFICATIONS_INTRO}
+          note={CERTIFICATIONS_SOURCE_NOTE}
         />
-      </div>
-      {isError && (
-        <p role="alert" className={styles.error}>
-          Could not load the earned badges right now.
-        </p>
-      )}
+        <div className={styles.grid} aria-busy={isPending}>
+          {isPending &&
+            Array.from({ length: CREDLY_BADGE_COUNT }, (_, i) => (
+              <CertificationCardSkeleton key={i} />
+            ))}
+          {earned?.map((certification) => (
+            <CertificationCard key={certification.name} certification={certification} />
+          ))}
+          <CertificationCard
+            key={IN_PROGRESS_CERTIFICATION.name}
+            certification={IN_PROGRESS_CERTIFICATION}
+            className={styles.inProgress}
+          />
+        </div>
+        {isError && (
+          <p role="alert" className={styles.error}>
+            Could not load the earned badges right now.
+          </p>
+        )}
+      </Container>
     </section>
   );
 };
