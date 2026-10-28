@@ -1,5 +1,0 @@
-export { CategoryMenu, type CategoryMenuItem } from './CategoryMenu'
-export { DEFAULT_PRESETS } from './presets'
-export type { WavePreset, WaveShape } from './types'
-export { WaveSurface } from './WaveSurface'
-export { WaveSurfaceMenu } from './WaveSurfaceMenu'
