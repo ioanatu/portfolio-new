@@ -1,0 +1,33 @@
+import { CREDLY_BADGE_COUNT, IN_PROGRESS_CERTIFICATION } from '../../content/certifications';
+import { useCredlyBadges } from '../../hooks/useCredlyBadges';
+import { CertificationCard } from '../CertificationCard/CertificationCard';
+import { CertificationCardSkeleton } from '../CertificationCard/CertificationCardSkeleton';
+import styles from './CertificationsSection.module.css';
+
+export const CertificationsSection = () => {
+  const { data: earned, isPending, isError } = useCredlyBadges();
+
+  return (
+    <section id="certifications" className={styles.section} aria-labelledby="certifications-title">
+      <div className={styles.grid} aria-busy={isPending}>
+        {isPending &&
+          Array.from({ length: CREDLY_BADGE_COUNT }, (_, i) => (
+            <CertificationCardSkeleton key={i} />
+          ))}
+        {earned?.map((certification) => (
+          <CertificationCard key={certification.name} certification={certification} />
+        ))}
+        <CertificationCard
+          key={IN_PROGRESS_CERTIFICATION.name}
+          certification={IN_PROGRESS_CERTIFICATION}
+          className={styles.inProgress}
+        />
+      </div>
+      {isError && (
+        <p role="alert" className={styles.error}>
+          Could not load the earned badges right now.
+        </p>
+      )}
+    </section>
+  );
+};
