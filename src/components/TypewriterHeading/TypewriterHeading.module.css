@@ -1,0 +1,96 @@
+.typewriter-heading {
+  cursor: default;
+
+  .line {
+    display: block;
+
+    @media (max-width: 640px) {
+      display: inline;
+    }
+  }
+
+  .word {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+    padding: 0.16em 0.05em 0.28em;
+    margin: -0.16em -0.05em -0.28em;
+  }
+
+  .inner {
+    display: inline-block;
+    padding: 0 0.03em 0.24em;
+    margin: 0 -0.03em -0.24em;
+    transform: translateY(108%) rotate(7deg);
+    transform-origin: 0 100%;
+    opacity: 0;
+    filter: blur(6px);
+  }
+
+  .bold {
+    font-weight: 800;
+  }
+
+  &.rising .inner {
+    animation: rise-word 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i) * 75ms);
+  }
+
+  &.settled .inner {
+    animation: none;
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  &.settled .hot {
+    transition: translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    &:hover {
+      translate: 0 -0.1em;
+      background: linear-gradient(
+        100deg,
+        var(--text) 0%,
+        var(--text) 24%,
+        #ff8a3d 34%,
+        #ffc94a 40%,
+        #f2509b 48%,
+        #8e4cf0 56%,
+        #3d7bf5 64%,
+        #2ec5b6 70%,
+        var(--text) 80%,
+        var(--text) 100%
+      );
+      background-size: 320% 100%;
+      background-position: 100% 0;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: gloss 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+      @media (prefers-reduced-motion: reduce) {
+        translate: none;
+        background: none;
+        -webkit-text-fill-color: currentcolor;
+        color: inherit;
+        animation: none;
+      }
+    }
+  }
+}
+
+@keyframes rise-word {
+  to {
+    transform: none;
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes gloss {
+  to {
+    background-position: 0% 0;
+  }
+}

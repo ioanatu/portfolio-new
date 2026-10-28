@@ -1,0 +1,66 @@
+.rotating-words {
+  display: inline-grid;
+  justify-items: start;
+  margin-left: -0.25em;
+  clip-path: inset(-0.05em -0.4em);
+
+  .word {
+    grid-area: 1 / 1;
+    font-weight: 700;
+    color: var(--sw3);
+    animation:
+      swap 9s cubic-bezier(0.6, 0, 0.3, 1) var(--swap-delay) infinite,
+      swap-hue 10s linear var(--hue-delay) infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+
+      & + .word {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+@keyframes swap-hue {
+  0%,
+  100% {
+    color: var(--sw1);
+  }
+  20% {
+    color: var(--sw2);
+  }
+  40% {
+    color: var(--sw3);
+  }
+  60% {
+    color: var(--sw4);
+  }
+  80% {
+    color: var(--sw5);
+  }
+}
+
+@keyframes swap {
+  0%,
+  26% {
+    transform: none;
+    opacity: 1;
+  }
+  33% {
+    transform: translateY(0.8em);
+    opacity: 0;
+  }
+  34% {
+    transform: translateY(-0.8em);
+    opacity: 0;
+  }
+  93% {
+    transform: translateY(-0.8em);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
