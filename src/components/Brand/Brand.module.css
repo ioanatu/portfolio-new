@@ -1,0 +1,46 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-family: 'Poppins', var(--display);
+  font-weight: 700;
+  font-size: calc(1.2rem - 1px);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    flex: none;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      100deg,
+      var(--text) 0%,
+      var(--text) 24%,
+      #ff8a3d 34%,
+      #ffc94a 40%,
+      #f2509b 48%,
+      #8e4cf0 56%,
+      #3d7bf5 64%,
+      #2ec5b6 70%,
+      var(--text) 80%,
+      var(--text) 100%
+    );
+    background-size: 320% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gloss 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+@keyframes gloss {
+  to {
+    background-position: 0% 0;
+  }
+}
