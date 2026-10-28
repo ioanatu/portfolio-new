@@ -68,7 +68,7 @@ export const DownloadCvMenu = ({ links, open, onOpenChange, className }: Downloa
         onClick={() => onOpenChange(!open)}
         onKeyDown={onButtonKeyDown}
       >
-        Download CV
+        View Resume
         <svg
           viewBox="0 0 16 16"
           fill="none"

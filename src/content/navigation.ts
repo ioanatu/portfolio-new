@@ -1,3 +1,6 @@
+import cvAts from '../assets/IoanaTatu_ATS_resume.pdf';
+import cvHuman from '../assets/IoanaTatu_Human.pdf';
+
 export type SectionNavItem = {
   label: string;
   sectionId: string;
@@ -10,8 +13,8 @@ export const SECTION_NAV_ITEMS: readonly SectionNavItem[] = [
 export const SECTION_IDS = SECTION_NAV_ITEMS.map(({ sectionId }) => sectionId);
 
 export const CV_LINKS = [
-  { label: 'ATS format', href: '/ioana-tatu-cv-ats.pdf' },
-  { label: 'Human eye', href: '/ioana-tatu-cv.pdf' },
+  { label: 'ATS format', href: cvAts },
+  { label: 'Human eye', href: cvHuman },
 ] as const;
 
 export const SOCIAL_LINKS = [

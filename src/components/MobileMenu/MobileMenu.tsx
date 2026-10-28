@@ -39,7 +39,7 @@ export const MobileMenu = ({
       <li className={styles.separator} aria-hidden="true" />
       <li>
         <span className={styles.label} id="mobile-cv-label">
-          Download CV
+          Resume
         </span>
         <div className={styles.cv} role="group" aria-labelledby="mobile-cv-label">
           {cvLinks.map(({ label, href }) => (
