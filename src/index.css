@@ -1,8 +1,187 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
+  --bg: #eef0f3;
+  --surface: #fff;
+  --surface-2: #f5f6f8;
+  --text: #1b1f3b;
+  --muted: #555a71;
+  --line: rgba(27, 31, 59, 0.12);
+  --btn: #1b1f3b;
+  --btn-text: #fff;
+  --focus: #4453d0;
+
+  --butter: #f6df7c;
+  --dawn: #f5cdbe;
+  --pink: #f2b9d3;
+  --lilac: #cfcaf4;
+  --on-pastel: #1b1f3b;
+
+  --r-lg: 28px;
+  --r-md: 18px;
+
+  --display:
+    'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --body: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Liquid-glass surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.22);
+  --glass-edge: rgba(255, 255, 255, 0.6);
+  --glass-hi: rgba(255, 255, 255, 0.95);
+  --glass-glow: rgba(255, 255, 255, 0.24);
+  --glass-shadow: rgba(27, 31, 59, 0.32);
+  --glass-ctl: rgba(255, 255, 255, 0.24);
+  --sheen: 0.55;
+  --stage-glass: rgba(255, 255, 255, 0.46);
+  --pending-glass: rgba(255, 255, 255, 0.31);
+
+  /* Hero gradient, grain and the diagonal page pattern */
+  --blob-o: 0.39;
+  --g-sky: #7fb8f2;
+  --g-coral: #ea5363;
+  --g-violet: #7446e0;
+  --g-ice: #bfe0f8;
+  --grain-o: 0.384;
+  --stripe: rgba(27, 31, 59, 0.057);
+
+  /* Colors of the rotating city name */
+  --sw1: #00994a;
+  --sw2: #008c99;
+  --sw3: #0038ff;
+  --sw4: #5a00ff;
+  --sw5: #b000e8;
+
   color-scheme: light;
-  font-family: system-ui, sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root[data-theme='dark'] {
+  --bg: #10121c;
+  --surface: #191c2a;
+  --surface-2: #222638;
+  --text: #ecedf5;
+  --muted: #a6aac0;
+  --line: rgba(236, 237, 245, 0.12);
+  --btn: #ecedf5;
+  --btn-text: #10121c;
+  --focus: #a9b2ff;
+
+  --glass-bg: rgba(25, 28, 42, 0.32);
+  --glass-edge: rgba(255, 255, 255, 0.16);
+  --glass-hi: rgba(255, 255, 255, 0.3);
+  --glass-glow: rgba(255, 255, 255, 0.06);
+  --glass-shadow: rgba(0, 0, 0, 0.55);
+  --glass-ctl: rgba(255, 255, 255, 0.08);
+  --sheen: 0.12;
+  --stage-glass: rgba(25, 28, 42, 0.46);
+  --pending-glass: rgba(25, 28, 42, 0.31);
+
+  --blob-o: 0.3;
+  --g-sky: #4e8fe0;
+  --g-coral: #d9475a;
+  --g-violet: #7a4bf0;
+  --g-ice: #5b9bd6;
+  --grain-o: 0.24;
+  --stripe: rgba(236, 237, 245, 0.045);
+
+  --sw1: #00ff7a;
+  --sw2: #00ffe5;
+  --sw3: #3f86ff;
+  --sw4: #8a4dff;
+  --sw5: #e05bff;
+
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 100px);
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Keeps content from showing through the notch area */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 60;
+  background: var(--bg);
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+#root {
+  /* Anchors the diagonal page pattern */
+  position: relative;
+  isolation: isolate;
+}
+
+#root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(-45deg, var(--stripe) 0 1px, transparent 1px 6px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 220px);
 }
