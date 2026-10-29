@@ -10,7 +10,7 @@ export type Certification = {
 
 export const CERTIFICATIONS_TITLE = 'Certified on AWS,\nthree times and counting';
 export const CERTIFICATIONS_INTRO =
-  "I'm passionate about cloud computing and invest in my continuous education. I believe that understanding the platform your code runs on is essential to building performant, scalable, and secure applications.";
+  "I'm passionate about cloud computing and invest in my continuous education. Understanding things beyond my frontend role helps me build performant, scalable, and secure applications.";
 export const CERTIFICATIONS_SOURCE_NOTES: string[] = [
   'A Lambda function on aws fetches earned badges directly from the Credly API.',
   'The function has CORS enabled and is cached for one hour, so badges are not fetched on every page load.',
@@ -27,5 +27,5 @@ export const CREDLY_BADGE_COUNT = 3;
 export const IN_PROGRESS_CERTIFICATION: Certification = {
   name: 'AWS Certified Developer – Associate',
   badge: developerAssociate,
-  expected: 'November 2026',
+  expected: 'December 2026',
 };
