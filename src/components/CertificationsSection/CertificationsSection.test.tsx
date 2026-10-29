@@ -1,6 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, within } from '@testing-library/react';
-import { CERTIFICATIONS_SOURCE_NOTES } from '../../content/certifications';
+import {
+  CERTIFICATIONS_SOURCE_NOTES,
+  IN_PROGRESS_CERTIFICATION,
+} from '../../content/certifications';
 import { CertificationsSection } from './CertificationsSection';
 
 const badge = (name: string, issued_at_date: string) => ({
@@ -83,10 +86,12 @@ describe('CertificationsSection', () => {
 
     expect(
       await screen.findByRole('article', {
-        name: 'In progress: AWS Certified Developer – Associate, expected November 2026',
+        name: `In progress: ${IN_PROGRESS_CERTIFICATION.name}, expected ${IN_PROGRESS_CERTIFICATION.expected}`,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText('Expected November 2026')).toBeInTheDocument();
+    expect(screen.getByText(/Currently learning for the DVA-C03/)).toHaveTextContent(
+      `Expected ${IN_PROGRESS_CERTIFICATION.expected}`,
+    );
   });
 
   it('explains where the badges come from in the source card', () => {

@@ -1,0 +1,11 @@
+/* Yellow highlighter pen: see-through, with slanted ends like a marker stroke.
+   The text keeps its normal colour, which reads on the tint in both themes. */
+.emphasized-text {
+  padding: 0 0.3em;
+  background: color-mix(in srgb, var(--butter) 55%, transparent);
+  clip-path: polygon(0.25em 0, 100% 0, calc(100% - 0.25em) 100%, 0 100%);
+  color: var(--text);
+  font-weight: 700;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}

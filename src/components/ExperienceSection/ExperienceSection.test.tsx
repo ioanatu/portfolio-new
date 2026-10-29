@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { JOBS } from '../../content/experience';
 import { ExperienceSection } from './ExperienceSection';
@@ -8,7 +8,7 @@ describe('ExperienceSection', () => {
 
   it('lists every job with its role and dates', () => {
     expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(JOBS.length);
-    expect(screen.getByText('Frontend Software Engineer')).toBeInTheDocument();
+    expect(screen.getByText(JOBS[0]?.role ?? '')).toBeInTheDocument();
     expect(screen.getByText('Nov 2022 – Aug 2021')).toBeInTheDocument();
   });
 
@@ -25,5 +25,36 @@ describe('ExperienceSection', () => {
 
     await userEvent.click(futurice);
     expect(job).toHaveAttribute('open');
+  });
+
+  it('writes up sonnen project by project, with a link to Tariffs', () => {
+    const sonnen = within(
+      screen
+        .getByRole('heading', { name: JOBS[0]?.detail?.heading })
+        .closest('details') as HTMLElement,
+    );
+    expect(sonnen.getAllByRole('heading', { level: 4 })).toHaveLength(5);
+    expect(sonnen.getByText('Responsibilities common to all projects:')).toBeInTheDocument();
+    const link = sonnen.getByRole('link', { name: 'Tariffs, opens in a new tab' });
+    expect(link).toHaveAttribute('href', 'https://tariffs.sonnen.de/');
+    expect(link).toHaveAttribute('target', '_blank');
+  });
+
+  it('describes sonnen in a card with a link to its website', () => {
+    const link = screen.getByRole('link', { name: 'Visit sonnen.de, opens in a new tab' });
+    expect(link).toHaveAttribute('href', 'https://www.sonnen.de/');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(screen.getByText(JOBS[0]?.detail?.intro ?? '')).toBeInTheDocument();
+  });
+
+  it('sets key terms in bold in the Toolbox and Tariffs bullets only', () => {
+    const bold = Array.from(document.querySelectorAll('li strong')).map((item) => item.textContent);
+    expect(bold).toContain('microfrontends');
+    expect(bold).toContain('GitHub Actions');
+    expect(bold).toContain('B2B');
+    expect(bold).toContain('B2C');
+
+    const webUi = screen.getByRole('region', { name: 'web-ui' });
+    expect(webUi.querySelector('strong')).toBeNull();
   });
 });

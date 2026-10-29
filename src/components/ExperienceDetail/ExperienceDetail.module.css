@@ -1,0 +1,62 @@
+.experience-detail {
+  display: grid;
+  gap: 26px;
+  margin: 0 0 34px;
+  padding: 0 4px;
+  color: var(--muted);
+
+  b {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  h4 {
+    font: inherit;
+    font-size: 1.2rem;
+    letter-spacing: 0;
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 18px;
+
+    a {
+      width: 32px;
+      min-height: 32px;
+      padding: 0;
+      margin-left: 14px;
+    }
+  }
+
+  /* The description is lighter than the project name, so long ones stay on one line */
+  .summary {
+    font-size: 1rem;
+  }
+
+  .stack {
+    padding-left: 2.1em;
+  }
+
+  ul {
+    display: grid;
+    gap: 6px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    padding-left: 2.1em;
+    line-height: 1.45;
+
+    .bullet {
+      position: absolute;
+      left: 0.4em;
+      top: 0.35em;
+      color: var(--muted);
+    }
+  }
+}

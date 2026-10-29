@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { CertificationsSection } from '../../components/CertificationsSection/CertificationsSection';
 import { Container } from '../../components/Container/Container';
 import { ExperienceSection } from '../../components/ExperienceSection/ExperienceSection';
@@ -22,11 +23,15 @@ export const EducationSection = () => {
 };
 export const SkillsSection = () => {
   return (
-    <section id="skills" className={styles.placeholder} aria-labelledby="skills-title">
+    <section
+      id="skills"
+      className={clsx(styles.placeholder, styles.skills)}
+      aria-labelledby="skills-title"
+    >
       <Container>
         <SectionHead
           tag="Skills"
-          title={'Skills'}
+          title={'Skills & Tech Stack'}
           titleId="skills-title"
           intro={CERTIFICATIONS_INTRO}
         />

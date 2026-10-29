@@ -41,3 +41,7 @@ export const SectionHead = ({
     </div>
   );
 };
+
+//  <Container>
+//       <ClientList title={CLIENTS_TITLE} clients={CLIENTS} />
+//     </Container>

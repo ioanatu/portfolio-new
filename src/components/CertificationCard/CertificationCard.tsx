@@ -44,7 +44,10 @@ export const CertificationCard = ({
         )}
       </h3>
       {pending ? (
-        <p>Expected {expected}</p>
+        <p>
+          Currently learning for the DVA-C03. <br />
+          Expected {expected}
+        </p>
       ) : (
         issued && (
           <p>

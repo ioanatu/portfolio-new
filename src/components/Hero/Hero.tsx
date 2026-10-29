@@ -56,7 +56,7 @@ export const Hero = () => {
               current={false}
               className={buttonClassName({ variant: 'secondary' })}
             >
-              Certifications
+              AWS Certifications
             </SectionLink>
           </div>
         </div>
