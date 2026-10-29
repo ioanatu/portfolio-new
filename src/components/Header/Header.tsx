@@ -15,7 +15,6 @@ import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
 import styles from './Header.module.css';
 
 const MOBILE_MENU_ID = 'mobile-menu';
-/** Scroll distance after which the navbar turns into frosted glass. */
 const GLASS_SCROLL_PX = 8;
 
 export const Header = () => {
@@ -68,6 +67,7 @@ export const Header = () => {
               className={styles.cvMenu}
             />
             <ThemeToggle />
+
             <IconButton
               label={menuOpen ? 'Close menu' : 'Open menu'}
               expanded={menuOpen}
@@ -89,6 +89,7 @@ export const Header = () => {
             </IconButton>
           </div>
         </nav>
+
         {menuOpen && (
           <MobileMenu
             id={MOBILE_MENU_ID}

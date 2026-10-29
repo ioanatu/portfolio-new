@@ -21,6 +21,8 @@
   --lilac: #cfcaf4;
   --on-pastel: #1b1f3b;
 
+  --section-padding: clamp(88px, 11vw, 144px);
+
   --r-lg: 28px;
   --r-md: 18px;
 
@@ -98,6 +100,10 @@
   --sw5: #e05bff;
 
   color-scheme: dark;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--section-padding) * -1);
 }
 
 html {

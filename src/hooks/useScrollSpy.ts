@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-/** A thin band at 35% of the viewport height decides which section counts as current. */
 const BAND_MARGIN = '-35% 0px -64% 0px';
 
 /**
