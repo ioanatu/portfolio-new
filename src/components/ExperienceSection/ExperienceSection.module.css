@@ -1,5 +1,5 @@
 .section {
-  padding-block: clamp(88px, 11vw, 144px);
+  padding-block: var(--section-padding);
 
   .jobs {
     max-width: 920px;

@@ -1,4 +1,4 @@
-import { Link, useRouterState } from '@tanstack/react-router';
+import { useRouterState } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { CV_LINKS, SECTION_IDS, SECTION_NAV_ITEMS } from '../../content/navigation';
@@ -55,9 +55,9 @@ export const Header = () => {
                 </SectionLink>
               </li>
             ))}
-            <li>
+            {/* <li>
               <Link to="/projects">Projects</Link>
-            </li>
+            </li> */}
           </ul>
           <div className={styles.actions}>
             <DownloadCvMenu

@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router';
 import { SECTION_NAV_ITEMS, SOCIAL_LINKS } from '../../content/navigation';
 import { Brand } from '../Brand/Brand';
 import { Container } from '../Container/Container';
@@ -25,9 +24,9 @@ export const Footer = () => (
                 </SectionLink>
               </li>
             ))}
-            <li>
+            {/* <li>
               <Link to="/projects">Projects</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div>
