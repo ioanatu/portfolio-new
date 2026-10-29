@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { useState } from 'react';
 import {
@@ -15,6 +14,7 @@ import { buttonClassName } from '../Button/buttonClassName';
 import { Container } from '../Container/Container';
 import { HeroBackground } from '../HeroBackground/HeroBackground';
 import { RotatingWords } from '../RotatingWords/RotatingWords';
+import { SectionLink } from '../SectionLink/SectionLink';
 import { StatusPill } from '../StatusPill/StatusPill';
 import { TypewriterHeading } from '../TypewriterHeading/TypewriterHeading';
 import styles from './Hero.module.css';
@@ -44,12 +44,20 @@ export const Hero = () => {
             {HERO_LEDE}
           </p>
           <div className={clsx(styles.rise, styles.actions, { [styles.waiting]: waiting })}>
-            <Link to="/" className={buttonClassName({ variant: 'primary' })}>
-              Placeholder
-            </Link>
-            <a href={''} className={buttonClassName({ variant: 'secondary' })}>
-              Placeholder
-            </a>
+            <SectionLink
+              sectionId="skills"
+              current={false}
+              className={buttonClassName({ variant: 'primary' })}
+            >
+              Check out my skills
+            </SectionLink>
+            <SectionLink
+              sectionId="certifications"
+              current={false}
+              className={buttonClassName({ variant: 'secondary' })}
+            >
+              Certifications
+            </SectionLink>
           </div>
         </div>
       </Container>

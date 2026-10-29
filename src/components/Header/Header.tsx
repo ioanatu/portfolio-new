@@ -1,5 +1,6 @@
 import { useRouterState } from '@tanstack/react-router';
 import clsx from 'clsx';
+import { Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { CV_LINKS, SECTION_IDS, SECTION_NAV_ITEMS } from '../../content/navigation';
 import { useResponsiveNav } from '../../hooks/useResponsiveNav';
@@ -76,16 +77,7 @@ export const Header = () => {
               className={styles.menuButton}
               ref={menuButtonRef}
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                aria-hidden="true"
-              >
-                <path d="M4 8h16M4 16h16" />
-              </svg>
+              <Menu size={24} strokeWidth={1.8} aria-hidden="true" />
             </IconButton>
           </div>
         </nav>

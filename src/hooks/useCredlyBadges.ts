@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { Certification } from '../content/certifications';
 
 type CredlyBadge = {
+  id: string;
   issued_at_date: string;
   badge_template: { name: string; image_url: string };
 };
@@ -39,9 +40,10 @@ const fetchBadges = async (): Promise<Certification[]> => {
   const { data }: CredlyResponse = await response.json();
   return [...data]
     .sort((a, b) => b.issued_at_date.localeCompare(a.issued_at_date))
-    .map(({ issued_at_date, badge_template }) => ({
+    .map(({ id, issued_at_date, badge_template }) => ({
       name: badge_template.name,
       badge: badge_template.image_url,
+      credentialUrl: `https://www.credly.com/badges/${id}/public_url`,
       issued: toIssued(issued_at_date),
     }));
 };

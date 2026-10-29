@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { Plus } from 'lucide-react';
 import type { Job } from '../../content/experience';
 import styles from './ExperienceItem.module.css';
 
@@ -19,17 +20,7 @@ export const ExperienceItem = ({
       </div>
       <span className={styles.dates}>{dates}</span>
       <span className={styles.plus} aria-hidden="true">
-        <svg
-          viewBox="0 0 16 16"
-          width="16"
-          height="16"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        >
-          <path d="M8 2v12M2 8h12" />
-        </svg>
+        <Plus size={22} strokeWidth={1.8} aria-hidden="true" />
       </span>
     </summary>
     <ul>

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { ArrowUp } from 'lucide-react';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { useScrolledPast } from '../../hooks/useScrolledPast';
 import styles from './BackToTop.module.css';
@@ -22,17 +23,7 @@ export const BackToTop = () => {
       aria-label="Back to top"
       onClick={scrollToTop}
     >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.9"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M12 19V5M5.5 11.5L12 5l6.5 6.5" />
-      </svg>
+      <ArrowUp size={24} strokeWidth={1.9} aria-hidden="true" />
     </button>
   );
 };

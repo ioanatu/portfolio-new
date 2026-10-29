@@ -41,7 +41,7 @@ describe('Header', () => {
 
   it('lists the CV versions in a menu that closes with Escape', async () => {
     await renderRoute('/');
-    const trigger = await screen.findByRole('button', { name: 'Download CV' });
+    const trigger = await screen.findByRole('button', { name: 'View Resume' });
     await userEvent.click(trigger);
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
     const ats = screen.getByRole('menuitem', { name: /ATS format/ });
@@ -58,7 +58,7 @@ describe('Header', () => {
 
   it('moves through the CV versions with the arrow keys', async () => {
     await renderRoute('/');
-    const trigger = await screen.findByRole('button', { name: 'Download CV' });
+    const trigger = await screen.findByRole('button', { name: 'View Resume' });
     trigger.focus();
     await userEvent.keyboard('{ArrowDown}');
     expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();

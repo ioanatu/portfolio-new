@@ -43,7 +43,8 @@ export const Footer = () => (
         </div>
       </div>
       <p className={styles.legal}>
-        © {new Date().getFullYear()} Ioana Tatu. Built with React, TypeScript, and a dash of Claude.
+        © {new Date().getFullYear()} Ioana Tatu. Built with React, TypeScript, AWS, and a dash of
+        Claude.
       </p>
     </Container>
   </footer>

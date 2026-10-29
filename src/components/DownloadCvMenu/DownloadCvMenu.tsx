@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { ChevronDown } from 'lucide-react';
 import { type KeyboardEvent, useEffect, useRef } from 'react';
 import { buttonClassName } from '../Button/buttonClassName';
 import styles from './DownloadCvMenu.module.css';
@@ -69,17 +70,7 @@ export const DownloadCvMenu = ({ links, open, onOpenChange, className }: Downloa
         onKeyDown={onButtonKeyDown}
       >
         View Resume
-        <svg
-          viewBox="0 0 16 16"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M4 6l4 4 4-4" />
-        </svg>
+        <ChevronDown size={14} strokeWidth={1.8} aria-hidden="true" />
       </button>
       <ul
         ref={listRef}

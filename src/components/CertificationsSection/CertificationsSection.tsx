@@ -1,11 +1,11 @@
 import {
   CERTIFICATIONS_INTRO,
-  CERTIFICATIONS_SOURCE_NOTE,
   CERTIFICATIONS_TITLE,
   CREDLY_BADGE_COUNT,
   IN_PROGRESS_CERTIFICATION,
 } from '../../content/certifications';
 import { useCredlyBadges } from '../../hooks/useCredlyBadges';
+import { BadgeSourceCard } from '../BadgeSourceCard/BadgeSourceCard';
 import { CertificationCard } from '../CertificationCard/CertificationCard';
 import { CertificationCardSkeleton } from '../CertificationCard/CertificationCardSkeleton';
 import { Container } from '../Container/Container';
@@ -23,7 +23,6 @@ export const CertificationsSection = () => {
           title={CERTIFICATIONS_TITLE}
           titleId="certifications-title"
           intro={CERTIFICATIONS_INTRO}
-          note={CERTIFICATIONS_SOURCE_NOTE}
         />
         <div className={styles.grid} aria-busy={isPending}>
           {isPending &&
@@ -33,6 +32,7 @@ export const CertificationsSection = () => {
           {earned?.map((certification) => (
             <CertificationCard key={certification.name} certification={certification} />
           ))}
+          <BadgeSourceCard />
           <CertificationCard
             key={IN_PROGRESS_CERTIFICATION.name}
             certification={IN_PROGRESS_CERTIFICATION}

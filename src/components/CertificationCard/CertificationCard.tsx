@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+// import { ArrowUpRight } from 'lucide-react';
 import type { Certification } from '../../content/certifications';
 import styles from './CertificationCard.module.css';
 
@@ -8,7 +9,7 @@ type CertificationCardProps = {
 };
 
 export const CertificationCard = ({
-  certification: { name, badge, issued, expected },
+  certification: { name, badge, credentialUrl, issued, expected },
   className,
 }: CertificationCardProps) => {
   const pending = Boolean(expected);
@@ -27,7 +28,21 @@ export const CertificationCard = ({
         loading="lazy"
         decoding="async"
       />
-      <h3>{name}</h3>
+      <h3>
+        {credentialUrl ? (
+          <a
+            href={credentialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cardLink}
+            aria-label={`Show credential: ${name}`}
+          >
+            {name}
+          </a>
+        ) : (
+          name
+        )}
+      </h3>
       {pending ? (
         <p>Expected {expected}</p>
       ) : (
@@ -37,6 +52,20 @@ export const CertificationCard = ({
           </p>
         )
       )}
+      {/*
+      {credentialUrl && (
+        <a
+          href={credentialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.credential}
+          aria-label={`Show credential: ${name}`}
+        >
+          <span className={styles.credentialLabel}>Show credential</span>
+          <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
+        </a>
+      )}
+      */}
     </article>
   );
 };

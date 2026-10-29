@@ -6,9 +6,8 @@ export type SectionNavItem = {
   sectionId: string;
 };
 
-/** Sections not on the page yet just leave the URL hash behind; the scroll spy skips them. */
 export const SECTION_NAV_ITEMS: readonly SectionNavItem[] = [
-  { label: 'About', sectionId: 'about' },
+  // { label: 'About', sectionId: 'about' },
   { label: 'Experience', sectionId: 'experience' },
   { label: 'Skills', sectionId: 'skills' },
   { label: 'Certifications', sectionId: 'certifications' },
