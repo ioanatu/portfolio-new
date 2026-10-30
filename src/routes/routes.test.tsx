@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react';
+import { SECTION_IDS } from '../content/navigation';
 import { renderRoute } from '../testUtils';
 
 describe('routes', () => {
@@ -11,6 +12,22 @@ describe('routes', () => {
     expect(
       screen.getByRole('heading', { name: /Certified on AWS,\s+three times and counting/ }),
     ).toBeInTheDocument();
+  });
+
+  it('renders a labelled section for every navbar item', async () => {
+    await renderRoute('/');
+    await screen.findByRole('main');
+    SECTION_IDS.forEach((id) => {
+      const section = document.getElementById(id);
+      expect(section).toBeInTheDocument();
+      expect(section).toHaveAccessibleName();
+    });
+    expect(new Set(SECTION_IDS).size).toBe(SECTION_IDS.length);
+  });
+
+  it('no longer has a projects page', async () => {
+    await renderRoute('/projects');
+    expect(await screen.findByRole('heading', { level: 1, name: /Hey there/ })).toBeInTheDocument();
   });
 
   it('links the hero buttons to the skills and certifications sections', async () => {

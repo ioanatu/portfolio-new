@@ -1,5 +1,6 @@
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { SECTION_NAV_ITEMS } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
 
 describe('Header', () => {
@@ -18,6 +19,27 @@ describe('Header', () => {
     await userEvent.keyboard('{Escape}');
     expect(document.getElementById('mobile-menu')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Open menu' })).toHaveFocus();
+  });
+
+  it('links the navbar to every section of the home page', async () => {
+    await renderRoute('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
+      expect(within(nav).getByRole('link', { name: label, hidden: true })).toHaveAttribute(
+        'href',
+        `/#${sectionId}`,
+      );
+    });
+  });
+
+  it('lists the same sections in the mobile menu', async () => {
+    await renderRoute('/');
+    await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+    const menu = within(document.getElementById('mobile-menu') as HTMLElement);
+    SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
+      expect(menu.getByRole('link', { name: label })).toHaveAttribute('href', `/#${sectionId}`);
+    });
+    expect(menu.queryByRole('link', { name: 'Projects' })).not.toBeInTheDocument();
   });
 
   it('closes the mobile menu after choosing a section', async () => {
