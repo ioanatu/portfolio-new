@@ -1,0 +1,47 @@
+.language-item {
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  &:last-child .top {
+    border-bottom: 0;
+  }
+
+  .name {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .level {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .certificates {
+    display: grid;
+    padding: 0;
+    list-style: none;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 0.95rem;
+
+    b {
+      margin-left: 6px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+  }
+}

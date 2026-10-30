@@ -1,0 +1,55 @@
+.study-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+
+  .logo {
+    display: block;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    &.fills img {
+      object-fit: cover;
+    }
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .institution {
+    font-weight: 500;
+  }
+
+  .years {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .heading {
+    font-family: var(--display);
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    letter-spacing: -0.02em;
+  }
+}
