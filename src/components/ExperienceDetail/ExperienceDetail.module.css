@@ -30,7 +30,6 @@
     }
   }
 
-  /* The description is lighter than the project name, so long ones stay on one line */
   .summary {
     font-size: 1rem;
   }

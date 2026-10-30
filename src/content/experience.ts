@@ -35,7 +35,7 @@ export type Job = {
 
 export const EXPERIENCE_TITLE = 'Where I’ve worked';
 export const EXPERIENCE_INTRO =
-  '5+ years of frontend engineering across a product company, consultancy and a startup. I’ve built B2B and B2C applications, from microfrontend dashboards to component libraries, and have been involved in all phases of the software development lifecycle.';
+  '5+ years of frontend engineering across a product company, consultancy and a startup. I’ve built B2B and B2C applications, from microfrontend dashboards to component libraries, and have brought value to all phases of the software development lifecycle.';
 
 export const RESUME_DOWNLOAD_LABEL = 'Download streamlined resume:';
 export const RESUME_DOWNLOADS = [

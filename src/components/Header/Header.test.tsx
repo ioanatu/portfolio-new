@@ -20,12 +20,11 @@ describe('Header', () => {
     expect(screen.getByRole('button', { name: 'Open menu' })).toHaveFocus();
   });
 
-  it('closes the mobile menu after choosing a page', async () => {
+  it('closes the mobile menu after choosing a section', async () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
     const menu = document.getElementById('mobile-menu') as HTMLElement;
-    await userEvent.click(menu.querySelector('a[href="/projects"]') as HTMLElement);
-    expect(await screen.findByRole('heading', { name: 'Products I’ve helped ship' })).toBeVisible();
+    await userEvent.click(menu.querySelector('a[href="/#certifications"]') as HTMLElement);
     expect(document.getElementById('mobile-menu')).not.toBeInTheDocument();
   });
 

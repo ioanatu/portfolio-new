@@ -7,7 +7,6 @@ export type Study = {
   years: string;
   title: string;
   logo: string;
-  /** The logo is a full-bleed square instead of a mark that needs padding. */
   logoFills?: boolean;
 };
 
@@ -19,7 +18,7 @@ export type Language = {
 
 export const EDUCATION_TITLE = 'Education & languages';
 export const EDUCATION_INTRO =
-  'Computer science at a technical university, an intensive engineering bootcamp, the visual training behind my eye for interfaces, and four working languages.';
+  'Computer science at a technical university and an intensive engineering bootcamp, on a design background and passion for languages. If I could do it all over again, I would go full into sciences.';
 
 export const STUDIES_TITLE = 'Studies';
 export const LANGUAGES_TITLE = 'Languages';

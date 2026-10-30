@@ -34,3 +34,6 @@ dist-ssr
 
 # Test
 coverage
+
+#Tanstack
+.tanstack/tmp

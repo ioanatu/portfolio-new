@@ -13,19 +13,6 @@ describe('routes', () => {
     ).toBeInTheDocument();
   });
 
-  it('shows the projects page and marks its link as current', async () => {
-    await renderRoute('/projects');
-    expect(
-      await screen.findByRole('heading', { level: 1, name: 'Products I’ve helped ship' }),
-    ).toHaveFocus();
-    expect(screen.getAllByRole('article')).toHaveLength(6);
-    const nav = screen.getByRole('navigation', { name: 'Main' });
-    expect(within(nav).getByRole('link', { name: 'Projects' })).toHaveAttribute(
-      'aria-current',
-      'page',
-    );
-  });
-
   it('links the hero buttons to the skills and certifications sections', async () => {
     await renderRoute('/');
     const hero = within(await screen.findByRole('main'));

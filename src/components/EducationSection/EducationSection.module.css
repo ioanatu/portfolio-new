@@ -25,7 +25,7 @@
   }
 
   .studies {
-    gap: 30px;
+    gap: 38px;
     padding: 0 0 16px;
   }
 
@@ -40,7 +40,6 @@
   --edu-glass: rgba(25, 28, 42, 0.55);
 }
 
-/* Jumping here lands the heading a little lower under the navbar */
 section[id].section {
   scroll-margin-top: calc(var(--section-padding) * -1 + 20px);
 }
