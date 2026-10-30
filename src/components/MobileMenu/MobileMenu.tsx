@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router';
 import type { SectionNavItem } from '../../content/navigation';
 import { SectionLink } from '../SectionLink/SectionLink';
 import styles from './MobileMenu.module.css';
@@ -31,11 +30,6 @@ export const MobileMenu = ({
           </SectionLink>
         </li>
       ))}
-      <li>
-        <Link to="/projects" onClick={onNavigate}>
-          Projects
-        </Link>
-      </li>
       <li className={styles.separator} aria-hidden="true" />
       <li>
         <span className={styles.label} id="mobile-cv-label">
