@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_CREDLY_API_URL: ${{ vars.VITE_CREDLY_API_URL }}
+      VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
+      VITE_APP_VERSION: ${{ github.sha }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
     steps:
       - name: Checkout
