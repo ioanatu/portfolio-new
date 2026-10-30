@@ -4,5 +4,5 @@
 
 section[id].skills {
   padding-top: calc(var(--section-padding) / 2);
-  scroll-margin-top: calc(var(--section-padding) / -2);
+  scroll-margin-top: calc(var(--section-padding) / -2 + 30px);
 }

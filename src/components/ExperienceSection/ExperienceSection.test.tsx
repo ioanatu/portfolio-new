@@ -35,7 +35,7 @@ describe('ExperienceSection', () => {
     );
     expect(sonnen.getAllByRole('heading', { level: 4 })).toHaveLength(5);
     expect(sonnen.getByText('Responsibilities common to all projects:')).toBeInTheDocument();
-    const link = sonnen.getByRole('link', { name: 'Tariffs, opens in a new tab' });
+    const link = sonnen.getByRole('link', { name: 'Visit tariffs.sonnen.de, opens in a new tab' });
     expect(link).toHaveAttribute('href', 'https://tariffs.sonnen.de/');
     expect(link).toHaveAttribute('target', '_blank');
   });
@@ -54,7 +54,26 @@ describe('ExperienceSection', () => {
     expect(bold).toContain('B2B');
     expect(bold).toContain('B2C');
 
-    const webUi = screen.getByRole('region', { name: 'web-ui' });
-    expect(webUi.querySelector('strong')).toBeNull();
+    document.querySelectorAll('li strong').forEach((item) => {
+      expect(['Toolbox', 'Tariffs']).toContain(item.closest('section')?.getAttribute('aria-label'));
+    });
+  });
+
+  it('gives Futurice and Aaron.ai a company card with a link to their website', () => {
+    expect(
+      screen.getByRole('link', { name: 'Visit futurice.com, opens in a new tab' }),
+    ).toHaveAttribute('href', 'https://www.futurice.com/de');
+    expect(
+      screen.getByRole('link', { name: 'Visit aaron.ai, opens in a new tab' }),
+    ).toHaveAttribute('href', 'https://www.aaron.ai/');
+  });
+
+  it('offers both resume versions under the jobs', () => {
+    expect(screen.getByText('Download streamlined resume:')).toBeInTheDocument();
+    for (const name of ['ATS format', 'Happy human eye']) {
+      const link = screen.getByRole('link', { name });
+      expect(link.getAttribute('href')).toMatch(/\.pdf$/);
+      expect(link).toHaveAttribute('target', '_blank');
+    }
   });
 });

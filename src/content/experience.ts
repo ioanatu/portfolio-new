@@ -1,9 +1,12 @@
+import aaronLogo from '../assets/aaron-logo.png';
+import futuriceLogo from '../assets/futurice-logo.jpg';
 import sonnenLogo from '../assets/sonnen-logo.png';
+import { CV_LINKS } from './navigation';
 
 export type JobProject = {
   name: string;
   summary: string;
-  link?: { href: string };
+  link?: { href: string; label: string };
   stack?: string;
   /** Phrases to set in bold in the bullet points. */
   emphasized?: readonly string[];
@@ -16,9 +19,11 @@ export type JobDetail = {
   logo: string;
   intro: string;
   website: { href: string; label: string };
-  projects: readonly JobProject[];
-  commonTitle: string;
-  commonPoints: readonly string[];
+  /** Plain bullet points, for jobs that are not split into projects. */
+  highlights?: readonly string[];
+  projects?: readonly JobProject[];
+  commonTitle?: string;
+  commonPoints?: readonly string[];
 };
 
 export type Job = {
@@ -31,6 +36,12 @@ export type Job = {
 export const EXPERIENCE_TITLE = 'Where I’ve worked';
 export const EXPERIENCE_INTRO =
   '5+ years of frontend engineering across a product company, consultancy and a startup. I’ve built B2B and B2C applications, from microfrontend dashboards to component libraries, and have been involved in all phases of the software development lifecycle.';
+
+export const RESUME_DOWNLOAD_LABEL = 'Download streamlined resume:';
+export const RESUME_DOWNLOADS = [
+  { label: 'ATS format', href: CV_LINKS[0].href },
+  { label: 'Happy human eye', href: CV_LINKS[1].href },
+] as const;
 
 export const JOBS: readonly Job[] = [
   {
@@ -49,7 +60,7 @@ export const JOBS: readonly Job[] = [
           name: 'Tariffs',
           emphasized: ['microfrontends', 'GitHub Actions', 'B2B', 'B2C', 'atomic design'],
           summary: 'Purchase flow for new sonnen energy contracts.',
-          link: { href: 'https://tariffs.sonnen.de/' },
+          link: { href: 'https://tariffs.sonnen.de/', label: 'tariffs.sonnen.de' },
           points: [
             'B2C customer-facing application built with React, TypeScript, Vite, GraphQL, ContextAPI, and a BFF approach.',
             'Bootstrapped the project, implemented CI/CD pipeline, integrated Sentry, google Analytics, guided frontend architecture decisions.',
@@ -95,21 +106,35 @@ export const JOBS: readonly Job[] = [
     company: 'Futurice',
     role: 'Software Engineer Consultant',
     dates: 'Nov 2022 – Aug 2021',
-    highlights: [
-      'Built features for Red Bull München’s server-side rendered website.',
-      'Developed a B2B mobile app for Royal Unibrew in Denmark and Hartwall in Finland.',
-      'Contributed to Dev Breakfast, an agency-wide knowledge-sharing series on clean code, TDD and scalability, and supported recruiting.',
-    ],
+    detail: {
+      heading: 'Futurice',
+      logo: futuriceLogo,
+      website: { href: 'https://www.futurice.com/de', label: 'futurice.com' },
+      intro:
+        'Futurice is a consultancy with Finnish roots and values that develops IT solutions for clients on the German and Scandinavian markets.',
+      highlights: [
+        'Built features for Red Bull München’s server-side rendered website.',
+        'Developed a B2B mobile app for Royal Unibrew in Denmark and Hartwall in Finland.',
+        'Contributed to Dev Breakfast, an agency-wide knowledge-sharing series on clean code, TDD and scalability, and supported recruiting.',
+      ],
+    },
   },
   {
     field: 'engineering',
     company: 'Aaron.ai',
     role: 'Junior Fullstack JavaScript Developer',
     dates: 'Jul 2021 – Jan 2021',
-    highlights: [
-      'Owned a feature end to end as feature owner and requirements engineer, aligning stakeholders on business and technical constraints.',
-      'Designed and implemented the UI in the absence of a dedicated design team.',
-    ],
+    detail: {
+      heading: 'Aaron.ai',
+      logo: aaronLogo,
+      website: { href: 'https://www.aaron.ai/', label: 'aaron.ai' },
+      intro:
+        'Aaron.ai is an AI phone assistant for doctors’ practices that answers calls around the clock and books appointments automatically. It is now part of Doctolib.',
+      highlights: [
+        'Owned a feature end to end as feature owner and requirements engineer, aligning stakeholders on business and technical constraints.',
+        'Designed and implemented the UI in the absence of a dedicated design team.',
+      ],
+    },
   },
   /*{
     field: 'design',

@@ -1,0 +1,19 @@
+.resume-download {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 20px;
+  max-width: 920px;
+  margin: 36px auto 0;
+
+  p {
+    color: var(--muted);
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

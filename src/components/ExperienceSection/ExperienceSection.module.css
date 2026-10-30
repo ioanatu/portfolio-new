@@ -1,9 +1,18 @@
 .section {
-  padding-block: var(--section-padding) calc(var(--section-padding) / 2);
+  /* 30% less space between the hero and this section: the hero's 48px bottom padding plus
+     the top padding here come to 70% of what they were */
+  --top-padding: calc(var(--section-padding) * 0.7 - 14.4px);
+
+  padding-block: var(--top-padding) calc(var(--section-padding) / 2);
 
   .jobs {
     max-width: 920px;
     margin: 0 auto;
     border-top: 1px solid var(--line);
   }
+}
+
+/* Jumping here still lands the content just under the navbar */
+section[id].section {
+  scroll-margin-top: calc(var(--top-padding) * -1 + 50px);
 }
