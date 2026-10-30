@@ -1,11 +1,14 @@
-/* Yellow highlighter pen: see-through, with slanted ends like a marker stroke.
-   The text keeps its normal colour, which reads on the tint in both themes. */
 .emphasized-text {
+  --highlight: color-mix(in srgb, var(--lilac) 85%, transparent);
+
   padding: 0 0.3em;
-  background: color-mix(in srgb, var(--butter) 55%, transparent);
-  clip-path: polygon(0.25em 0, 100% 0, calc(100% - 0.25em) 100%, 0 100%);
+  background: var(--highlight);
   color: var(--text);
-  font-weight: 700;
+  font-weight: 500;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+}
+
+:root[data-theme='dark'] .emphasized-text {
+  --highlight: rgba(46, 28, 110, 0.9);
 }

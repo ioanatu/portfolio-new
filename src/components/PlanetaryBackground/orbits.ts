@@ -36,12 +36,12 @@ const PALETTE = {
   light: {
     line: 'rgba(27, 31, 59, 0.14)',
     planetFill: 'rgba(228, 230, 236, 0.64)',
-    planetStroke: 'rgba(27, 31, 59, 0.25)',
+    planetStroke: 'rgba(27, 31, 59, 0.2)',
   },
   dark: {
     line: 'rgba(236, 237, 245, 0.096)',
     planetFill: 'rgba(25, 28, 42, 0.64)',
-    planetStroke: 'rgba(236, 237, 245, 0.32)',
+    planetStroke: 'rgba(236, 237, 245, 0.256)',
   },
 } satisfies Record<Theme, Record<string, string>>;
 
