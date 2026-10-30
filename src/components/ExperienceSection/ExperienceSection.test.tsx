@@ -12,10 +12,8 @@ describe('ExperienceSection', () => {
     expect(screen.getByText('Nov 2022 – Aug 2021')).toBeInTheDocument();
   });
 
-  it('expands the latest job only', () => {
-    const [latest, ...others] = Array.from(document.querySelectorAll('details'));
-    expect(latest).toHaveAttribute('open');
-    others.forEach((job) => expect(job).not.toHaveAttribute('open'));
+  it('starts with every job collapsed', () => {
+    document.querySelectorAll('details').forEach((job) => expect(job).not.toHaveAttribute('open'));
   });
 
   it('expands a job when its summary is clicked', async () => {

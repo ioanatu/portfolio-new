@@ -1,60 +1,46 @@
-import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { renderRoute } from '../test/renderWithRouter'
-
-// jsdom has no canvas; the wave surface bails out without a 2D context
-beforeEach(() => {
-  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null)
-})
+import { screen, within } from '@testing-library/react';
+import { renderRoute } from '../testUtils';
 
 describe('routes', () => {
-  it('renders the home page with the menu as links', async () => {
-    await renderRoute('/')
+  it('renders the hero, certifications and the navbar on the home page', async () => {
+    await renderRoute('/');
     expect(
-      await screen.findByRole('heading', { name: 'Hello' }),
-    ).toBeInTheDocument()
-    expect(screen.getAllByRole('link')).toHaveLength(6)
-  })
+      await screen.findByRole('heading', { level: 1, name: /Hey there, I’m ioana/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /Certified on AWS,\s+three times and counting/ }),
+    ).toBeInTheDocument();
+  });
 
-  it('shows the section of the category in the URL and marks it current', async () => {
-    await renderRoute('/film')
+  it('shows the projects page and marks its link as current', async () => {
+    await renderRoute('/projects');
     expect(
-      await screen.findByRole('heading', { name: 'Film' }),
-    ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Film' })).toHaveAttribute(
+      await screen.findByRole('heading', { level: 1, name: 'Products I’ve helped ship' }),
+    ).toHaveFocus();
+    expect(screen.getAllByRole('article')).toHaveLength(6);
+    const nav = screen.getByRole('navigation', { name: 'Main' });
+    expect(within(nav).getByRole('link', { name: 'Projects' })).toHaveAttribute(
       'aria-current',
       'page',
-    )
-  })
+    );
+  });
 
-  it('switches section when a menu item is clicked', async () => {
-    await renderRoute('/')
-    await userEvent.click(
-      await screen.findByRole('link', { name: 'AWS Certifications' }),
-    )
-    expect(
-      await screen.findByRole('heading', { name: 'AWS Certifications' }),
-    ).toBeInTheDocument()
-  })
+  it('links the hero buttons to the skills and certifications sections', async () => {
+    await renderRoute('/');
+    const hero = within(await screen.findByRole('main'));
+    expect(hero.getByRole('link', { name: 'Check out my skills' })).toHaveAttribute(
+      'href',
+      '/#skills',
+    );
+    expect(hero.getByRole('link', { name: 'AWS Certifications' })).toHaveAttribute(
+      'href',
+      '/#certifications',
+    );
+  });
 
-  it('redirects unknown categories to home', async () => {
-    await renderRoute('/nope')
-    expect(
-      await screen.findByRole('heading', { name: 'Hello' }),
-    ).toBeInTheDocument()
-  })
-
-  it('shows the four AWS badges on the AWS Certifications page', async () => {
-    await renderRoute('/aws-certifications')
-    expect(await screen.findAllByRole('img')).toHaveLength(4)
-    expect(screen.getByRole('img', { name: /CLF-C02/ })).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: /AIF-C01/ })).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: /SAA-C03/ })).toBeInTheDocument()
-    expect(screen.getByRole('img', { name: /DVA-C02/ })).toBeInTheDocument()
-    expect(screen.getAllByText(/^(Oct 2021|Sep 2026|Oct 2026)$/)).toHaveLength(
-      3,
-    )
-    expect(screen.getByText('Expected')).toBeInTheDocument()
-    expect(screen.getByText('Dec 2026')).toBeInTheDocument()
-  })
-})
+  it('redirects unknown paths to the home page', async () => {
+    await renderRoute('/nope');
+    expect(await screen.findByRole('heading', { level: 1, name: /Hey there/ })).toBeInTheDocument();
+  });
+});
