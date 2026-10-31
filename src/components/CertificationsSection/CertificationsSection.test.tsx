@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import {
   CERTIFICATIONS_SOURCE_NOTES,
   IN_PROGRESS_CERTIFICATION,
@@ -21,9 +21,31 @@ const renderSection = () =>
     </QueryClientProvider>,
   );
 
+type ObserverCallback = (entries: { isIntersecting: boolean }[]) => void;
+
+/** Reports every observed element as visible at once, or only when `reveal` is called. */
+const stubIntersectionObserver = (visibleAtOnce: boolean) => {
+  let callback: ObserverCallback | undefined;
+  vi.stubGlobal(
+    'IntersectionObserver',
+    class {
+      constructor(onChange: ObserverCallback) {
+        callback = onChange;
+      }
+      observe() {
+        if (visibleAtOnce) callback?.([{ isIntersecting: true }]);
+      }
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  return { reveal: () => act(() => callback?.([{ isIntersecting: true }])) };
+};
+
 describe('CertificationsSection', () => {
   beforeEach(() => {
     vi.stubEnv('VITE_CREDLY_API_URL', 'https://credly.test/');
+    stubIntersectionObserver(true);
   });
 
   afterEach(() => {
@@ -108,5 +130,18 @@ describe('CertificationsSection', () => {
     renderSection();
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Could not load');
+  });
+
+  it('waits to fetch the badges until the section nears the viewport', async () => {
+    const fetchBadges = vi.fn(async () => Response.json({ data: [] }));
+    vi.stubGlobal('fetch', fetchBadges);
+    const { reveal } = stubIntersectionObserver(false);
+    renderSection();
+
+    expect(fetchBadges).not.toHaveBeenCalled();
+    expect(document.querySelectorAll('article[aria-hidden="true"]')).toHaveLength(3);
+
+    reveal();
+    await waitFor(() => expect(fetchBadges).toHaveBeenCalledTimes(1));
   });
 });

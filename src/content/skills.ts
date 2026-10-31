@@ -69,7 +69,7 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
 export const AI_PANEL = {
   title: 'AI engineering',
   description:
-    'I am educating myself on how to use AI in software engineering, and I am experimenting with different tools and workflows.',
+    'I am educating myself on how to use AI in software engineering and am experimenting with different tools and workflows.',
   skillsTitle: 'Building with AI',
   skills: ['Claude Code', 'Cursor', 'GitHub Copilot', 'WIP: Agentic workflows with review gates'],
   coursesTitle: 'Courses',

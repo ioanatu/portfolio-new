@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import {
   CERTIFICATIONS_INTRO,
   CERTIFICATIONS_TITLE,
@@ -5,6 +6,7 @@ import {
   IN_PROGRESS_CERTIFICATION,
 } from '../../content/certifications';
 import { useCredlyBadges } from '../../hooks/useCredlyBadges';
+import { useInView } from '../../hooks/useInView';
 import { BadgeSourceCard } from '../BadgeSourceCard/BadgeSourceCard';
 import { CertificationCard } from '../CertificationCard/CertificationCard';
 import { CertificationCardSkeleton } from '../CertificationCard/CertificationCardSkeleton';
@@ -12,11 +14,21 @@ import { Container } from '../Container/Container';
 import { SectionHead } from '../SectionHead/SectionHead';
 import styles from './CertificationsSection.module.css';
 
+/** Starts the badge request shortly before the section scrolls into view */
+const FETCH_AHEAD_MARGIN = '400px';
+
 export const CertificationsSection = () => {
-  const { data: earned, isPending, isError } = useCredlyBadges();
+  const sectionRef = useRef<HTMLElement>(null);
+  const nearViewport = useInView(sectionRef, FETCH_AHEAD_MARGIN);
+  const { data: earned, isPending, isError } = useCredlyBadges(nearViewport);
 
   return (
-    <section id="certifications" className={styles.section} aria-labelledby="certifications-title">
+    <section
+      ref={sectionRef}
+      id="certifications"
+      className={styles.section}
+      aria-labelledby="certifications-title"
+    >
       <Container>
         <SectionHead
           tag="Certifications"

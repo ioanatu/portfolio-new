@@ -48,5 +48,10 @@ const fetchBadges = async (): Promise<Certification[]> => {
     }));
 };
 
-export const useCredlyBadges = () =>
-  useQuery({ queryKey: ['credly-badges'], queryFn: fetchBadges, staleTime: 60 * 60 * 1000 });
+export const useCredlyBadges = (enabled = true) =>
+  useQuery({
+    queryKey: ['credly-badges'],
+    queryFn: fetchBadges,
+    staleTime: 60 * 60 * 1000,
+    enabled,
+  });
