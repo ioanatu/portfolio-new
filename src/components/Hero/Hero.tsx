@@ -47,7 +47,7 @@ export const Hero = () => {
             <SectionLink
               sectionId="skills"
               current={false}
-              className={buttonClassName({ variant: 'primary' })}
+              className={buttonClassName({ variant: 'glass' })}
             >
               Check out my skills
             </SectionLink>

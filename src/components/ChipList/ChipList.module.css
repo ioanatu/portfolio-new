@@ -1,0 +1,18 @@
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 5px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface-2);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+  }
+}

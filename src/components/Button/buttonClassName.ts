@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import styles from './Button.module.css';
 
 type ButtonStyleOptions = {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'glass';
   size?: 'medium' | 'small';
   className?: string;
 };
@@ -12,9 +12,4 @@ export const buttonClassName = ({
   size = 'medium',
   className,
 }: ButtonStyleOptions = {}) =>
-  clsx(
-    styles.button,
-    variant === 'primary' ? styles.primary : styles.secondary,
-    { [styles.small]: size === 'small' },
-    className,
-  );
+  clsx(styles.button, styles[variant], { [styles.small]: size === 'small' }, className);

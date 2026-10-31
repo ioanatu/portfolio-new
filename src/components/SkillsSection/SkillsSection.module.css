@@ -1,0 +1,43 @@
+.section {
+  padding-block: calc(var(--section-padding) / 2) var(--section-padding);
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 0.95fr)) repeat(2, minmax(0, 1.05fr));
+    gap: 16px;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    margin-top: 16px;
+    padding: 16px 24px;
+    padding-top: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--surface);
+
+    h3 {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+section[id].section {
+  scroll-margin-top: calc(var(--section-padding) / -2);
+}
