@@ -27,7 +27,6 @@ const PLANETS: readonly Planet[] = [
   { radius: 0.76, size: 11, phase: 4.6 },
   { radius: 0.84, size: 13, phase: 1.8 },
   { radius: 0.84, size: 12, phase: 4.9, noLine: true },
-  { radius: 0.68, size: 34, phase: 3.7, noLine: true, speed: 0.25 },
   { radius: 0.76, size: 28, phase: 1.2, noLine: true, speed: 0.2 },
 ];
 

@@ -16,12 +16,6 @@ export const CERTIFICATIONS_SOURCE_NOTES: string[] = [
   'A Lambda function on aws fetches earned badges directly from the Credly API.',
   'The function has CORS enabled and is cached for one hour, so badges are not fetched on every page load.',
 ];
-export const BADGE_SOURCE_TAG = 'Under the hood';
-export const BADGE_SOURCE_STEPS: readonly { name: string; detail: string }[] = [
-  { name: 'Browser', detail: 'Asks once an hour, cached by react-query' },
-  { name: 'AWS Lambda', detail: 'Function URL in eu-central-1' },
-  { name: 'Credly API', detail: 'Returns the accepted badges as JSON' },
-];
 
 export const CREDLY_BADGE_COUNT = 3;
 

@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export const CATEGORY_SIGNALS = {
+const CATEGORY_SIGNALS = {
   analytics: ['analytics_storage'],
 } as const;
 

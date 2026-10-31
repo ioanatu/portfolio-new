@@ -32,7 +32,9 @@ describe('SkillsSection', () => {
     render(<SkillsSection />);
 
     const panel = screen.getByRole('complementary', { name: AI_PANEL.title });
-    expect(within(panel).getByRole('heading', { level: 4, name: 'Courses' })).toBeVisible();
+    expect(
+      within(panel).getByRole('heading', { level: 4, name: AI_PANEL.coursesTitle }),
+    ).toBeVisible();
     const [{ name, credentialUrl }] = AI_PANEL.courses;
     const link = within(panel).getByRole('link', { name: `Show credential: ${name}` });
     expect(link).toHaveAttribute('href', credentialUrl);

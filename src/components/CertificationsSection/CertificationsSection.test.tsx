@@ -112,7 +112,7 @@ describe('CertificationsSection', () => {
       }),
     ).toBeInTheDocument();
     expect(screen.getByText(/Currently learning for the DVA-C03/)).toHaveTextContent(
-      `Expected ${IN_PROGRESS_CERTIFICATION.expected}`,
+      `Expected in ${IN_PROGRESS_CERTIFICATION.expected}`,
     );
   });
 

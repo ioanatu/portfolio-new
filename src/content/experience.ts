@@ -48,7 +48,7 @@ export const JOBS: readonly Job[] = [
     field: 'engineering',
     company: 'sonnen',
     role: 'Frontend Engineer',
-    dates: 'January 2026 – December 2022',
+    dates: 'Jan 2026 – Dec 2022',
     detail: {
       heading: 'sonnen GmbH — Berlin',
       logo: sonnenLogo,

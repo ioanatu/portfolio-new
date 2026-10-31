@@ -35,9 +35,6 @@ export const Footer = () => {
                   </SectionLink>
                 </li>
               ))}
-              {/* <li>
-              <Link to="/projects">Projects</Link>
-            </li> */}
             </ul>
           </div>
           <div>

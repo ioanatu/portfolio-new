@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-// import { ArrowUpRight } from 'lucide-react';
 import type { Certification } from '../../content/certifications';
 import styles from './CertificationCard.module.css';
 
@@ -55,20 +54,6 @@ export const CertificationCard = ({
           </p>
         )
       )}
-      {/*
-      {credentialUrl && (
-        <a
-          href={credentialUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.credential}
-          aria-label={`Show credential: ${name}`}
-        >
-          <span className={styles.credentialLabel}>Show credential</span>
-          <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
-        </a>
-      )}
-      */}
     </article>
   );
 };

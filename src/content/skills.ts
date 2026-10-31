@@ -72,7 +72,7 @@ export const AI_PANEL = {
     'I am educating myself on how to use AI in software engineering and am experimenting with different tools and workflows.',
   skillsTitle: 'Building with AI',
   skills: ['Claude Code', 'Cursor', 'GitHub Copilot', 'WIP: Agentic workflows with review gates'],
-  coursesTitle: 'Courses',
+  coursesTitle: 'Udemy Courses',
   courses: [
     {
       name: 'AI Coder: Complete Claude Code & Coding Agents Course',
