@@ -1,4 +1,4 @@
-import { useLinkProps } from '@tanstack/react-router';
+import { useLinkProps, useRouterState } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 
 type SectionLinkProps = {
@@ -17,6 +17,9 @@ export const SectionLink = ({
   children,
 }: SectionLinkProps) => {
   const linkProps = useLinkProps({ to: '/', hash: sectionId });
+  const alreadyThere = useRouterState({
+    select: ({ location }) => location.pathname === '/' && location.hash === sectionId,
+  });
 
   return (
     <a
@@ -25,7 +28,12 @@ export const SectionLink = ({
       className={className}
       aria-current={current ? 'location' : undefined}
       onClick={(event) => {
-        linkProps.onClick?.(event);
+        if (alreadyThere) {
+          event.preventDefault();
+          document.getElementById(sectionId)?.scrollIntoView();
+        } else {
+          linkProps.onClick?.(event);
+        }
         onClick?.();
       }}
     >

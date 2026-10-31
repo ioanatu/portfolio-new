@@ -1,4 +1,4 @@
-import { useRouterState } from '@tanstack/react-router';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -27,6 +27,18 @@ export const Header = () => {
   const scrolled = useScrolledPast(GLASS_SCROLL_PX);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const activeSectionId = useScrollSpy(SECTION_IDS, pathname);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pathname !== '/' || !activeSectionId) return;
+    void navigate({
+      to: '/',
+      hash: activeSectionId,
+      replace: true,
+      resetScroll: false,
+      hashScrollIntoView: false,
+    });
+  }, [activeSectionId, pathname, navigate]);
 
   useResponsiveNav(navRef, (fits) => {
     if (fits) setMenuOpen(false);

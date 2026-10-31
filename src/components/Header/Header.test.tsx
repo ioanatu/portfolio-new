@@ -32,6 +32,22 @@ describe('Header', () => {
     });
   });
 
+  it('scrolls back to a section whose link was already followed', async () => {
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    await renderRoute('/');
+    const { label, sectionId } = SECTION_NAV_ITEMS[0];
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const link = within(nav).getByRole('link', { name: label, hidden: true });
+
+    await userEvent.click(link);
+    scrollIntoView.mockClear();
+
+    await userEvent.click(link);
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView.mock.contexts[0]).toBe(document.getElementById(sectionId));
+  });
+
   it('lists the same sections in the mobile menu', async () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
