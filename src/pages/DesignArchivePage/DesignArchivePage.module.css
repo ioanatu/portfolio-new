@@ -1,0 +1,20 @@
+.page {
+  display: grid;
+  place-items: center;
+  min-height: 70svh;
+  padding-block: var(--section-padding);
+  text-align: center;
+
+  .message {
+    max-width: 38ch;
+    margin: 0 auto 28px;
+    color: var(--muted);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.5;
+
+    a {
+      color: var(--text);
+      text-underline-offset: 4px;
+    }
+  }
+}

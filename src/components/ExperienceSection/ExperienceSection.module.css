@@ -1,7 +1,7 @@
 .section {
   --top-padding: max(0px, calc(var(--section-padding) * 0.7 - 64.4px));
 
-  padding-block: var(--top-padding) calc(var(--section-padding) / 2);
+  padding-block: var(--top-padding) calc(var(--section-padding) / 2 + 50px);
 
   .jobs {
     max-width: 920px;
@@ -11,9 +11,5 @@
 }
 
 section[id].section {
-  scroll-margin-top: calc(var(--top-padding) * -1 + 50px);
-
-  @media (max-width: 960px) {
-    scroll-margin-top: calc(var(--top-padding) * -1);
-  }
+  scroll-margin-top: calc(var(--top-padding) * -1);
 }

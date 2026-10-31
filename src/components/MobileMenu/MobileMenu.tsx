@@ -1,10 +1,12 @@
-import type { SectionNavItem } from '../../content/navigation';
+import type { PageNavItem, SectionNavItem } from '../../content/navigation';
+import { PageLink } from '../PageLink/PageLink';
 import { SectionLink } from '../SectionLink/SectionLink';
 import styles from './MobileMenu.module.css';
 
 type MobileMenuProps = {
   id: string;
   sections: readonly SectionNavItem[];
+  pages: readonly PageNavItem[];
   activeSectionId: string | null;
   cvLinks: readonly { label: string; href: string }[];
   onNavigate: () => void;
@@ -13,6 +15,7 @@ type MobileMenuProps = {
 export const MobileMenu = ({
   id,
   sections,
+  pages,
   activeSectionId,
   cvLinks,
   onNavigate,
@@ -28,6 +31,13 @@ export const MobileMenu = ({
           >
             {label}
           </SectionLink>
+        </li>
+      ))}
+      {pages.map(({ label, to }) => (
+        <li key={to}>
+          <PageLink to={to} onClick={onNavigate}>
+            {label}
+          </PageLink>
         </li>
       ))}
       <li className={styles.separator} aria-hidden="true" />

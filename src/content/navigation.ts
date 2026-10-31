@@ -14,6 +14,15 @@ export const SECTION_NAV_ITEMS: readonly SectionNavItem[] = [
   { label: 'Education', sectionId: 'education' },
 ];
 
+export type PageNavItem = {
+  label: string;
+  to: '/design-archive';
+};
+
+export const PAGE_NAV_ITEMS: readonly PageNavItem[] = [
+  { label: 'Design archive', to: '/design-archive' },
+];
+
 export const SECTION_IDS = SECTION_NAV_ITEMS.map(({ sectionId }) => sectionId);
 
 export const CV_LINKS = [

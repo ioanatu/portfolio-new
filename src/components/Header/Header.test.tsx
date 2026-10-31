@@ -88,4 +88,30 @@ describe('Header', () => {
     await userEvent.keyboard('{ArrowDown}');
     expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();
   });
+
+  it('links the navbar to the design archive and marks it as the current page there', async () => {
+    await renderRoute('/design-archive');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const link = within(nav).getByRole('link', { name: 'Design archive', hidden: true });
+
+    expect(link).toHaveAttribute('href', '/design-archive');
+    expect(link).toHaveAttribute('aria-current', 'page');
+  });
+
+  it('opens the design archive from the navbar', async () => {
+    await renderRoute('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    await userEvent.click(within(nav).getByRole('link', { name: 'Design archive', hidden: true }));
+
+    expect(await screen.findByText(/This page is work in progress/)).toBeInTheDocument();
+  });
+
+  it('lists the design archive in the mobile menu', async () => {
+    await renderRoute('/');
+    await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+
+    expect(
+      within(document.getElementById('mobile-menu')!).getByRole('link', { name: 'Design archive' }),
+    ).toHaveAttribute('href', '/design-archive');
+  });
 });
