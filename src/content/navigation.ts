@@ -7,11 +7,11 @@ export type SectionNavItem = {
 };
 
 export const SECTION_NAV_ITEMS: readonly SectionNavItem[] = [
-  // { label: 'About', sectionId: 'about' },
   { label: 'Experience', sectionId: 'experience' },
   { label: 'Skills', sectionId: 'skills' },
   { label: 'Certifications', sectionId: 'certifications' },
   { label: 'Education', sectionId: 'education' },
+  { label: 'Projects', sectionId: 'projects' },
 ];
 
 export type PageNavItem = {

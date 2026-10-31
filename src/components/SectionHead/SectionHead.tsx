@@ -5,7 +5,7 @@ type SectionHeadProps = {
   tag: string;
   title: string;
   titleId: string;
-  intro: string;
+  intro?: string;
   note?: string;
   pageTitle?: boolean;
   before?: ReactNode;
@@ -36,7 +36,7 @@ export const SectionHead = ({
       >
         {title}
       </Heading>
-      <p className={styles.intro}>{intro}</p>
+      {intro && <p className={styles.intro}>{intro}</p>}
       {note && <p className={styles.note}>{note}</p>}
     </div>
   );

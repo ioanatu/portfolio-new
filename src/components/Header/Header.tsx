@@ -70,7 +70,7 @@ export const Header = () => {
               </li>
             ))}
             {PAGE_NAV_ITEMS.map(({ label, to }) => (
-              <li key={to}>
+              <li key={to} className={styles.pageItem}>
                 <PageLink to={to}>{label}</PageLink>
               </li>
             ))}

@@ -2,6 +2,7 @@ import { CertificationsSection } from '../../components/CertificationsSection/Ce
 import { EducationSection } from '../../components/EducationSection/EducationSection';
 import { ExperienceSection } from '../../components/ExperienceSection/ExperienceSection';
 import { Hero } from '../../components/Hero/Hero';
+import { ProjectsSection } from '../../components/ProjectsSection/ProjectsSection';
 import { SkillsSection } from '../../components/SkillsSection/SkillsSection';
 
 export const HomePage = () => {
@@ -12,6 +13,7 @@ export const HomePage = () => {
       <SkillsSection />
       <CertificationsSection />
       <EducationSection />
+      <ProjectsSection />
     </main>
   );
 };

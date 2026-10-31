@@ -55,7 +55,6 @@ describe('Header', () => {
     SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
       expect(menu.getByRole('link', { name: label })).toHaveAttribute('href', `/#${sectionId}`);
     });
-    expect(menu.queryByRole('link', { name: 'Projects' })).not.toBeInTheDocument();
   });
 
   it('closes the mobile menu after choosing a section', async () => {

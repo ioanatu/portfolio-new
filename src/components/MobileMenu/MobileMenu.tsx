@@ -33,6 +33,7 @@ export const MobileMenu = ({
           </SectionLink>
         </li>
       ))}
+      {pages.length > 0 && <li className={styles.separator} aria-hidden="true" />}
       {pages.map(({ label, to }) => (
         <li key={to}>
           <PageLink to={to} onClick={onNavigate}>
