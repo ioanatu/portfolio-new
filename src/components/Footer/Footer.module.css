@@ -7,6 +7,10 @@
     grid-template-columns: 2fr 1fr 1fr;
     gap: 32px;
 
+    @media (min-width: 1000px) {
+      grid-template-columns: auto 1fr 1fr;
+    }
+
     @media (max-width: 680px) {
       grid-template-columns: 1fr 1fr;
 
@@ -53,8 +57,30 @@
   }
 
   .legal {
-    margin-top: 30px;
-    color: var(--muted);
+    margin-top: 12px;
     font-size: 0.9rem;
+
+    p {
+      @media (min-width: 1000px) {
+        max-width: none;
+        white-space: nowrap;
+      }
+    }
+
+    .privacy {
+      margin-bottom: 11px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--text);
+      }
+    }
   }
 }

@@ -1,0 +1,40 @@
+/* Maps the library's tokens onto the site's, so the modals follow the theme */
+#cc-main {
+  --cc-font-family: var(--body);
+  --cc-bg: var(--surface);
+  --cc-primary-color: var(--text);
+  --cc-secondary-color: var(--muted);
+  --cc-separator-border-color: var(--line);
+  --cc-link-color: var(--text);
+  --cc-modal-border-radius: var(--r-md);
+  --cc-btn-border-radius: 12px;
+  --cc-btn-primary-bg: var(--btn);
+  --cc-btn-primary-color: var(--btn-text);
+  --cc-btn-primary-border-color: var(--btn);
+  --cc-btn-primary-hover-bg: var(--btn);
+  --cc-btn-primary-hover-color: var(--btn-text);
+  --cc-btn-primary-hover-border-color: var(--btn);
+  --cc-btn-secondary-bg: var(--surface);
+  --cc-btn-secondary-color: var(--text);
+  --cc-btn-secondary-border-color: var(--line);
+  --cc-btn-secondary-hover-bg: var(--surface-2);
+  --cc-btn-secondary-hover-color: var(--text);
+  --cc-btn-secondary-hover-border-color: var(--line);
+  --cc-toggle-on-bg: var(--btn);
+  --cc-toggle-on-knob-bg: var(--btn-text);
+  --cc-cookie-category-block-bg: var(--surface-2);
+  --cc-cookie-category-block-border: var(--line);
+  --cc-cookie-category-block-hover-bg: var(--surface-2);
+  --cc-cookie-category-block-hover-border: var(--line);
+  --cc-cookie-category-expanded-block-bg: var(--surface);
+  --cc-cookie-category-expanded-block-hover-bg: var(--surface-2);
+  --cc-footer-bg: var(--surface-2);
+  --cc-footer-border-color: var(--line);
+  --cc-footer-color: var(--muted);
+  --cc-z-index: 60;
+}
+
+#cc-main .cm__btn,
+#cc-main .pm__btn {
+  border-radius: 999px;
+}

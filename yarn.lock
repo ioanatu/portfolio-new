@@ -4479,6 +4479,7 @@ __metadata:
     three: "npm:^0.186.1"
     typescript: "npm:~6.0"
     typescript-eslint: "npm:^8.72.0"
+    vanilla-cookieconsent: "npm:^3.1.0"
     vite: "npm:^8.3.5"
     vitest: "npm:^5.0.5"
   languageName: unknown
@@ -5404,6 +5405,13 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10/cc102e193d079dda118846627f97ac8d34059ae7e1112188ed6330bd42a6b31c209cbb39923d4d663ddc42e5969913015778397131fcd3249909756c88ba9906
+  languageName: node
+  linkType: hard
+
+"vanilla-cookieconsent@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "vanilla-cookieconsent@npm:3.1.0"
+  checksum: 10/053e887cde87cb1e583288d2c3d8b56acf9c97293e5c9ff5c35d0f43b68c8e20441a321469126e92ac78fbb8410fe245cd2f879d4c376b7b2a66ffca00dee41c
   languageName: node
   linkType: hard
 

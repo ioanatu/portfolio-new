@@ -20,12 +20,12 @@ type ThemeProviderProps = {
   children: ReactNode;
 };
 
-/** Saved choice wins; without one the theme follows the system setting. */
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>(() => readStoredTheme() ?? getSystemTheme());
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    document.documentElement.classList.toggle('cc--darkmode', theme === 'dark');
   }, [theme]);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 .section {
-  padding-block: calc(var(--section-padding) / 2) var(--section-padding);
+  padding-block: calc(var(--section-padding) / 2) calc(var(--section-padding) - 60px);
 
   .grid {
     display: grid;
