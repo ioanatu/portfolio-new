@@ -42,4 +42,8 @@
 
 section[id].section {
   scroll-margin-top: calc(var(--section-padding) * -1 + 20px);
+
+  @media (max-width: 960px) {
+    scroll-margin-top: calc(var(--section-padding) * -1);
+  }
 }

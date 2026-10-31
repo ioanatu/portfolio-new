@@ -9,6 +9,8 @@ type Planet = {
   phase: number;
   /** Planets sharing an orbit draw its line only once. */
   noLine?: boolean;
+  /** Multiplies the speed its orbit would give it; below 1 drifts slower than the rest. */
+  speed?: number;
 };
 
 const PLANETS: readonly Planet[] = [
@@ -25,6 +27,8 @@ const PLANETS: readonly Planet[] = [
   { radius: 0.76, size: 11, phase: 4.6 },
   { radius: 0.84, size: 13, phase: 1.8 },
   { radius: 0.84, size: 12, phase: 4.9, noLine: true },
+  { radius: 0.68, size: 34, phase: 3.7, noLine: true, speed: 0.25 },
+  { radius: 0.76, size: 28, phase: 1.2, noLine: true, speed: 0.2 },
 ];
 
 const TILT = (-9 * Math.PI) / 180;
@@ -35,18 +39,18 @@ const FULL_TURN = Math.PI * 2;
 const PALETTE = {
   light: {
     line: 'rgba(27, 31, 59, 0.14)',
-    planetFill: 'rgba(228, 230, 236, 0.64)',
-    planetStroke: 'rgba(27, 31, 59, 0.2)',
+    planetFill: 'rgba(228, 230, 236, 0.704)',
+    planetStroke: 'rgba(27, 31, 59, 0.18)',
   },
   dark: {
     line: 'rgba(236, 237, 245, 0.096)',
-    planetFill: 'rgba(25, 28, 42, 0.64)',
-    planetStroke: 'rgba(236, 237, 245, 0.256)',
+    planetFill: 'rgba(25, 28, 42, 0.704)',
+    planetStroke: 'rgba(236, 237, 245, 0.2304)',
   },
 } satisfies Record<Theme, Record<string, string>>;
 
 /** Outer planets move slower (Kepler-ish), in radians per second. */
-const angularSpeed = (radius: number) => 0.0128 * Math.pow(radius, -1.5);
+const angularSpeed = (radius: number) => 0.01152 * Math.pow(radius, -1.5);
 
 /**
  * Draws the system into a context that is already scaled to CSS pixels.
@@ -80,8 +84,8 @@ export const drawOrbits = (
 
   ctx.fillStyle = colors.planetFill;
   ctx.strokeStyle = colors.planetStroke;
-  PLANETS.forEach(({ radius, size, phase }, i) => {
-    const angle = phase + seconds * angularSpeed(radius);
+  PLANETS.forEach(({ radius, size, phase, speed = 1 }, i) => {
+    const angle = phase + seconds * angularSpeed(radius) * speed;
     const x = radii[i] * Math.cos(angle);
     const y = radii[i] * 0.42 * Math.sin(angle);
     ctx.beginPath();

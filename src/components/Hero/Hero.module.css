@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   isolation: isolate;
-  padding-bottom: 48px;
+  padding-bottom: 28px;
   text-align: center;
 
   .intro {

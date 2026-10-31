@@ -12,6 +12,7 @@ export const CERTIFICATIONS_TITLE = 'Certified on AWS,\nthree times and counting
 export const CERTIFICATIONS_INTRO =
   "I'm passionate about cloud computing and invest in my continuous education. Understanding things beyond my frontend role helps me build performant, scalable, and secure applications.";
 export const CERTIFICATIONS_SOURCE_NOTES: string[] = [
+  'Badges are fetched with lazy loading shortly before section is scrolled into view.',
   'A Lambda function on aws fetches earned badges directly from the Credly API.',
   'The function has CORS enabled and is cached for one hour, so badges are not fetched on every page load.',
 ];
