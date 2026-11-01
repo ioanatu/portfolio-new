@@ -65,6 +65,29 @@
     font-variant-numeric: tabular-nums;
   }
 
+  @media (max-width: 680px) {
+    .logo {
+      width: 45.36px;
+      height: 45.36px;
+    }
+
+    h3 {
+      font-size: calc(1.4rem * 0.81);
+    }
+
+    .role {
+      font-size: calc(1.25rem * 0.81);
+    }
+
+    .dates {
+      font-size: calc(1rem * 0.9025);
+    }
+
+    summary:has(.logo) .dates {
+      padding-left: calc(45.36px + 16px);
+    }
+  }
+
   .plus {
     display: grid;
     place-items: center;
@@ -90,7 +113,6 @@
     transform: rotate(45deg);
   }
 
-  /* The other jobs' bullet list; the sonnen write-up styles its own lists */
   > ul {
     display: grid;
     gap: 10px;

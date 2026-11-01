@@ -1,6 +1,6 @@
-import { screen, within } from '@testing-library/react';
+import { act, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SECTION_NAV_ITEMS } from '../../content/navigation';
+import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
 
 describe('Header', () => {
@@ -128,5 +128,65 @@ describe('Header', () => {
     expect(
       within(document.getElementById('mobile-menu')!).getByRole('link', { name: 'Design archive' }),
     ).toHaveAttribute('href', '/design-archive');
+  });
+
+  it('lists Projects after Education, then the pages after a gap', async () => {
+    await renderRoute('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+    const labels = within(nav)
+      .getAllByRole('link', { hidden: true })
+      .map((link) => link.textContent);
+
+    const sections = SECTION_NAV_ITEMS.map(({ label }) => label);
+    expect(sections.slice(-2)).toEqual(['Education', 'Projects']);
+    const pages = PAGE_NAV_ITEMS.map(({ label }) => label);
+    expect(labels.slice(labels.indexOf(sections[0]))).toEqual(
+      expect.arrayContaining([...sections, ...pages]),
+    );
+    expect(labels.indexOf('Projects')).toBeLessThan(labels.indexOf(pages[0]));
+  });
+
+  it('separates the pages from the sections in the mobile menu', async () => {
+    await renderRoute('/');
+    await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+    const menu = document.getElementById('mobile-menu') as HTMLElement;
+    const items = [...menu.querySelectorAll('li')];
+    const projects = items.findIndex((item) => item.textContent === 'Projects');
+    const designArchive = items.findIndex((item) => item.textContent === 'Design archive');
+
+    expect(items[projects + 1]).toHaveAttribute('aria-hidden', 'true');
+    expect(designArchive).toBe(projects + 2);
+  });
+
+  it('keeps the URL hash on the section in view', async () => {
+    type Change = (entries: unknown[]) => void;
+    const observers: { onChange: Change; targets: Element[] }[] = [];
+    vi.stubGlobal(
+      'IntersectionObserver',
+      class {
+        entry: { onChange: Change; targets: Element[] };
+        constructor(onChange: Change) {
+          this.entry = { onChange, targets: [] };
+          observers.push(this.entry);
+        }
+        observe(target: Element) {
+          this.entry.targets.push(target);
+        }
+        unobserve() {}
+        disconnect() {}
+      },
+    );
+    const { router } = await renderRoute('/');
+    await screen.findByRole('navigation', { name: 'Main' });
+    expect(router.state.location.hash).toBe('');
+
+    const skills = document.getElementById('skills') as HTMLElement;
+    await act(async () => {
+      observers
+        .filter(({ targets }) => targets.includes(skills))
+        .forEach(({ onChange }) => onChange([{ target: skills, isIntersecting: true }]));
+    });
+
+    expect(router.state.location.hash).toBe('skills');
   });
 });

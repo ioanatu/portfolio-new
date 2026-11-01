@@ -2,6 +2,10 @@
   border-top: 1px solid var(--line);
   padding-block: 40px;
 
+  @media (max-width: 680px) {
+    padding-bottom: 20px;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
@@ -11,11 +15,21 @@
       grid-template-columns: auto 1fr 1fr;
     }
 
+    /* Brand, tagline, links, copyright, then the privacy button */
     @media (max-width: 680px) {
       grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
 
       & > div:first-child {
-        grid-column: 1 / -1;
+        display: contents;
+
+        & > * {
+          grid-column: 1 / -1;
+        }
+      }
+
+      & > div:not(:first-child) {
+        margin-top: 32px;
       }
     }
 
@@ -60,10 +74,20 @@
     margin-top: 12px;
     font-size: 0.9rem;
 
+    @media (max-width: 680px) {
+      display: contents;
+    }
+
     p {
       @media (min-width: 1000px) {
         max-width: none;
         white-space: nowrap;
+      }
+
+      @media (max-width: 680px) {
+        grid-column: 1 / -1;
+        order: 1;
+        margin-top: 32px;
       }
     }
 
@@ -80,6 +104,13 @@
 
       &:hover {
         color: var(--text);
+      }
+
+      @media (max-width: 680px) {
+        grid-column: 1 / -1;
+        order: 2;
+        justify-self: start;
+        margin: 12px 0 0;
       }
     }
   }

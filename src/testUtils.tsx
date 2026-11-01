@@ -11,9 +11,10 @@ export const renderRoute = async (path: string) => {
     history: createMemoryHistory({ initialEntries: [path] }),
   });
   await router.load();
-  return render(
+  const result = render(
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
     </QueryClientProvider>,
   );
+  return { ...result, router };
 };

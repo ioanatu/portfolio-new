@@ -1,9 +1,12 @@
 .section {
   --top-padding: max(0px, calc(var(--section-padding) - 80px));
 
-  /* Pulls the section up into the empty bottom padding of the one above */
   margin-top: -80px;
   padding-block: var(--top-padding) var(--section-padding);
+
+  @media (max-width: 960px) {
+    margin-top: 10px;
+  }
 
   .grid {
     display: grid;

@@ -46,6 +46,10 @@
       background-color 0.2s ease;
   }
 
+  @media (max-width: 680px) {
+    bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+  }
+
   @media (prefers-reduced-motion: reduce) {
     &,
     &.show {

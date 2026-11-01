@@ -34,5 +34,4 @@ export const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/ioanatatu' },
   { label: 'GitHub', href: 'https://github.com/ioanatatu' },
   { label: 'Behance', href: 'https://behance.net/IoanaTatu' },
-  { label: 'Design system', href: 'https://design-system.ioanatatu.com' },
 ] as const;

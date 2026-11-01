@@ -21,6 +21,10 @@
   .title {
     white-space: pre-line;
     font-size: clamp(2.1rem, 4.6vw, 3.7rem);
+
+    @media (max-width: 680px) {
+      font-size: calc(2.1rem * 0.95);
+    }
   }
 
   .page-title {
