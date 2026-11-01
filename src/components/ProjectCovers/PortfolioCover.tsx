@@ -8,7 +8,7 @@ const LINES = [
 
 export const PortfolioCover = () => (
   <svg
-    viewBox="0 0 320 200"
+    viewBox="0 0 340 200"
     preserveAspectRatio="xMidYMid meet"
     fontFamily="Hanken Grotesk, system-ui, sans-serif"
     fontSize="12"
@@ -26,14 +26,14 @@ export const PortfolioCover = () => (
     </text>
     <rect x="140" y="74" width="56" height="36" rx="12" fill="#1B1F3B" />
     <text x="168" y="96" textAnchor="middle" fill="#fff">
-      λ
+      aws λ
     </text>
-    <rect x="238" y="40" width="66" height="36" rx="18" fill="#F6DF7C" />
-    <text x="271" y="62" textAnchor="middle" fill="#1B1F3B">
-      Dynamo
+    <rect x="238" y="40" width="84" height="36" rx="18" fill="#F6DF7C" />
+    <text x="280" y="62" textAnchor="middle" fill="#1B1F3B">
+      DynamoDB
     </text>
-    <rect x="238" y="116" width="66" height="36" rx="18" fill="#F2B9D3" />
-    <text x="271" y="138" textAnchor="middle" fill="#1B1F3B">
+    <rect x="238" y="116" width="80" height="36" rx="18" fill="#F2B9D3" />
+    <text x="280" y="138" textAnchor="middle" fill="#1B1F3B">
       S3
     </text>
   </svg>

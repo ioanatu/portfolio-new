@@ -16,7 +16,7 @@ export const NamePronunciation = ({ children }: NamePronunciationProps) => {
   return (
     <span className={styles.namePronunciation}>
       {children}
-      <span className={styles.tooltip}>
+      <span className={clsx(styles.tooltip, { [styles.open]: playing })}>
         <span className={styles.bubble}>
           <span className={styles.label}>{PRONUNCIATION_LABEL}</span>
           <button

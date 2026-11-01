@@ -4,6 +4,10 @@
   position: relative;
   cursor: pointer;
 
+  @media (max-width: 680px) {
+    position: static;
+  }
+
   .tooltip {
     position: absolute;
     z-index: 5;
@@ -18,13 +22,17 @@
     cursor: default;
 
     @media (max-width: 680px) {
-      left: 50%;
-      padding: 0 0 12px;
-      translate: -50% 4px;
+      top: 16px;
+      right: 0;
+      bottom: auto;
+      left: auto;
+      padding: 0;
+      translate: 100% 0;
     }
   }
 
-  &:hover .tooltip {
+  &:hover .tooltip,
+  .tooltip.open {
     opacity: 1;
     visibility: visible;
     translate: 0 0;
@@ -34,7 +42,7 @@
       visibility 0s linear 0.1s;
 
     @media (max-width: 680px) {
-      translate: -50% 0;
+      translate: 0 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -62,11 +70,21 @@
     letter-spacing: 0.01em;
     text-align: left;
     white-space: normal;
+
+    @media (max-width: 680px) {
+      padding: 12px 18px 12px 12px;
+      border-right: 0;
+      border-radius: var(--r-md) 0 0 var(--r-md);
+    }
   }
 
   .label {
     max-width: 15ch;
     margin-right: 5px;
+
+    @media (max-width: 680px) {
+      margin: 0 0 0 11px;
+    }
   }
 }
 
@@ -101,6 +119,10 @@
   border-radius: 50%;
   background: var(--surface);
   color: var(--text);
+
+  @media (max-width: 680px) {
+    order: -1;
+  }
 
   &:hover {
     background: var(--surface-2);

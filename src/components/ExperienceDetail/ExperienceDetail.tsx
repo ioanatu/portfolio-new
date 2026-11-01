@@ -35,7 +35,12 @@ export const ExperienceDetail = ({
       <section key={name} aria-label={name}>
         <div className={styles.head}>
           <h4>
-            <b>{name}</b> — <span className={styles.summary}>{summary}</span>
+            <b>{name}</b>{' '}
+            {summary ? (
+              <>
+                — <span className={styles.summary}>{summary}</span>
+              </>
+            ) : null}
             {link && (
               <a
                 href={link.href}

@@ -1,7 +1,7 @@
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { showConsentPreferences } from '../../consent/cookieConsent';
-import { SECTION_NAV_ITEMS, SOCIAL_LINKS } from '../../content/navigation';
+import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS, SOCIAL_LINKS } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
 
 vi.mock('../../consent/cookieConsent', () => ({ showConsentPreferences: vi.fn() }));
@@ -23,6 +23,35 @@ describe('Footer', () => {
       expect(link).toHaveAttribute('href', href);
       expect(link).toHaveAttribute('target', '_blank');
     });
+  });
+
+  it('lists the sections, social links and pages under their own headings', async () => {
+    const footer = await renderFooter();
+
+    const sections = footer.getByRole('heading', { level: 4, name: 'Sections' }).nextElementSibling;
+    const pages = footer.getByRole('heading', { level: 4, name: 'Pages' }).nextElementSibling;
+    const links = footer.getByRole('heading', { level: 4, name: 'Links' }).nextElementSibling;
+    expect(
+      within(sections as HTMLElement)
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(SECTION_NAV_ITEMS.map(({ label }) => label));
+    expect(
+      within(links as HTMLElement)
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(SOCIAL_LINKS.map(({ label }) => label));
+    expect(
+      within(pages as HTMLElement)
+        .getAllByRole('link')
+        .map((link) => [link.textContent, link.getAttribute('href')]),
+    ).toEqual(PAGE_NAV_ITEMS.map(({ label, to }) => [label, to]));
+  });
+
+  it('no longer has an Elsewhere heading', async () => {
+    const footer = await renderFooter();
+
+    expect(footer.queryByRole('heading', { name: 'Elsewhere' })).not.toBeInTheDocument();
   });
 
   it('does not link to the design system, which has its own project card', async () => {

@@ -10,7 +10,7 @@ export const HERO_NAME = /^ioana$/i;
 export const PRONUNCIATION_LABEL = 'Listen to name pronunciation';
 
 export const HERO_LEDE =
-  'Welcome to my new portfolio, where I showcase my knowledge and have fun building old-school and with AI. Browse around to see my experience, skills, and certifications.';
+  'Welcome to my new portfolio, where I showcase my knowledge and have fun building the old-school way and with AI. Browse around to see my experience, skills, and certifications.';
 
 export const STATUS_TEXT = 'Open to new frontend roles';
 export const STATUS_PLACES = ['Berlin', 'Paris', 'Remote'] as const;

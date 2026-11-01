@@ -5,21 +5,18 @@ import { CV_LINKS } from './navigation';
 
 export type JobProject = {
   name: string;
-  summary: string;
+  summary?: string;
   link?: { href: string; label: string };
   stack?: string;
-  /** Phrases to set in bold in the bullet points. */
   emphasized?: readonly string[];
   points: readonly string[];
 };
 
-/** A longer write-up of a job: an intro, its projects and what was common to all of them. */
 export type JobDetail = {
   heading: string;
   logo: string;
   intro: string;
   website: { href: string; label: string };
-  /** Plain bullet points, for jobs that are not split into projects. */
   highlights?: readonly string[];
   projects?: readonly JobProject[];
   commonTitle?: string;
@@ -54,7 +51,7 @@ export const JOBS: readonly Job[] = [
       logo: sonnenLogo,
       website: { href: 'https://www.sonnen.de/', label: 'sonnen.de' },
       intro:
-        'sonnen is an energy company specialized in battery production and energy contracts. As of 29 October 2026, sonnen GmbH has files for insolvency proceedings under self-administration.',
+        'sonnen is an energy company specialized in battery production and energy contracts. As of 29 October 2026, sonnen GmbH has filed for insolvency proceedings under self-administration.',
       projects: [
         {
           name: 'Tariffs',
@@ -63,8 +60,8 @@ export const JOBS: readonly Job[] = [
           link: { href: 'https://tariffs.sonnen.de/', label: 'tariffs.sonnen.de' },
           points: [
             'B2C customer-facing application built with React, TypeScript, Vite, GraphQL, ContextAPI, and a BFF approach.',
-            'Bootstrapped the project, implemented CI/CD pipeline, integrated Sentry, google Analytics, guided frontend architecture decisions.',
-            'In addition to ongoing feature development, ensured 80% test coverage, monitored with Sentry, and mentored junior team members.',
+            'Bootstrapped project, implemented CI/CD pipeline with GitHub Actions, integrated Sentry, google Analytics, guided frontend architecture decisions.',
+            'In addition to ongoing feature development, I ensured accessibility compliance with WCAG 2.1 AA standards, quality standards through 80% test coverage and performance optimization with Lighthouse audits.',
           ],
         },
         {
@@ -72,8 +69,8 @@ export const JOBS: readonly Job[] = [
           emphasized: ['microfrontends', 'GitHub Actions', 'B2B', 'B2C', 'atomic design'],
           summary: 'Modern dashboard for sonnen partners.',
           points: [
-            'B2B microfrontends application built with React, Typescript, Vite Module Federation and GraphQL, localization with i18n and POEditor, hosted in a GitHub monorepo, and deployed to an S3 bucket served through AWS CloudFront.',
-            'Contributed my experience to all phases of the project: microfrontend architecture research and decision, tech stack selection based on business requirements and trade-offs, ADRs and documentation, CI/CD pipeline setup with GitHub Actions, AWS hosting and CloudFront configuration, and ongoing feature development.',
+            'B2B microfrontends application built with React, Typescript, Vite Module Federation and GraphQL, localization with i18n and POEditor, hosted in a monorepo, deployed to S3 environment buckets, served through CloudFront.',
+            'Contributed to all phases of the project: microfrontend architecture research, tech stack selection based on business requirements and trade-offs, ADRs and documentation, CI/CD setup, AWS hosting, CloudFront configuration, and ongoing feature development.',
           ],
         },
         {
@@ -82,22 +79,24 @@ export const JOBS: readonly Job[] = [
             'Sonnen partners application used for the battery commissioning process and post-sale support.',
           points: [
             'B2B application built with React, Redux, RxJS, SASS, webpack, REST API, deployed on GitLab.',
-            'Legacy app where I performed regular bug fixes, code refactorings, and occasionally developed new features.',
+            'Legacy app where I performed regular bug fixes, developed new features and drove code refactorings to improve maintainability.',
           ],
         },
         {
           name: 'Web-ui',
-          summary: 'Component library based on new company design system.',
+          summary: 'Component library based on new design system after company rebranding.',
           points: [
-            'Led the implementation of a new design system, including the creation of reusable components, and mentored junior team members on frontend best practices and testing.',
-            'I led tech stack research and selection, onboarded the design team on atomic design methodology, and helped build the library from scratch',
+            'Led the implementation of a new design system, including the creation of reusable components.',
+            'Led tech stack research and selection, onboarded design team on atomic design methodology, and contributed to building the library from scratch.',
           ],
         },
       ],
       commonTitle: 'Responsibilities common to all projects:',
       commonPoints: [
-        'Thorough code reviews focused on enhancing best practices, functionality, and maintainability, as well as domain knowledge transfer.',
-        'my communication and organisational skills enabled me to occasionally fill gaps caused by a fast-moving environment, such as clarifying business requirements, writing tickets, leading Refinements, while my keen eye for design details made me a go-to person for designers and QA when testing user flows and UI.',
+        'Thorough code reviews focused on enhancing best practices, code base quality and domain knowledge transfer.',
+        'Filled gaps caused by a fast-changing work environment: business requirements clarification, tickets writing, Refinements moderation.',
+        'Fostered cross-team collaboration between designers, devs and QA.',
+        'Onboarded new team members onto project ecosystem and introduced them to our coding and testing conventions, mentored junior team members on frontend best practices.',
       ],
     },
   },
@@ -111,11 +110,29 @@ export const JOBS: readonly Job[] = [
       logo: futuriceLogo,
       website: { href: 'https://www.futurice.com/de', label: 'futurice.com' },
       intro:
-        'Futurice is a consultancy with Finnish roots and values that develops IT solutions for clients on the German and Scandinavian markets.',
+        'Futurice is a consultancy company with Finnish roots and values that develops solutions for clients on the German and Scandinavian markets.',
       highlights: [
         'Built features for Red Bull München’s server-side rendered website.',
         'Developed a B2B mobile app for Royal Unibrew in Denmark and Hartwall in Finland.',
         'Contributed to Dev Breakfast, an agency-wide knowledge-sharing series on clean code, TDD and scalability, and supported recruiting.',
+      ],
+      projects: [
+        {
+          name: 'RedBull München website',
+          summary: 'MVP website for ice hockey club Red Bull Munich.',
+          link: { href: 'https://www.redbullmuenchen.de/de/', label: 'redbullmuenchen.de' },
+          points: [
+            'B2C app with React, TypeScript, Remix, Contentful for content management and a serverless backend on AWS.',
+            'Built features for a server-side rendered frontend application with Remix and styled-components.',
+          ],
+        },
+        {
+          name: 'Mobile application for FC Byern and RedBull München',
+          summary: '',
+          points: [
+            'Developed frontend features with React Native and TypeScript, collaborating closely with the UI/ UX designer team.',
+          ],
+        },
       ],
     },
   },
@@ -129,10 +146,10 @@ export const JOBS: readonly Job[] = [
       logo: aaronLogo,
       website: { href: 'https://www.aaron.ai/', label: 'aaron.ai' },
       intro:
-        'Aaron.ai is an AI phone assistant for doctors’ practices that answers calls around the clock and books appointments automatically. It is now part of Doctolib.',
+        'Aaron.ai was an AI phone assistant for doctors’ practices that answered calls and booked appointments, helping alleviate the administrative burden from medical assistants. In 2024 Aaron.ai was bought by Doctolib.',
       highlights: [
-        'Owned a feature end to end as feature owner and requirements engineer, aligning stakeholders on business and technical constraints.',
-        'Designed and implemented the UI in the absence of a dedicated design team.',
+        'Owned features end to end as feature owner, developer and requirements engineer, aligning stakeholders on business and technical constraints.',
+        'Designed and implemented UI elements in the absence of a dedicated design team.',
       ],
     },
   },

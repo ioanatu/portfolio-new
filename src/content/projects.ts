@@ -1,6 +1,6 @@
 export const PROJECTS_TITLE = 'Projects';
 
-export const PROJECTS_INTRO = 'Platforms I build and run on my own.';
+export const PROJECTS_INTRO = 'Projects I built for fun and learning.';
 
 export type ProjectCoverId = 'portfolio' | 'design-system' | 'nap';
 
@@ -21,7 +21,7 @@ export const PROJECTS: readonly Project[] = [
     linkLabel: 'ioanatatu.com',
     repoHref: 'https://github.com/ioanatatu/portfolio-client',
     description:
-      'Frontend hosted on Netlify and backend built with Serverless Framework for Lambda and S3, DynamoDB, and DNS managed in AWS.',
+      'Frontend hosted on Netlify and backend built with AWS Serverless Framework for Lambda and S3, DynamoDB, and DNS managed with Route 53.',
     cover: 'portfolio',
   },
   {
@@ -30,7 +30,7 @@ export const PROJECTS: readonly Project[] = [
     linkLabel: 'design-system.ioanatatu.com',
     repoHref: 'https://github.com/ioanatu/component-library',
     description:
-      'My own accessible component library and token system, hosted on S3 with SSL from AWS Certificate Manager on its own subdomain.',
+      'I built my own accessible component library and token system with Storybook. The library is WCAG 2.1 AA compliant and supports multiple themes. The package is hosted on GitHub and published on npm.',
     cover: 'design-system',
   },
   {
@@ -38,7 +38,8 @@ export const PROJECTS: readonly Project[] = [
     href: 'https://www.thenap.de/',
     linkLabel: 'thenap.de',
     repoHref: 'https://github.com/ioanatatu/take-a-nap',
-    description: 'The landing page of The Nap.',
+    description:
+      "Fun project I built many years ago. It was meant to experiement with all technologies I was curious about at that time. It uses PostgreSQL and Firebase as databases. P.S.: I haven't revewed the SSL certificate yet.",
     cover: 'nap',
   },
 ];

@@ -1,14 +1,14 @@
 .emphasized-text {
-  --highlight: color-mix(in srgb, var(--lilac) 85%, transparent);
+  --highlight: color-mix(in srgb, var(--lilac) 30%, transparent);
 
   padding: 0 0.3em;
   background: var(--highlight);
-  color: var(--text);
+  color: #000;
   font-weight: 500;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 
 :root[data-theme='dark'] .emphasized-text {
-  --highlight: rgba(46, 28, 110, 0.9);
+  --highlight: rgba(46, 28, 110, 0.05);
 }

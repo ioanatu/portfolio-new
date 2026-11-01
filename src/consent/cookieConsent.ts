@@ -55,9 +55,9 @@ export const initializeConsent = () =>
       translations: {
         en: {
           consentModal: {
-            title: 'Privacy settings',
+            title: 'Privacy settings — Personal use only',
             description:
-              'Hey there, dear visitor! I use Google Tag Manager to see how the site is used. No commercial purposes. Accepting would help me understand usage.',
+              'Hey there, dear visitor! I use Google Analytics to understand how people interact with my website and learn from their behavior. No commercial purposes.Accepting cookies would really help me learn more about analytics. Thank you!  💜',
             acceptAllBtn: 'Accept all',
             acceptNecessaryBtn: 'Reject all',
             showPreferencesBtn: 'Manage preferences',
