@@ -6,6 +6,10 @@
   isolation: isolate;
   padding-block: var(--section-padding);
 
+  @media (min-width: 961px) {
+    margin-top: -80px;
+  }
+
   .layout {
     display: grid;
     grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);

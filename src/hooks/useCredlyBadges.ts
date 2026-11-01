@@ -30,11 +30,10 @@ const toIssued = (date: string): Certification['issued'] => {
   return { month: MONTHS[Number(month) - 1] ?? '', year };
 };
 
-const fetchBadges = async (): Promise<Certification[]> => {
-  const url = import.meta.env.VITE_CREDLY_API_URL?.trim();
-  if (!url) throw new Error('VITE_CREDLY_API_URL is not set');
+export const CREDLY_BADGES_PATH = '/credlyBadges';
 
-  const response = await fetch(url);
+const fetchBadges = async (): Promise<Certification[]> => {
+  const response = await fetch(CREDLY_BADGES_PATH);
   if (!response.ok) throw new Error(`Credly request failed: ${response.status}`);
 
   const { data }: CredlyResponse = await response.json();

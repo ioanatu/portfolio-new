@@ -13,8 +13,8 @@ export const CERTIFICATIONS_INTRO =
   "I'm passionate about cloud computing and invest in my continuous education. Understanding things beyond my frontend role helps me build performant, scalable, and secure applications.";
 export const CERTIFICATIONS_SOURCE_NOTES: string[] = [
   'Badges are fetched with lazy loading shortly before section is scrolled into view.',
-  'A Lambda function on aws fetches earned badges directly from the Credly API.',
-  'The function has CORS enabled and is cached for one hour, so badges are not fetched on every page load.',
+  'A Lambda function on AWS fetches earned badges directly from Credly API.',
+  'To prevent direct access to the function, the Lambda is registered as CloudFront origin and only accepts requests forwarded by its distribution.',
 ];
 
 export const CREDLY_BADGE_COUNT = 3;

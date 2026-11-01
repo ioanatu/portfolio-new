@@ -4,6 +4,7 @@ import {
   CERTIFICATIONS_SOURCE_NOTES,
   IN_PROGRESS_CERTIFICATION,
 } from '../../content/certifications';
+import { CREDLY_BADGES_PATH } from '../../hooks/useCredlyBadges';
 import { CertificationsSection } from './CertificationsSection';
 
 const badge = (name: string, issued_at_date: string) => ({
@@ -44,12 +45,10 @@ const stubIntersectionObserver = (visibleAtOnce: boolean) => {
 
 describe('CertificationsSection', () => {
   beforeEach(() => {
-    vi.stubEnv('VITE_CREDLY_API_URL', 'https://credly.test/');
     stubIntersectionObserver(true);
   });
 
   afterEach(() => {
-    vi.unstubAllEnvs();
     vi.unstubAllGlobals();
   });
 
@@ -143,5 +142,6 @@ describe('CertificationsSection', () => {
 
     reveal();
     await waitFor(() => expect(fetchBadges).toHaveBeenCalledTimes(1));
+    expect(fetchBadges).toHaveBeenCalledWith(CREDLY_BADGES_PATH);
   });
 });
