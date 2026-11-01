@@ -1,13 +1,20 @@
 import clsx from 'clsx';
-import { type CSSProperties, Fragment, useEffect, useEffectEvent, useState } from 'react';
+import {
+  type CSSProperties,
+  Fragment,
+  type ReactNode,
+  useEffect,
+  useEffectEvent,
+  useState,
+} from 'react';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import styles from './TypewriterHeading.module.css';
 
-const START_DELAY_MS = 300;
-const WORD_STAGGER_MS = 75;
-const WORD_DURATION_MS = 1000;
-const SETTLE_LEAD_MS = 350;
+const START_DELAY_MS = 270;
+const WORD_STAGGER_MS = 67.5;
+const WORD_DURATION_MS = 900;
+const SETTLE_LEAD_MS = 315;
 const SETTLED_AFTER_MS = 30;
 
 type Phase = 'waiting' | 'rising' | 'settled';
@@ -18,6 +25,7 @@ type TypewriterHeadingProps = {
   className?: string;
   hotWord?: RegExp;
   boldWord?: RegExp;
+  decorateWord?: (word: string, element: ReactNode) => ReactNode;
   onSettle?: () => void;
 };
 
@@ -28,6 +36,7 @@ export const TypewriterHeading = ({
   className,
   hotWord,
   boldWord,
+  decorateWord,
   onSettle,
 }: TypewriterHeadingProps) => {
   const reducedMotion = usePrefersReducedMotion();
@@ -54,6 +63,9 @@ export const TypewriterHeading = ({
     return () => timers.forEach(clearTimeout);
   }, [reducedMotion, wordCount]);
 
+  const decorate = (word: string, element: ReactNode) =>
+    decorateWord ? decorateWord(word, element) : element;
+
   const currentPhase = reducedMotion ? 'settled' : phase;
 
   return (
@@ -69,17 +81,20 @@ export const TypewriterHeading = ({
                 return (
                   <Fragment key={index}>
                     {position > 0 && ' '}
-                    <span className={styles.word}>
-                      <span
-                        className={clsx(styles.inner, {
-                          [styles.hot]: hotWord?.test(word),
-                          [styles.bold]: boldWord?.test(word),
-                        })}
-                        style={{ '--i': index } as CSSProperties}
-                      >
-                        {word}
-                      </span>
-                    </span>
+                    {decorate(
+                      word,
+                      <span className={styles.word}>
+                        <span
+                          className={clsx(styles.inner, {
+                            [styles.hot]: hotWord?.test(word),
+                            [styles.bold]: boldWord?.test(word),
+                          })}
+                          style={{ '--i': index } as CSSProperties}
+                        >
+                          {word}
+                        </span>
+                      </span>,
+                    )}
                   </Fragment>
                 );
               })}

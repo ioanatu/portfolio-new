@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import {
   HERO_HOT_WORD,
   HERO_LEDE,
@@ -13,11 +13,15 @@ import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { buttonClassName } from '../Button/buttonClassName';
 import { Container } from '../Container/Container';
 import { HeroBackground } from '../HeroBackground/HeroBackground';
+import { NamePronunciation, PronunciationButton } from '../NamePronunciation/NamePronunciation';
 import { RotatingWords } from '../RotatingWords/RotatingWords';
 import { SectionLink } from '../SectionLink/SectionLink';
 import { StatusPill } from '../StatusPill/StatusPill';
 import { TypewriterHeading } from '../TypewriterHeading/TypewriterHeading';
 import styles from './Hero.module.css';
+
+const decorateHeroWord = (word: string, element: ReactNode) =>
+  HERO_NAME.test(word) ? <NamePronunciation>{element}</NamePronunciation> : element;
 
 export const Hero = () => {
   const reducedMotion = usePrefersReducedMotion();
@@ -29,7 +33,7 @@ export const Hero = () => {
       <HeroBackground />
       <Container>
         <div className={styles.intro}>
-          <StatusPill className={styles.rise}>
+          <StatusPill className={clsx(styles.rise, styles.status)}>
             {STATUS_TEXT} <RotatingWords words={STATUS_PLACES} label={STATUS_PLACES_LABEL} />
           </StatusPill>
           <TypewriterHeading
@@ -38,8 +42,10 @@ export const Hero = () => {
             lines={HERO_LINES}
             hotWord={HERO_HOT_WORD}
             boldWord={HERO_NAME}
+            decorateWord={decorateHeroWord}
             onSettle={() => setHeadingSettled(true)}
           />
+          <PronunciationButton className={styles.pronounce} />
           <p className={clsx(styles.rise, styles.lede, { [styles.waiting]: waiting })}>
             {HERO_LEDE}
           </p>

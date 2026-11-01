@@ -7,6 +7,7 @@ export const HERO_LINES = [
 
 export const HERO_HOT_WORD = /^(design|architect|product)/i;
 export const HERO_NAME = /^ioana$/i;
+export const PRONUNCIATION_LABEL = 'Listen to name pronunciation';
 
 export const HERO_LEDE =
   'Welcome to my new portfolio, where I showcase my knowledge and have fun building old-school and with AI. Browse around to see my experience, skills, and certifications.';

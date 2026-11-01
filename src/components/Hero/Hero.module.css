@@ -14,6 +14,11 @@
     padding-block: clamp(32px, 5vh, 64px);
   }
 
+  .status {
+    position: relative;
+    top: -10px;
+  }
+
   .title {
     font-size: clamp(2rem, 4.8vw, 4.4rem);
     margin: 38px auto 20px;
@@ -22,7 +27,7 @@
   }
 
   .lede {
-    --d: 60ms;
+    --d: 54ms;
 
     max-width: 58ch;
     margin: 26px auto 0;
@@ -30,8 +35,12 @@
     font-size: clamp(1.05rem, 1.4vw, 1.2rem);
   }
 
+  .pronounce:focus-visible {
+    margin: 0 auto 20px;
+  }
+
   .actions {
-    --d: 300ms;
+    --d: 270ms;
 
     display: flex;
     gap: 12px;
@@ -43,7 +52,7 @@
   .rise {
     opacity: 0;
     transform: translateY(16px);
-    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    animation: rise 0.81s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
     animation-delay: var(--d, 0ms);
 
     &.waiting {
