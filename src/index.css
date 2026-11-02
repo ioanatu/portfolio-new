@@ -52,7 +52,7 @@
   --g-violet: #7446e0;
   --g-ice: #bfe0f8;
   --grain-o: 0.384;
-  --stripe: rgba(27, 31, 59, 0.057);
+  --stripe: rgba(27, 31, 59, 0.0412);
 
   /* Colors of the rotating city name */
   --sw1: #00994a;
@@ -73,7 +73,7 @@
   --surface-2: #222638;
   --text: #ecedf5;
   --muted: #a6aac0;
-  --line: rgba(236, 237, 245, 0.12);
+  --line: rgba(236, 237, 245, 0.0866);
   --btn: #ecedf5;
   --btn-text: #10121c;
   --focus: #a9b2ff;
@@ -94,7 +94,7 @@
   --g-violet: #7a4bf0;
   --g-ice: #5b9bd6;
   --grain-o: 0.24;
-  --stripe: rgba(236, 237, 245, 0.045);
+  --stripe: rgba(236, 237, 245, 0.0866);
 
   --sw1: #00ff7a;
   --sw2: #00ffe5;
@@ -191,6 +191,12 @@ p {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: repeating-linear-gradient(-45deg, var(--stripe) 0 1px, transparent 1px 6px);
+  background-image: repeating-linear-gradient(
+    140deg,
+    var(--stripe),
+    var(--stripe) 1px,
+    transparent 1px,
+    transparent 6px
+  );
   mask-image: linear-gradient(180deg, transparent 0, #000 220px);
 }

@@ -27,7 +27,7 @@ export const SECTION_IDS = SECTION_NAV_ITEMS.map(({ sectionId }) => sectionId);
 
 export const CV_LINKS = [
   { label: 'ATS format', href: cvAts },
-  { label: 'Human eye', href: cvHuman },
+  { label: 'For human reader', href: cvHuman },
 ] as const;
 
 export const SOCIAL_LINKS = [

@@ -14,12 +14,13 @@ export const Footer = () => {
           <div>
             <Brand />
             <p>
-              Frontend engineer building aesthetic, scalable web products from Berlin and Paris. 💜
+              Frontend Engineer building performant, scalable and aesthetic web products from Berlin
+              and Paris. 💜
             </p>
             <div className={styles.legal}>
               <p>
-                © {new Date().getFullYear()} Ioana Tatu. Built with React, TypeScript, AWS, and a
-                dash of Claude.
+                © {new Date().getFullYear()} Ioana Tatu. Built with React, TypeScript, AWS, and
+                Claude Code.
               </p>
               <button type="button" className={styles.privacy} onClick={showConsentPreferences}>
                 Privacy settings

@@ -1,5 +1,5 @@
 .emphasized-text {
-  --highlight: color-mix(in srgb, var(--lilac) 30%, transparent);
+  --highlight: color-mix(in srgb, var(--lilac) 10%, transparent);
 
   padding: 0 0.3em;
   background: var(--highlight);

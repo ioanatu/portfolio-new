@@ -57,7 +57,7 @@ export const initializeConsent = () =>
           consentModal: {
             title: 'Privacy settings — Personal use only',
             description:
-              'Hey there, dear visitor! I use Google Analytics to understand how people interact with my website and learn from their behavior. No commercial purposes.Accepting cookies would really help me learn more about analytics. Thank you!  💜',
+              'Hey there, dear visitor! I use Google Analytics to understand how people interact with my website and learn from their behavior. No commercial purposes. Accepting cookies would really help me learn more about analytics. Thank you!  💜',
             acceptAllBtn: 'Accept all',
             acceptNecessaryBtn: 'Reject all',
             showPreferencesBtn: 'Manage preferences',

@@ -37,7 +37,7 @@ export const EXPERIENCE_INTRO =
 export const RESUME_DOWNLOAD_LABEL = 'Download streamlined resume:';
 export const RESUME_DOWNLOADS = [
   { label: 'ATS format', href: CV_LINKS[0].href },
-  { label: 'Happy human eye', href: CV_LINKS[1].href },
+  { label: 'For human reader', href: CV_LINKS[1].href },
 ] as const;
 
 export const JOBS: readonly Job[] = [
@@ -59,7 +59,7 @@ export const JOBS: readonly Job[] = [
           summary: 'Purchase flow for new sonnen energy contracts.',
           link: { href: 'https://tariffs.sonnen.de/', label: 'tariffs.sonnen.de' },
           points: [
-            'B2C customer-facing application built with React, TypeScript, Vite, GraphQL, ContextAPI, and a BFF approach.',
+            'Customer-facing application built with React, TypeScript, Vite, GraphQL, ContextAPI, and a BFF approach.',
             'Bootstrapped project, implemented CI/CD pipeline with GitHub Actions, integrated Sentry, google Analytics, guided frontend architecture decisions.',
             'In addition to ongoing feature development, I ensured accessibility compliance with WCAG 2.1 AA standards, quality standards through 80% test coverage and performance optimization with Lighthouse audits.',
           ],
@@ -70,7 +70,7 @@ export const JOBS: readonly Job[] = [
           summary: 'Modern dashboard for sonnen partners.',
           points: [
             'B2B microfrontends application built with React, Typescript, Vite Module Federation and GraphQL, localization with i18n and POEditor, hosted in a monorepo, deployed to S3 environment buckets, served through CloudFront.',
-            'Contributed to all phases of the project: microfrontend architecture research, tech stack selection based on business requirements and trade-offs, ADRs and documentation, CI/CD setup, AWS hosting, CloudFront configuration, and ongoing feature development.',
+            'Contributed to all phases of the project: microfrontend architecture research, tech stack selection based on business requirements and trade-offs, ADRs and documentation, CI/CD setup, AWS hosting, CloudFront configuration, MVP development and release.',
           ],
         },
         {
@@ -86,8 +86,8 @@ export const JOBS: readonly Job[] = [
           name: 'Web-ui',
           summary: 'Component library based on new design system after company rebranding.',
           points: [
-            'Led the implementation of a new design system, including the creation of reusable components.',
             'Led tech stack research and selection, onboarded design team on atomic design methodology, and contributed to building the library from scratch.',
+            'Advocated for the early adoption of accessibility standards.',
           ],
         },
       ],
@@ -112,8 +112,7 @@ export const JOBS: readonly Job[] = [
       intro:
         'Futurice is a consultancy company with Finnish roots and values that develops solutions for clients on the German and Scandinavian markets.',
       highlights: [
-        'Built features for Red Bull München’s server-side rendered website.',
-        'Developed a B2B mobile app for Royal Unibrew in Denmark and Hartwall in Finland.',
+        'Acted as a consultant on several projects, working with clients across Europe and experiencing different cultures: Red Bull München on their website and with Royal Unibrew (Denmark) and Hartwall (Finland) on a B2B mobile application.',
         'Contributed to Dev Breakfast, an agency-wide knowledge-sharing series on clean code, TDD and scalability, and supported recruiting.',
       ],
       projects: [
@@ -148,7 +147,7 @@ export const JOBS: readonly Job[] = [
       intro:
         'Aaron.ai was an AI phone assistant for doctors’ practices that answered calls and booked appointments, helping alleviate the administrative burden from medical assistants. In 2024 Aaron.ai was bought by Doctolib.',
       highlights: [
-        'Owned features end to end as feature owner, developer and requirements engineer, aligning stakeholders on business and technical constraints.',
+        'Owned features end-to-end as feature owner, developer and requirements engineer, aligning stakeholders on business and technical constraints.',
         'Designed and implemented UI elements in the absence of a dedicated design team.',
       ],
     },
