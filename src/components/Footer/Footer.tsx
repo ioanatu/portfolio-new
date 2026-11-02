@@ -14,8 +14,8 @@ export const Footer = () => {
           <div>
             <Brand />
             <p>
-              Frontend Engineer building performant, scalable and aesthetic web products from Berlin
-              and Paris. 💜
+              Frontend Engineer building performant, scalable and aesthetic web products from
+              Berlin. 💜
             </p>
             <div className={styles.legal}>
               <p>

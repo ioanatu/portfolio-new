@@ -3,8 +3,7 @@ import { VisuallyHidden } from '../VisuallyHidden/VisuallyHidden';
 import styles from './RotatingWords.module.css';
 
 type RotatingWordsProps = {
-  words: readonly [string, string, string];
-  // Everything the words say together, for screen readers.
+  words: string[];
   label: string;
 };
 
