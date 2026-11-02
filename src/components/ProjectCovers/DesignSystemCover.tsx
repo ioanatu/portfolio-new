@@ -1,7 +1,7 @@
 /** Neo-brutalist look of the design system's Storybook: ink outlines, hard offset shadows */
 const INK = '#1A1A1A';
 const ACCENT = '#3367F6';
-const MONO = 'JetBrains Mono, ui-monospace, monospace';
+const MONO = 'JetBrains Mono Variable, ui-monospace, monospace';
 
 const SWATCHES = [
   { name: 'accent.500', color: ACCENT },
@@ -20,7 +20,7 @@ export const DesignSystemCover = () => (
   <svg
     viewBox="0 0 320 200"
     preserveAspectRatio="xMidYMid meet"
-    fontFamily="Hanken Grotesk, system-ui, sans-serif"
+    fontFamily="Hanken Grotesk Variable, system-ui, sans-serif"
     aria-hidden="true"
   >
     <rect width="320" height="200" fill="#F7F5F5" />

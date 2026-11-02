@@ -519,6 +519,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/hanken-grotesk@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/hanken-grotesk@npm:5.3.0"
+  checksum: 10/ee3e37054627cd747a578d3e1eee2f773f01274df08e6d08f80f7752de43a1f812e4f4d94fd1098ff94f8905dca6023587773978b9db06a981990560eb1a8a65
+  languageName: node
+  linkType: hard
+
+"@fontsource-variable/jetbrains-mono@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource-variable/jetbrains-mono@npm:5.3.0"
+  checksum: 10/08ef6fd0e1b66b318aaedb2f17034a8cb01c02da4fdceb7e7c5c7b4097d5fce63089a417cf8b39b0c1133bb639db5623166f3496df63f047ba474438b29b423d
+  languageName: node
+  linkType: hard
+
+"@fontsource/poppins@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource/poppins@npm:5.3.0"
+  checksum: 10/5fa72b1fc9c17fb49b1227f555193e592f0f29da527ed824de8cd3ba76fd25ab1e81bee8b57e9f236f669b0c4033300f4e97b063478dc7c813f33af595d121db
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.2":
   version: 0.19.2
   resolution: "@humanfs/core@npm:0.19.2"
@@ -4442,6 +4463,9 @@ __metadata:
   resolution: "portfolio-new@workspace:."
   dependencies:
     "@eslint/js": "npm:^10.0.1"
+    "@fontsource-variable/hanken-grotesk": "npm:^5.3.0"
+    "@fontsource-variable/jetbrains-mono": "npm:^5.3.0"
+    "@fontsource/poppins": "npm:^5.3.0"
     "@sentry/react": "npm:^11.10.0"
     "@sentry/vite-plugin": "npm:^11.10.0"
     "@tanstack/eslint-plugin-query": "npm:^5.105.0"

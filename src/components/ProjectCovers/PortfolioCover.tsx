@@ -10,7 +10,7 @@ export const PortfolioCover = () => (
   <svg
     viewBox="0 0 340 200"
     preserveAspectRatio="xMidYMid meet"
-    fontFamily="Hanken Grotesk, system-ui, sans-serif"
+    fontFamily="Hanken Grotesk Variable, system-ui, sans-serif"
     fontSize="12"
     fontWeight="600"
     aria-hidden="true"

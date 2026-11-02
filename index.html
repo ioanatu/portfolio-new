@@ -9,13 +9,6 @@
       content="Ioana Tatu is a Berlin-based frontend engineer: React, TypeScript, design systems, microfrontends, AWS and AI-assisted engineering."
     />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@400..700&family=Poppins:wght@700&display=swap"
-      rel="stylesheet"
-    />
-
     <title>Ioana Tatu — Frontend Engineer</title>
 
     <!-- Google Tag Manager -->
@@ -41,18 +34,30 @@
     </script>
 
     <script>
+      // Loaded once the page is idle after `load`, so it does not compete with the first render.
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
+        function load() {
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
 
-        f.parentNode.insertBefore(j, f);
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+
+          f.parentNode.insertBefore(j, f);
+        }
+
+        function whenIdle() {
+          if ('requestIdleCallback' in w) w.requestIdleCallback(load, { timeout: 3000 });
+          else setTimeout(load, 1500);
+        }
+
+        if (d.readyState === 'complete') whenIdle();
+        else w.addEventListener('load', whenIdle);
       })(window, document, 'script', 'dataLayer', 'GTM-NXFQG653');
     </script>
     <!-- End Google Tag Manager -->

@@ -1,4 +1,7 @@
 import './instrument';
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '@fontsource/poppins/700.css';
 import './index.css';
 import * as Sentry from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
