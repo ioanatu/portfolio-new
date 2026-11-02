@@ -52,8 +52,18 @@ export const Header = () => {
       setMenuOpen(false);
       menuButtonRef.current?.focus();
     };
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (document.getElementById(MOBILE_MENU_ID)?.contains(target)) return;
+      if (menuButtonRef.current?.contains(target)) return;
+      setMenuOpen(false);
+    };
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
   }, [menuOpen]);
 
   return (

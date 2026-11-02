@@ -17,6 +17,11 @@
   .status {
     position: relative;
     top: -10px;
+
+    @media (max-width: 680px) {
+      top: -35px;
+      font-size: calc(0.936rem * 0.95);
+    }
   }
 
   .title {
@@ -24,6 +29,11 @@
     margin: 38px auto 20px;
     letter-spacing: -0.04em;
     line-height: 1.02;
+
+    @media (max-width: 680px) {
+      position: relative;
+      font-size: calc(2rem * 1.05);
+    }
   }
 
   .lede {

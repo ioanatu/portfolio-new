@@ -48,6 +48,18 @@ describe('Header', () => {
     expect(scrollIntoView.mock.contexts[0]).toBe(document.getElementById(sectionId));
   });
 
+  it('closes the mobile menu when clicking elsewhere on the page', async () => {
+    renderRoute('/');
+    await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+    const menu = document.getElementById('mobile-menu') as HTMLElement;
+
+    await userEvent.click(menu);
+    expect(document.getElementById('mobile-menu')).toBeInTheDocument();
+
+    await userEvent.click(document.body);
+    expect(document.getElementById('mobile-menu')).not.toBeInTheDocument();
+  });
+
   it('lists the same sections in the mobile menu', async () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
