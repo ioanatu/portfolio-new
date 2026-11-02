@@ -15,8 +15,8 @@ describe('Footer', () => {
   it('links to every section and to the social profiles', async () => {
     const footer = await renderFooter();
 
-    SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
-      expect(footer.getByRole('link', { name: label })).toHaveAttribute('href', `/#${sectionId}`);
+    SECTION_NAV_ITEMS.forEach(({ label }) => {
+      expect(footer.getByRole('link', { name: label })).toHaveAttribute('href', '/');
     });
     SOCIAL_LINKS.forEach(({ label, href }) => {
       const link = footer.getByRole('link', { name: label });

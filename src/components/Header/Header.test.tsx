@@ -1,4 +1,4 @@
-import { act, screen, waitFor, within } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
@@ -24,28 +24,29 @@ describe('Header', () => {
   it('links the navbar to every section of the home page', async () => {
     await renderRoute('/');
     const nav = await screen.findByRole('navigation', { name: 'Main' });
-    SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
+    SECTION_NAV_ITEMS.forEach(({ label }) => {
       expect(within(nav).getByRole('link', { name: label, hidden: true })).toHaveAttribute(
         'href',
-        `/#${sectionId}`,
+        '/',
       );
     });
   });
 
-  it('scrolls back to a section whose link was already followed', async () => {
+  it('scrolls to a section without adding it to the URL', async () => {
     const scrollIntoView = vi.fn();
     Element.prototype.scrollIntoView = scrollIntoView;
-    await renderRoute('/');
+    const { router } = await renderRoute('/');
     const { label, sectionId } = SECTION_NAV_ITEMS[0];
     const nav = await screen.findByRole('navigation', { name: 'Main' });
     const link = within(nav).getByRole('link', { name: label, hidden: true });
 
     await userEvent.click(link);
-    scrollIntoView.mockClear();
-
     await userEvent.click(link);
-    expect(scrollIntoView).toHaveBeenCalledTimes(1);
-    expect(scrollIntoView.mock.contexts[0]).toBe(document.getElementById(sectionId));
+
+    expect(scrollIntoView).toHaveBeenCalledTimes(2);
+    expect(scrollIntoView.mock.contexts[1]).toBe(document.getElementById(sectionId));
+    expect(router.state.location.hash).toBe('');
+    expect(router.state.location.pathname).toBe('/');
   });
 
   it('closes the mobile menu when clicking elsewhere on the page', async () => {
@@ -64,8 +65,8 @@ describe('Header', () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
     const menu = within(document.getElementById('mobile-menu') as HTMLElement);
-    SECTION_NAV_ITEMS.forEach(({ label, sectionId }) => {
-      expect(menu.getByRole('link', { name: label })).toHaveAttribute('href', `/#${sectionId}`);
+    SECTION_NAV_ITEMS.forEach(({ label }) => {
+      expect(menu.getByRole('link', { name: label })).toHaveAttribute('href', '/');
     });
   });
 
@@ -73,7 +74,9 @@ describe('Header', () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
     const menu = document.getElementById('mobile-menu') as HTMLElement;
-    await userEvent.click(menu.querySelector('a[href="/#certifications"]') as HTMLElement);
+    await userEvent.click(
+      within(menu).getByRole('link', { name: 'Certifications' }) as HTMLElement,
+    );
     expect(document.getElementById('mobile-menu')).not.toBeInTheDocument();
   });
 
@@ -95,7 +98,7 @@ describe('Header', () => {
     const ats = screen.getByRole('menuitem', { name: /ATS format/ });
     expect(ats.getAttribute('href')).toMatch(/IoanaTatu_ATS_resume.*\.pdf$/);
     expect(ats).toHaveAttribute('target', '_blank');
-    expect(screen.getByRole('menuitem', { name: /Human eye/ }).getAttribute('href')).toMatch(
+    expect(screen.getByRole('menuitem', { name: /For human reader/ }).getAttribute('href')).toMatch(
       /IoanaTatu_Human.*\.pdf$/,
     );
 
@@ -111,7 +114,7 @@ describe('Header', () => {
     await userEvent.keyboard('{ArrowDown}');
     expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
-    expect(screen.getByRole('menuitem', { name: /Human eye/ })).toHaveFocus();
+    expect(screen.getByRole('menuitem', { name: /For human reader/ })).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
     expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();
   });
@@ -170,53 +173,30 @@ describe('Header', () => {
     expect(designArchive).toBe(projects + 2);
   });
 
-  it('keeps the URL hash on the section in view', async () => {
-    type Change = (entries: unknown[]) => void;
-    const observers: { onChange: Change; targets: Element[] }[] = [];
-    vi.stubGlobal(
-      'IntersectionObserver',
-      class {
-        entry: { onChange: Change; targets: Element[] };
-        constructor(onChange: Change) {
-          this.entry = { onChange, targets: [] };
-          observers.push(this.entry);
-        }
-        observe(target: Element) {
-          this.entry.targets.push(target);
-        }
-        unobserve() {}
-        disconnect() {}
-      },
-    );
-    const { router } = await renderRoute('/');
-    await screen.findByRole('navigation', { name: 'Main' });
+  it('goes to the home page and scrolls to the section from another page', async () => {
+    const scrollIntoView = vi.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+    const { router } = await renderRoute('/design-archive');
+    const { label, sectionId } = SECTION_NAV_ITEMS[0];
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
+
+    await userEvent.click(within(nav).getByRole('link', { name: label, hidden: true }));
+
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalled());
+    expect(scrollIntoView.mock.contexts[0]).toBe(document.getElementById(sectionId));
+    expect(router.state.location.pathname).toBe('/');
     expect(router.state.location.hash).toBe('');
-
-    const skills = document.getElementById('skills') as HTMLElement;
-    await act(async () => {
-      observers
-        .filter(({ targets }) => targets.includes(skills))
-        .forEach(({ onChange }) => onChange([{ target: skills, isIntersecting: true }]));
-    });
-
-    expect(router.state.location.hash).toBe('skills');
   });
 
-  it('removes the /#top hash when already at the top', async () => {
-    const { router } = await renderRoute('/#top');
-    await screen.findByRole('navigation', { name: 'Main' });
-    await waitFor(() => expect(router.state.location.hash).toBe(''));
-  });
+  it('scrolls to the top without changing the URL when the logo is clicked', async () => {
+    const scrollTo = vi.fn();
+    vi.stubGlobal('scrollTo', scrollTo);
+    const { router } = await renderRoute('/');
+    const nav = await screen.findByRole('navigation', { name: 'Main' });
 
-  it('removes the URL hash on scrolling back to the top from a section', async () => {
-    const { router } = await renderRoute('/#skills');
-    await screen.findByRole('navigation', { name: 'Main' });
-    expect(router.state.location.hash).toBe('skills');
+    await userEvent.click(within(nav).getByRole('link', { name: 'Ioana Tatu, home' }));
 
-    await act(async () => {
-      window.dispatchEvent(new Event('scroll'));
-    });
-
+    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
     expect(router.state.location.hash).toBe('');
   });
 });

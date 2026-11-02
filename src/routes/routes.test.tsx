@@ -34,14 +34,8 @@ describe('routes', () => {
   it('links the hero buttons to the skills and certifications sections', async () => {
     await renderRoute('/');
     const hero = within(await screen.findByRole('main'));
-    expect(hero.getByRole('link', { name: 'Check out my skills' })).toHaveAttribute(
-      'href',
-      '/#skills',
-    );
-    expect(hero.getByRole('link', { name: 'AWS Certifications' })).toHaveAttribute(
-      'href',
-      '/#certifications',
-    );
+    expect(hero.getByRole('link', { name: 'Check out my skills' })).toHaveAttribute('href', '/');
+    expect(hero.getByRole('link', { name: 'AWS Certifications' })).toHaveAttribute('href', '/');
   });
 
   it('redirects unknown paths to the home page', async () => {

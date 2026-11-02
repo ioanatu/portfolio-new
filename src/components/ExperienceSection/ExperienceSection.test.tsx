@@ -50,7 +50,6 @@ describe('ExperienceSection', () => {
     expect(bold).toContain('microfrontends');
     expect(bold).toContain('GitHub Actions');
     expect(bold).toContain('B2B');
-    expect(bold).toContain('B2C');
 
     document.querySelectorAll('li strong').forEach((item) => {
       expect(['Toolbox', 'Tariffs']).toContain(item.closest('section')?.getAttribute('aria-label'));
@@ -68,7 +67,7 @@ describe('ExperienceSection', () => {
 
   it('offers both resume versions under the jobs', () => {
     expect(screen.getByText('Download streamlined resume:')).toBeInTheDocument();
-    for (const name of ['ATS format', 'Happy human eye']) {
+    for (const name of ['ATS format', 'For human reader']) {
       const link = screen.getByRole('link', { name });
       expect(link.getAttribute('href')).toMatch(/\.pdf$/);
       expect(link).toHaveAttribute('target', '_blank');
