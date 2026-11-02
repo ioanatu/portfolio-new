@@ -86,6 +86,7 @@ export const MORE_SKILLS: readonly string[] = [
   'React Native',
   'Node.js',
   'Express',
+  'Next.js',
   'Sass',
   'styled-components',
   'i18n',
@@ -97,4 +98,6 @@ export const MORE_SKILLS: readonly string[] = [
   'Contentful',
   'POEditor',
   'LaunchDarkly',
+  'Firebase',
+  'Figma',
 ];

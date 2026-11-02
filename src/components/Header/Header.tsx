@@ -26,6 +26,7 @@ export const Header = () => {
   const [cvOpen, setCvOpen] = useState(false);
   const scrolled = useScrolledPast(GLASS_SCROLL_PX);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const hash = useRouterState({ select: (state) => state.location.hash });
   const activeSectionId = useScrollSpy(SECTION_IDS, pathname);
   const navigate = useNavigate();
 
@@ -39,6 +40,23 @@ export const Header = () => {
       hashScrollIntoView: false,
     });
   }, [activeSectionId, pathname, navigate]);
+
+  useEffect(() => {
+    if (pathname !== '/' || !hash) return;
+    const clearHashAtTop = () => {
+      if (window.scrollY > 0) return;
+      void navigate({
+        to: '/',
+        hash: undefined,
+        replace: true,
+        resetScroll: false,
+        hashScrollIntoView: false,
+      });
+    };
+    if (hash === 'top') clearHashAtTop();
+    window.addEventListener('scroll', clearHashAtTop, { passive: true });
+    return () => window.removeEventListener('scroll', clearHashAtTop);
+  }, [pathname, hash, navigate]);
 
   useResponsiveNav(navRef, (fits) => {
     if (fits) setMenuOpen(false);

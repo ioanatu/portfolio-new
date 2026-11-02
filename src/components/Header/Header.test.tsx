@@ -1,4 +1,4 @@
-import { act, screen, within } from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
@@ -200,5 +200,23 @@ describe('Header', () => {
     });
 
     expect(router.state.location.hash).toBe('skills');
+  });
+
+  it('removes the /#top hash when already at the top', async () => {
+    const { router } = await renderRoute('/#top');
+    await screen.findByRole('navigation', { name: 'Main' });
+    await waitFor(() => expect(router.state.location.hash).toBe(''));
+  });
+
+  it('removes the URL hash on scrolling back to the top from a section', async () => {
+    const { router } = await renderRoute('/#skills');
+    await screen.findByRole('navigation', { name: 'Main' });
+    expect(router.state.location.hash).toBe('skills');
+
+    await act(async () => {
+      window.dispatchEvent(new Event('scroll'));
+    });
+
+    expect(router.state.location.hash).toBe('');
   });
 });

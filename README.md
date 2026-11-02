@@ -1,8 +1,10 @@
 # portfolio-new
 
-I created this project to showcase my skills, highlight my professional experience, and experiment with AI-powered tools.
+This project is meant to showcase my skills, highlight my professional experience, and function as a sandbox for experimentation.
 
-I uses Sentry for error tracking and performance monitoring, and Google Analytics for my personal learning process. Please accept cookies as there is no marketing purpose behind.
+## Monitoring & Analytics
+
+I use Sentry to monitor errors and website performance, and Google Analytics to better understand visitor traffic and user behavior as part of my own learning process. Your privacy matters to me and there is no marketing purpose behind. Thank you for supporting my work by accepting cookies!
 
 ---
 
@@ -14,14 +16,25 @@ I uses Sentry for error tracking and performance monitoring, and Google Analytic
 - three.js for the 3D hero
 - Vitest + React Testing Library
 - ESLint (with jsx-a11y) + Prettier
+- Node.js 24
 - Yarn 4
 
 ## Pages
 
-- `/` – hero
+- `/` – main landing page with sections
 - `/projects` – projects (work in progress)
 
-Dark mode follows the system setting until the toggle is used; the choice is saved in `localStorage`.
+## Features
+
+- **Name pronunciation**: hover (or tap on mobile) my name in Hero section to hear it spoken.
+- **Live Credly badges**: certifications are fetched lazily through a `/credlyBadges` CloudFront path that forwards to a Lambda. Lambda is thus not accessed directly and only the CloudFront distribution has IAM permissions for GET requests.
+- **Dark Mode**: Who doesn't have a dark mode nowadays, right? It follows the system setting until the toggle is used. The choice is saved in `localStorage`.
+- **Animations**: created with claude code.
+- **Resume download**: ATS and human-friendly CV versions.
+- **Cookie consent**: Google Analytics loads only after opt-in, and choices can be changed from the footer. I use an open source lightweight & gdpr compliant cookie consent plugin [vanilla-cookieconsent](https://www.npmjs.com/package/vanilla-cookieconsent)
+- **Monitoring**: mandatory Sentry error tracking and performance, with source maps uploaded in CI.
+- **Responsive and accessible**: mobile, tablet and desktop layouts, keyboard support, and reduced-motion support.
+- **CI/CD**: GitHub Actions lints, tests, builds and deploys to S3 behind CloudFront.
 
 ## Getting started
 
@@ -50,7 +63,7 @@ yarn dev
 
 ## Deployment
 
-Pushes directly to `main` run `.github/workflows/deploy.yml`, which lints, tests, builds and syncs `dist/` to S3. Because this is a personal project, it does not use environments.
+The file `.github/workflows/deploy.yml`, contains the workflow for linting, running tests, and building. The `dist/` is uploaded to S3. Because this is a personal project, it does not use environments, instead it pushes directly to `main`.
 
 ---
 
