@@ -79,7 +79,7 @@ export const JOBS: readonly Job[] = [
             'Sonnen partners application used for the battery commissioning process and post-sale support.',
           points: [
             'B2B application built with React, Redux, RxJS, SASS, webpack, REST API, deployed on GitLab.',
-            'Legacy app where I performed regular bug fixes, developed new features and drove code refactorings to improve maintainability.',
+            'Legacy app where I developed new features and drove code refactorings to improve code quality and maintainability.',
           ],
         },
         {

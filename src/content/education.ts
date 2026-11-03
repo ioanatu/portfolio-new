@@ -56,6 +56,6 @@ export const LANGUAGES: readonly Language[] = [
     ],
   },
   { name: 'German', level: 'Fluent', certificates: [{ name: 'TestDaF C1', year: '2017' }] },
-  { name: 'French', level: 'Conversational' },
+  { name: 'French', level: 'Professional' },
   { name: 'Romanian', level: 'Native' },
 ];
