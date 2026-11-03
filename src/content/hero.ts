@@ -13,5 +13,5 @@ export const HERO_LEDE =
   'Welcome to my new portfolio, where I showcase my knowledge and have fun building the old-school way and with AI. Browse around to see my experience, skills, and certifications.';
 
 export const STATUS_TEXT = 'Open to new frontend roles';
-export const STATUS_PLACES = ['Berlin', 'Remote'];
-export const STATUS_PLACES_LABEL = 'Berlin or remote';
+export const STATUS_PLACES = ['Berlin', 'Paris', 'Amsterdam', 'Remote'];
+export const STATUS_PLACES_LABEL = 'Berlin, Paris, Amsterdam or remote';
