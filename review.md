@@ -32,11 +32,7 @@ The site is a React 19 + TypeScript + Vite personal portfolio: file-based TanSta
 
 ## High
 
-### H1. Deploy pipeline is currently red
-
-**Where:** `src/components/Header/Header.test.tsx` (~L99), `src/content/navigation.ts`, `src/assets/IoanaTatu_FrontendEngineer_*.pdf`  
-**Finding:** The CV files were renamed to `IoanaTatu_FrontendEngineer_ATS.pdf` / `IoanaTatu_FrontendEngineer_Human.pdf`. The Header test still expects `/IoanaTatu_ATS_resume.*\.pdf$/`. Vitest result: 1 failed, 71 passed.  
-**Remediate:** Update the regexes to the current filenames (or assert `href` ends with `.pdf` and contains `ATS` / `Human`). Re-run `yarn test:run`. Do not merge until green.
+H1. Deploy pipeline is currently red, test failing - ✅
 
 ### H2. Long-lived AWS keys in GitHub Actions
 
