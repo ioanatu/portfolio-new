@@ -1,5 +1,5 @@
-import cvAts from '../assets/IoanaTatu_ATS_resume.pdf';
-import cvHuman from '../assets/IoanaTatu_Human.pdf';
+import cvAts from '../assets/IoanaTatu_FrontendEngineer_ATS.pdf';
+import cvHuman from '../assets/IoanaTatu_FrontendEngineer_Human.pdf';
 
 export type SectionNavItem = {
   label: string;

@@ -96,10 +96,10 @@ describe('Header', () => {
     await userEvent.click(trigger);
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
     const ats = screen.getByRole('menuitem', { name: /ATS format/ });
-    expect(ats.getAttribute('href')).toMatch(/IoanaTatu_ATS_resume.*\.pdf$/);
+    expect(ats.getAttribute('href')).toMatch(/IoanaTatu_FrontendEngineer_ATS.*\.pdf$/);
     expect(ats).toHaveAttribute('target', '_blank');
     expect(screen.getByRole('menuitem', { name: /For human reader/ }).getAttribute('href')).toMatch(
-      /IoanaTatu_Human.*\.pdf$/,
+      /IoanaTatu_FrontendEngineer_Human.*\.pdf$/,
     );
 
     await userEvent.keyboard('{Escape}');

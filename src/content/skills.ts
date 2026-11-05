@@ -64,7 +64,7 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
     label: 'Quality',
     title: 'Testing & TDD',
     description: '',
-    skills: ['Vitest', 'Jest', 'React Testing Library'],
+    skills: ['Vitest', 'Jest', 'React Testing Library', 'Cypress'],
   },
 ];
 
@@ -72,8 +72,14 @@ export const AI_PANEL = {
   title: 'AI engineering',
   description:
     'I am educating myself on how to use AI in software engineering and am experimenting with different tools and workflows.',
-  skillsTitle: 'Building with AI',
-  skills: ['Claude Code', 'Cursor', 'GitHub Copilot', 'WIP: Agentic workflows with review gates'],
+  skillsTitle: 'AI-assisted development',
+  skills: [
+    'Claude Code',
+    'Cursor',
+    'GitHub Copilot',
+    'WIP: Agentic workflows with review gates',
+    'AI-assisted implementation, refactoring, test generation, and code review',
+  ],
   coursesTitle: 'Udemy Courses I took',
   courses: [
     {
