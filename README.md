@@ -35,6 +35,7 @@ I use Sentry to monitor errors and website performance, and Google Analytics to 
 - **Monitoring**: mandatory Sentry error tracking and performance, with source maps uploaded in CI.
 - **Responsive and accessible**: mobile, tablet and desktop layouts, keyboard support, and reduced-motion support.
 - **CI/CD**: GitHub Actions lints, tests, builds and deploys to S3 behind CloudFront.
+- **Meta tags for social preview**: These index.html meta tags control how the website appears when someone shares its URL on social media, messaging apps, and other platforms (for me this was important particularly for Whatsapp and LinkedIn).
 
 ## Getting started
 
