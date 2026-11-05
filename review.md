@@ -11,12 +11,10 @@ The site is a React 19 + TypeScript + Vite personal portfolio: file-based TanSta
 ## Summary
 
 | Severity | Count |
-| --- | --- |
-| High | 6 |
-| Medium | 14 |
-| Low | 12 |
-
-**Currently failing:** `yarn test:run` — 1 of 72 tests fails (`Header` CV filename assertion). That step is in the deploy workflow, so a push to `main` will not deploy until it is fixed.
+| -------- | ----- |
+| High     | 6     |
+| Medium   | 14    |
+| Low      | 12    |
 
 ---
 
