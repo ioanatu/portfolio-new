@@ -114,6 +114,7 @@ export const JOBS: readonly Job[] = [
       highlights: [
         'Acted as a consultant on several projects, working with clients across Europe and experiencing different cultures: Red Bull München on their website and with Royal Unibrew (Denmark) and Hartwall (Finland) on a B2B mobile application.',
         'Contributed to Dev Breakfast, an agency-wide knowledge-sharing series on clean code, TDD and scalability, and supported recruiting.',
+        'Had first contact with accessibility, WCAG standards, ARIA and browser assistive tools, and started implementing them in projects.',
       ],
       projects: [
         {
