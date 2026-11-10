@@ -37,3 +37,6 @@ coverage
 
 #Tanstack
 .tanstack/tmp
+
+MY_NOTES.md
+ARCHITECTURE.md
