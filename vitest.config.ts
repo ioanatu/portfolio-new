@@ -10,6 +10,13 @@ export default defineConfig({
     restoreMocks: true,
     setupFiles: ['./vitest.setup.ts'],
     css: { modules: { classNameStrategy: 'non-scoped' } },
+    server: {
+      deps: {
+        // The component library's entry does `import './...css'`. Dependencies are loaded by Node,
+        // which cannot load a stylesheet, so Vite has to process this one itself.
+        inline: ['@ioanatu/component-library'],
+      },
+    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],

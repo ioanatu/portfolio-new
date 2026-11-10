@@ -1,17 +1,15 @@
+import { Button } from '@ioanatu/component-library';
 import clsx from 'clsx';
-import { ChevronDown } from 'lucide-react';
-import { useId } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import type { Recommendation } from '../../content/recommendations';
-import { buttonClassName } from '../Button/buttonClassName';
 import styles from './RecommendationCard.module.css';
 import { contentTransitionName } from './transitionNames';
 
-const MORE_LABEL = 'Read more';
+const MORE_LABEL = 'Read more ...';
 const LESS_LABEL = 'Show less';
 
 type RecommendationCardProps = {
   recommendation: Recommendation;
-  /** Name under which the card and its text take part in view transitions */
   transitionName: string;
   expanded: boolean;
   onToggle: () => void;
@@ -25,6 +23,15 @@ export const RecommendationCard = ({
 }: RecommendationCardProps) => {
   const fullTextId = useId();
   const label = expanded ? LESS_LABEL : MORE_LABEL;
+  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+    button.setAttribute('aria-expanded', String(expanded));
+    button.setAttribute('aria-controls', fullTextId);
+    button.setAttribute('aria-label', `${label}: recommendation from ${author}`);
+  }, [expanded, fullTextId, label, author]);
 
   return (
     <article className={clsx(styles.recommendationCard, featured && styles.featured)}>
@@ -42,26 +49,14 @@ export const RecommendationCard = ({
           </span>
           <p>{highlight}</p>
         </blockquote>
-        <button
-          type="button"
-          className={buttonClassName({
-            variant: 'secondary',
-            size: 'small',
-            className: styles.more,
-          })}
-          aria-expanded={expanded}
-          aria-controls={fullTextId}
-          aria-label={`${label}: recommendation from ${author}`}
+        <Button
+          ref={buttonRef}
+          variant="primary"
+          size="md"
+          label={label}
+          className={styles.more}
           onClick={onToggle}
-        >
-          {label}
-          <ChevronDown
-            className={clsx(styles.chevron, expanded && styles.open)}
-            size={18}
-            strokeWidth={1.8}
-            aria-hidden="true"
-          />
-        </button>
+        />
         <div id={fullTextId} className={styles.fullText} hidden={!expanded}>
           {description.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

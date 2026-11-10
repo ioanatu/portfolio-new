@@ -75,6 +75,19 @@
   --line: rgba(236, 237, 245, 0.0866);
   --btn: #ecedf5;
   --btn-text: #10121c;
+  /*
+   * The component library only has light colours, and its buttons read these tokens, so they are
+   * restated here for the dark theme: the ink of the outline and of the hard shadow turns light
+   */
+  --surface-default: #1d1d21;
+  --surface-hover: #26262b;
+  --surface-active: #303036;
+  --surface-accent: #5b82ff;
+  --text-default: #f2f2f0;
+  --text-on-accent: #101014;
+  --border-default: #f2f2f0;
+  --shadow-default: #5b82ff;
+  --shadow-strong: #f2f2f0;
   --focus: #a9b2ff;
 
   --glass-bg: rgba(25, 28, 42, 0.32);

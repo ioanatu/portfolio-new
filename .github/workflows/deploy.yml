@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
         shell: bash
+        env:
+          # Lets yarn read the component library from GitHub Packages, see the README
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_PACKAGES_TOKEN }}
 
       - name: Perform linting
         run: yarn lint

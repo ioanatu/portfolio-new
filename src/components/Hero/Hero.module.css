@@ -1,6 +1,7 @@
 .hero {
+  /* No isolation: the pixel background reaches below the hero and must stay behind the content
+     of the next section too, so it joins the stacking context of the whole page */
   position: relative;
-  isolation: isolate;
   padding-bottom: 28px;
   text-align: center;
 
@@ -55,23 +56,10 @@
     --d: 270ms;
 
     display: flex;
-    gap: 12px;
+    gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 34px;
-
-    /* Pixel mosaic instead of the glass fill and gradient border; the a + class
-       selector outranks the shared .button.glass rule regardless of stylesheet order */
-    a.pixel-button {
-      position: relative;
-      isolation: isolate;
-      border-color: transparent;
-      background: none;
-
-      &:hover:not(:disabled) {
-        filter: brightness(1.12);
-      }
-    }
+    margin-top: 64px;
   }
 
   .rise {

@@ -43,9 +43,16 @@ Requires Node 24 (see `.nvmrc`).
 
 ```bash
 corepack enable
+export GITHUB_PACKAGES_TOKEN=<a GitHub token that can read packages>
 yarn install
 yarn dev
 ```
+
+### Component library
+
+The hero buttons come from my own [component library](https://github.com/ioanatu/component-library/pkgs/npm/component-library), `@ioanatu/component-library`, which is published on GitHub Packages. GitHub Packages needs a token even to read a package, so `yarn install` expects one in the `GITHUB_PACKAGES_TOKEN` environment variable. `.yarnrc.yml` only points to that variable, so no token is stored in the repo. Use a classic personal access token with the `read:packages` scope.
+
+The library adds its own CSS (colors, fonts and button styles). It only has light colors, so the dark theme restates the colors its buttons use, at the end of the dark block in `src/index.css`.
 
 ## Commands
 
@@ -64,7 +71,7 @@ yarn dev
 
 ## Deployment
 
-The file `.github/workflows/deploy.yml`, contains the workflow for linting, running tests, and building. The `dist/` is uploaded to S3. Because this is a personal project, it does not use environments, instead it pushes directly to `main`.
+The file `.github/workflows/deploy.yml`, contains the workflow for linting, running tests, and building. Installing the dependencies needs the repository secret `GITHUB_PACKAGES_TOKEN`, the token that can read the component library (see above). The `dist/` is uploaded to S3. Because this is a personal project, it does not use environments, instead it pushes directly to `main`.
 
 ---
 

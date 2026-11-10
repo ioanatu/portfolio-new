@@ -35,7 +35,9 @@ describe('RecommendationsSection', () => {
     render(<RecommendationsSection />);
     const { author, description } = RECOMMENDATIONS[0];
     const card = within(screen.getAllByRole('listitem')[0]);
-    const button = card.getByRole('button', { name: `Read more: recommendation from ${author}` });
+    const button = card.getByRole('button', {
+      name: `Read more ...: recommendation from ${author}`,
+    });
     expect(button).toHaveAttribute('aria-expanded', 'false');
 
     await userEvent.click(button);

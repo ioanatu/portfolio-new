@@ -47,18 +47,6 @@
     align-self: flex-start;
   }
 
-  .chevron {
-    transition: transform 0.3s ease;
-
-    &.open {
-      transform: rotate(180deg);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
-  }
-
   .full-text {
     display: grid;
     gap: 14px;

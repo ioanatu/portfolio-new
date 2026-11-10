@@ -3,7 +3,7 @@ import type { Theme } from '../../types';
 /** Default tile size in CSS pixels; the real size stretches slightly so whole tiles fill the parent. */
 export const MOSAIC_CELL = 24;
 
-type Rgb = [number, number, number];
+export type Rgb = [number, number, number];
 
 type MosaicPalette = {
   /** Flat colour the top of the card settles into, so text there reads cleanly */
@@ -26,12 +26,12 @@ const PALETTES: Record<Theme, MosaicPalette> = {
 /** Shown on the canvas until its first draw, and the colour the top of the mosaic settles into. */
 export const mosaicTopColor = (theme: Theme) => PALETTES[theme].top;
 
-const hex = (h: string): Rgb => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) as Rgb;
-const mix = (a: Rgb, b: Rgb, t: number): Rgb => a.map((v, i) => v + (b[i] - v) * t) as Rgb;
-const shade = (c: Rgb, k: number): Rgb =>
+export const hex = (h: string): Rgb => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) as Rgb;
+export const mix = (a: Rgb, b: Rgb, t: number): Rgb => a.map((v, i) => v + (b[i] - v) * t) as Rgb;
+export const shade = (c: Rgb, k: number): Rgb =>
   k >= 0 ? mix(c, [255, 255, 255], k) : mix(c, [4, 5, 14], -k);
 /** Deterministic noise in [-0.5, 0.5), so the mosaic is identical on every render. */
-const jitter = (x: number, y: number) => {
+export const jitter = (x: number, y: number) => {
   const s = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
   return s - Math.floor(s) - 0.5;
 };

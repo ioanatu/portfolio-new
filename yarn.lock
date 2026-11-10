@@ -590,6 +590,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ioanatu/component-library@npm:1.0.12":
+  version: 1.0.12
+  resolution: "@ioanatu/component-library@npm:1.0.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40ioanatu%2Fcomponent-library%2F1.0.12%2Fc8324bdec440b5a126591d5903ee8c66d10d8200"
+  peerDependencies:
+    "@types/react": ^19.2.14
+    "@types/react-dom": ^19.2.3
+    react: ^19.2.6
+    react-dom: ^19.2.6
+  checksum: 10/651ba09e86e7288cc21a85e2f0b06884414499baf1489f3bfd29d70ccab0d270e48bb30e3dd74bad8b0dbdc7cc63c227c4fe3608c8ff40a82edf1d430fab0d01
+  languageName: node
+  linkType: hard
+
 "@isaacs/fs-minipass@npm:^4.0.0":
   version: 4.0.1
   resolution: "@isaacs/fs-minipass@npm:4.0.1"
@@ -4466,6 +4478,7 @@ __metadata:
     "@fontsource-variable/hanken-grotesk": "npm:^5.3.0"
     "@fontsource-variable/jetbrains-mono": "npm:^5.3.0"
     "@fontsource/poppins": "npm:^5.3.0"
+    "@ioanatu/component-library": "npm:1.0.12"
     "@sentry/react": "npm:^11.10.0"
     "@sentry/vite-plugin": "npm:^11.10.0"
     "@tanstack/eslint-plugin-query": "npm:^5.105.0"
