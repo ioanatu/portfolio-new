@@ -2,7 +2,12 @@ import { useRouterState } from '@tanstack/react-router';
 import clsx from 'clsx';
 import { Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { CV_LINKS, PAGE_NAV_ITEMS, SECTION_IDS, SECTION_NAV_ITEMS } from '../../content/navigation';
+import {
+  CV_LINKS,
+  HEADER_PAGE_NAV_ITEMS,
+  SECTION_IDS,
+  SECTION_NAV_ITEMS,
+} from '../../content/navigation';
 import { useResponsiveNav } from '../../hooks/useResponsiveNav';
 import { useScrolledPast } from '../../hooks/useScrolledPast';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
@@ -67,7 +72,7 @@ export const Header = () => {
                 </SectionLink>
               </li>
             ))}
-            {PAGE_NAV_ITEMS.map(({ label, to }) => (
+            {HEADER_PAGE_NAV_ITEMS.map(({ label, to }) => (
               <li key={to} className={styles.pageItem}>
                 <PageLink to={to}>{label}</PageLink>
               </li>
@@ -99,7 +104,7 @@ export const Header = () => {
           <MobileMenu
             id={MOBILE_MENU_ID}
             sections={SECTION_NAV_ITEMS}
-            pages={PAGE_NAV_ITEMS}
+            pages={HEADER_PAGE_NAV_ITEMS}
             activeSectionId={activeSectionId}
             cvLinks={CV_LINKS}
             onNavigate={() => setMenuOpen(false)}

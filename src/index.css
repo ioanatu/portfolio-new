@@ -41,7 +41,6 @@
   --glass-glow: rgba(255, 255, 255, 0.24);
   --glass-shadow: rgba(27, 31, 59, 0.32);
   --glass-ctl: rgba(255, 255, 255, 0.24);
-  --sheen: 0.55;
   --stage-glass: rgba(255, 255, 255, 0.46);
   --pending-glass: rgba(255, 255, 255, 0.31);
 
@@ -84,7 +83,6 @@
   --glass-glow: rgba(255, 255, 255, 0.06);
   --glass-shadow: rgba(0, 0, 0, 0.55);
   --glass-ctl: rgba(255, 255, 255, 0.08);
-  --sheen: 0.12;
   --stage-glass: rgba(25, 28, 42, 0.46);
   --pending-glass: rgba(25, 28, 42, 0.31);
 
@@ -199,4 +197,153 @@ p {
     transparent 6px
   );
   mask-image: linear-gradient(180deg, transparent 0, #000 220px);
+}
+
+/*
+ * Cards that open and close morph from their old box to their new one, with a slight liquid
+ * wobble at the end. The card itself (background, border, shadow) stretches with the box, while
+ * its text is a separate layer that never scales: it only dissolves from the old layout into the
+ * new one inside the moving box.
+ */
+/* The card groups get their keyframes from RecommendationsSection.tsx, which uses the same spring */
+::view-transition-group(*) {
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.2, 1.15, 0.4, 1);
+  animation-timing-function: linear(
+    0,
+    0.47,
+    0.792,
+    0.967,
+    1.039,
+    1.053,
+    1.042,
+    1.026,
+    1.013,
+    1.004,
+    1,
+    0.998,
+    0.998,
+    0.999,
+    0.999,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  );
+}
+
+/*
+ * The card shell is a real box, not a picture of the card: stretching a picture would stretch the
+ * rounded corners too, and the old and new corners would cross-fade. With a real box the corner
+ * radius stays the same at every size, so the corners grow and shrink with the card. Its styles
+ * are copied from the real card when the transition starts.
+ */
+::view-transition-group(*.recommendation-card) {
+  box-sizing: border-box;
+  background: var(--card-background);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--card-backdrop);
+}
+
+::view-transition-old(*.recommendation-card),
+::view-transition-new(*.recommendation-card) {
+  display: none;
+}
+
+::view-transition-group(*.recommendation-content) {
+  overflow: clip;
+}
+
+/* The text is out of sight while the box moves, so only the card is seen changing shape */
+::view-transition-old(*.recommendation-content),
+::view-transition-new(*.recommendation-content) {
+  width: auto;
+  height: auto;
+  object-fit: none;
+  animation-timing-function: linear;
+}
+
+/*
+ * The old text is gone almost at once, while the card has hardly moved: it fades out (quickly at
+ * first) and shrinks towards its center. The new text only fades in once the spring of the card
+ * has finished (the spring is within half a percent of its end after about a third of the time).
+ */
+::view-transition-old(*.recommendation-content) {
+  animation-name: recommendation-text-shrink, recommendation-text-fade;
+  animation-timing-function: ease-in, ease-out;
+  transform-origin: center;
+}
+
+::view-transition-new(*.recommendation-content) {
+  animation-name: recommendation-text-in;
+  animation-timing-function: ease-out;
+}
+
+@keyframes recommendation-text-shrink {
+  0% {
+    transform: scale(1);
+  }
+  8%,
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes recommendation-text-fade {
+  0% {
+    opacity: 1;
+  }
+  3.5%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes recommendation-text-in {
+  0%,
+  34% {
+    opacity: 0;
+  }
+  62%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+ * While cards morph, the navbar becomes a layer of its own that sits above them, so the cards
+ * never wash over it. It only gets its name for the duration of the transition: a permanent
+ * name would cut the navbar off from the page behind it and take away its blur.
+ *
+ * The layer is a still picture of the navbar, so it gets the navbar's rounded shape and its blur
+ * (copied from the real navbar when the transition starts) back, to look exactly the same.
+ */
+html.view-transitioning header nav {
+  view-transition-name: site-nav;
+}
+
+::view-transition-group(site-nav) {
+  animation: none;
+  border-radius: 999px;
+  backdrop-filter: var(--site-nav-backdrop, none);
+}
+
+::view-transition-old(site-nav) {
+  display: none;
+}
+
+::view-transition-new(site-nav) {
+  animation: none;
 }

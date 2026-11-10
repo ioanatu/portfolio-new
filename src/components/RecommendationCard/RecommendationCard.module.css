@@ -1,0 +1,99 @@
+.recommendation-card {
+  composes: glass-panel from '../GlassPanel/GlassPanel.module.css';
+
+  display: flex;
+  flex-direction: column;
+
+  &:not(.featured) {
+    height: 100%;
+  }
+
+  /* The text layer: a separate view transition layer, so it never gets stretched */
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .highlight {
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    p {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1.25rem, 1.7vw, 1.45rem);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      text-wrap: pretty;
+    }
+  }
+
+  .mark {
+    display: block;
+    height: 0.55em;
+    margin-bottom: 10px;
+    color: #000;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-size: 6.5rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .more {
+    align-self: flex-start;
+  }
+
+  .chevron {
+    transition: transform 0.3s ease;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .full-text {
+    display: grid;
+    gap: 14px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .attribution {
+    display: grid;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .author {
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .role {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+}
+
+:root[data-theme='dark'] .recommendation-card .mark {
+  color: var(--text);
+}

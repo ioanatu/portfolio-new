@@ -1,0 +1,12 @@
+/* One canvas pixel per tile, scaled up crisply behind the parent's content.
+   The parent needs position: relative and isolation: isolate. */
+.mosaic {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  image-rendering: pixelated;
+  pointer-events: none;
+}

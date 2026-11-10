@@ -1,6 +1,6 @@
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS } from '../../content/navigation';
+import { PAGE_NAV_ITEMS, SECTION_NAV_ITEMS, SHOW_PAGES_IN_HEADER } from '../../content/navigation';
 import { renderRoute } from '../../testUtils';
 
 describe('Header', () => {
@@ -95,9 +95,12 @@ describe('Header', () => {
     const trigger = await screen.findByRole('button', { name: 'View Resume' });
     await userEvent.click(trigger);
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    const ats = screen.getByRole('menuitem', { name: /ATS format/ });
-    expect(ats.getAttribute('href')).toMatch(/IoanaTatu_FrontendEngineer_ATS.*\.pdf$/);
+    const ats = screen.getByRole('menuitem', { name: /ATS two pages/ });
+    expect(ats.getAttribute('href')).toMatch(/IoanaTatu_FrontendEngineer_ATS_2pages.*\.pdf$/);
     expect(ats).toHaveAttribute('target', '_blank');
+    expect(screen.getByRole('menuitem', { name: /ATS condensed/ }).getAttribute('href')).toMatch(
+      /IoanaTatu_FrontendEngineer_ATS_1page.*\.pdf$/,
+    );
     expect(screen.getByRole('menuitem', { name: /For human reader/ }).getAttribute('href')).toMatch(
       /IoanaTatu_FrontendEngineer_Human.*\.pdf$/,
     );
@@ -112,23 +115,28 @@ describe('Header', () => {
     const trigger = await screen.findByRole('button', { name: 'View Resume' });
     trigger.focus();
     await userEvent.keyboard('{ArrowDown}');
-    expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();
+    expect(screen.getByRole('menuitem', { name: /ATS condensed/ })).toHaveFocus();
+    await userEvent.keyboard('{ArrowDown}');
+    expect(screen.getByRole('menuitem', { name: /ATS two pages/ })).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
     expect(screen.getByRole('menuitem', { name: /For human reader/ })).toHaveFocus();
     await userEvent.keyboard('{ArrowDown}');
-    expect(screen.getByRole('menuitem', { name: /ATS format/ })).toHaveFocus();
+    expect(screen.getByRole('menuitem', { name: /ATS condensed/ })).toHaveFocus();
   });
 
-  it('links the navbar to the design archive and marks it as the current page there', async () => {
-    await renderRoute('/design-archive');
-    const nav = await screen.findByRole('navigation', { name: 'Main' });
-    const link = within(nav).getByRole('link', { name: 'Design archive', hidden: true });
+  it.skipIf(!SHOW_PAGES_IN_HEADER)(
+    'links the navbar to the design archive and marks it as the current page there',
+    async () => {
+      await renderRoute('/design-archive');
+      const nav = await screen.findByRole('navigation', { name: 'Main' });
+      const link = within(nav).getByRole('link', { name: 'Design archive', hidden: true });
 
-    expect(link).toHaveAttribute('href', '/design-archive');
-    expect(link).toHaveAttribute('aria-current', 'page');
-  });
+      expect(link).toHaveAttribute('href', '/design-archive');
+      expect(link).toHaveAttribute('aria-current', 'page');
+    },
+  );
 
-  it('opens the design archive from the navbar', async () => {
+  it.skipIf(!SHOW_PAGES_IN_HEADER)('opens the design archive from the navbar', async () => {
     await renderRoute('/');
     const nav = await screen.findByRole('navigation', { name: 'Main' });
     await userEvent.click(within(nav).getByRole('link', { name: 'Design archive', hidden: true }));
@@ -136,7 +144,7 @@ describe('Header', () => {
     expect(await screen.findByText(/This page is work in progress/)).toBeInTheDocument();
   });
 
-  it('lists the design archive in the mobile menu', async () => {
+  it.skipIf(!SHOW_PAGES_IN_HEADER)('lists the design archive in the mobile menu', async () => {
     await renderRoute('/');
     await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
 
@@ -145,33 +153,55 @@ describe('Header', () => {
     ).toHaveAttribute('href', '/design-archive');
   });
 
-  it('lists Projects after Education, then the pages after a gap', async () => {
-    await renderRoute('/');
-    const nav = await screen.findByRole('navigation', { name: 'Main' });
-    const labels = within(nav)
-      .getAllByRole('link', { hidden: true })
-      .map((link) => link.textContent);
+  it.skipIf(!SHOW_PAGES_IN_HEADER)(
+    'lists Projects after Education, then the pages after a gap',
+    async () => {
+      await renderRoute('/');
+      const nav = await screen.findByRole('navigation', { name: 'Main' });
+      const labels = within(nav)
+        .getAllByRole('link', { hidden: true })
+        .map((link) => link.textContent);
 
-    const sections = SECTION_NAV_ITEMS.map(({ label }) => label);
-    expect(sections.slice(-2)).toEqual(['Education', 'Projects']);
-    const pages = PAGE_NAV_ITEMS.map(({ label }) => label);
-    expect(labels.slice(labels.indexOf(sections[0]))).toEqual(
-      expect.arrayContaining([...sections, ...pages]),
-    );
-    expect(labels.indexOf('Projects')).toBeLessThan(labels.indexOf(pages[0]));
-  });
+      const sections = SECTION_NAV_ITEMS.map(({ label }) => label);
+      expect(sections.slice(-2)).toEqual(['Education', 'Projects']);
+      const pages = PAGE_NAV_ITEMS.map(({ label }) => label);
+      expect(labels.slice(labels.indexOf(sections[0]))).toEqual(
+        expect.arrayContaining([...sections, ...pages]),
+      );
+      expect(labels.indexOf('Projects')).toBeLessThan(labels.indexOf(pages[0]));
+    },
+  );
 
-  it('separates the pages from the sections in the mobile menu', async () => {
-    await renderRoute('/');
-    await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
-    const menu = document.getElementById('mobile-menu') as HTMLElement;
-    const items = [...menu.querySelectorAll('li')];
-    const projects = items.findIndex((item) => item.textContent === 'Projects');
-    const designArchive = items.findIndex((item) => item.textContent === 'Design archive');
+  it.skipIf(!SHOW_PAGES_IN_HEADER)(
+    'separates the pages from the sections in the mobile menu',
+    async () => {
+      await renderRoute('/');
+      await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+      const menu = document.getElementById('mobile-menu') as HTMLElement;
+      const items = [...menu.querySelectorAll('li')];
+      const projects = items.findIndex((item) => item.textContent === 'Projects');
+      const designArchive = items.findIndex((item) => item.textContent === 'Design archive');
 
-    expect(items[projects + 1]).toHaveAttribute('aria-hidden', 'true');
-    expect(designArchive).toBe(projects + 2);
-  });
+      expect(items[projects + 1]).toHaveAttribute('aria-hidden', 'true');
+      expect(designArchive).toBe(projects + 2);
+    },
+  );
+
+  it.skipIf(SHOW_PAGES_IN_HEADER)(
+    'keeps the design archive out of the navbar and mobile menu',
+    async () => {
+      await renderRoute('/');
+      const nav = await screen.findByRole('navigation', { name: 'Main' });
+      expect(within(nav).queryByRole('link', { name: 'Design archive', hidden: true })).toBeNull();
+
+      await userEvent.click(await screen.findByRole('button', { name: 'Open menu' }));
+      expect(
+        within(document.getElementById('mobile-menu')!).queryByRole('link', {
+          name: 'Design archive',
+        }),
+      ).toBeNull();
+    },
+  );
 
   it('goes to the home page and scrolls to the section from another page', async () => {
     const scrollIntoView = vi.fn();

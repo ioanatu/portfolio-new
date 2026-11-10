@@ -39,7 +39,7 @@ export const CertificationsSection = () => {
         <div className={styles.grid} aria-busy={isPending}>
           {isPending &&
             Array.from({ length: CREDLY_BADGE_COUNT }, (_, i) => (
-              <CertificationCardSkeleton key={i} />
+              <CertificationCardSkeleton key={i} shimmer={nearViewport} />
             ))}
           {earned?.map((certification) => (
             <CertificationCard key={certification.name} certification={certification} />

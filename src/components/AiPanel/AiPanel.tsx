@@ -1,6 +1,7 @@
 import { ArrowUpRight } from 'lucide-react';
 import { buttonClassName } from '../Button/buttonClassName';
 import { ChipList } from '../ChipList/ChipList';
+import { PixelMosaic } from '../PixelMosaic/PixelMosaic';
 import styles from './AiPanel.module.css';
 
 type AiPanelProps = {
@@ -23,6 +24,7 @@ export const AiPanel = ({
   courses,
 }: AiPanelProps) => (
   <aside aria-labelledby={titleId} className={styles.aiPanel}>
+    <PixelMosaic />
     <h3 id={titleId} className={styles.title}>
       {title}
     </h3>

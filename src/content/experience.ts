@@ -1,7 +1,7 @@
 import aaronLogo from '../assets/aaron-logo.png';
 import futuriceLogo from '../assets/futurice-logo.jpg';
 import sonnenLogo from '../assets/sonnen-logo.png';
-import { CV_LINKS } from './navigation';
+import { CV_HREFS } from './navigation';
 
 export type JobProject = {
   name: string;
@@ -34,10 +34,11 @@ export const EXPERIENCE_TITLE = 'Where I’ve worked';
 export const EXPERIENCE_INTRO =
   '5+ years of frontend engineering across a product company, consultancy and a startup. I’ve built B2B and B2C applications, from microfrontend dashboards to component libraries, and have brought value to all phases of the software development lifecycle.';
 
-export const RESUME_DOWNLOAD_LABEL = 'Download streamlined resume:';
+export const RESUME_DOWNLOAD_LABEL = 'Download resume:';
 export const RESUME_DOWNLOADS = [
-  { label: 'ATS format', href: CV_LINKS[0].href },
-  { label: 'For human reader', href: CV_LINKS[1].href },
+  { label: 'ATS single page condensed', href: CV_HREFS.atsCondensed },
+  { label: 'ATS two pages', href: CV_HREFS.ats },
+  { label: 'For human reader', href: CV_HREFS.human },
 ] as const;
 
 export const JOBS: readonly Job[] = [
@@ -122,8 +123,8 @@ export const JOBS: readonly Job[] = [
           summary: 'MVP website for ice hockey club Red Bull Munich.',
           link: { href: 'https://www.redbullmuenchen.de/de/', label: 'redbullmuenchen.de' },
           points: [
-            'B2C app with React, TypeScript, Remix, Contentful for content management and a serverless backend on AWS.',
-            'Built features for a server-side rendered frontend application with Remix and styled-components.',
+            'B2C app with Next.js, TypeScript, Contentful for content management and a serverless backend on AWS.',
+            'Built features for the server-side rendered frontend application with styled-components.',
           ],
         },
         {

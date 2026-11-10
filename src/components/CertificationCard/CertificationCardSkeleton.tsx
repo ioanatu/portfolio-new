@@ -1,9 +1,22 @@
 import clsx from 'clsx';
 import styles from './CertificationCard.module.css';
 
-export const CertificationCardSkeleton = ({ className }: { className?: string }) => (
+type CertificationCardSkeletonProps = {
+  shimmer?: boolean;
+  className?: string;
+};
+
+export const CertificationCardSkeleton = ({
+  shimmer = false,
+  className,
+}: CertificationCardSkeletonProps) => (
   <article
-    className={clsx(styles.certificationCard, styles.skeleton, className)}
+    className={clsx(
+      styles.certificationCard,
+      styles.skeleton,
+      shimmer && styles.shimmer,
+      className,
+    )}
     aria-hidden="true"
   >
     <span className={styles.badge} />

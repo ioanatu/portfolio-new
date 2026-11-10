@@ -144,4 +144,19 @@ describe('CertificationsSection', () => {
     await waitFor(() => expect(fetchBadges).toHaveBeenCalledTimes(1));
     expect(fetchBadges).toHaveBeenCalledWith(CREDLY_BADGES_PATH);
   });
+
+  it('shimmers the placeholders only once the section nears the viewport', async () => {
+    vi.stubGlobal('fetch', () => new Promise(() => {}));
+    const { reveal } = stubIntersectionObserver(false);
+    renderSection();
+
+    const placeholders = () => document.querySelectorAll('article[aria-hidden="true"]');
+    expect(placeholders()).toHaveLength(3);
+    placeholders().forEach((placeholder) => expect(placeholder).not.toHaveClass('shimmer'));
+
+    reveal();
+    await waitFor(() =>
+      placeholders().forEach((placeholder) => expect(placeholder).toHaveClass('shimmer')),
+    );
+  });
 });

@@ -65,9 +65,9 @@ describe('ExperienceSection', () => {
     ).toHaveAttribute('href', 'https://www.aaron.ai/');
   });
 
-  it('offers both resume versions under the jobs', () => {
-    expect(screen.getByText('Download streamlined resume:')).toBeInTheDocument();
-    for (const name of ['ATS format', 'For human reader']) {
+  it('offers every resume version under the jobs', () => {
+    expect(screen.getByText('Download resume:')).toBeInTheDocument();
+    for (const name of ['ATS single page condensed', 'ATS two pages', 'For human reader']) {
       const link = screen.getByRole('link', { name });
       expect(link.getAttribute('href')).toMatch(/\.pdf$/);
       expect(link).toHaveAttribute('target', '_blank');

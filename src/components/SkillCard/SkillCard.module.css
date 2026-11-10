@@ -33,21 +33,9 @@
     padding-top: 8px;
   }
 
+  /* Wider, with a bigger title, but the same white surface as the other cards */
   &.featured {
     grid-column: span 2;
-    border-color: transparent;
-    background:
-      radial-gradient(60% 85% at 80% 18%, rgba(255, 255, 255, var(--sheen)), transparent 62%),
-      linear-gradient(
-        135deg,
-        color-mix(in srgb, var(--g-sky) 30%, var(--surface)),
-        color-mix(in srgb, var(--g-violet) 18%, var(--surface)) 56%,
-        color-mix(in srgb, var(--g-coral) 20%, var(--surface))
-      );
-    backdrop-filter: blur(10px) saturate(1.9);
-    box-shadow:
-      inset 0 1px 1px var(--glass-hi),
-      0 30px 60px -28px var(--glass-shadow);
 
     .title {
       font-size: clamp(1.9rem, 3.2vw, 2.8rem);
@@ -56,12 +44,6 @@
 
     .description {
       max-width: 46ch;
-      color: var(--text);
-      opacity: 0.8;
-    }
-
-    .chips li {
-      background: var(--surface);
     }
 
     @media (max-width: 640px) {

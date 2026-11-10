@@ -10,8 +10,8 @@ export const HERO_NAME = /^ioana$/i;
 export const PRONUNCIATION_LABEL = 'Listen to name pronunciation';
 
 export const HERO_LEDE =
-  'Welcome to my new portfolio, where I showcase my knowledge and have fun building the old-school way and with AI. Browse around to see my experience, skills, and certifications.';
+  'Welcome to my new portfolio. \nBrowse around to see my experience, skills, and certifications, \nand what the people I worked with say about me.';
 
 export const STATUS_TEXT = 'Open to new frontend roles';
-export const STATUS_PLACES = ['Berlin', 'Paris', 'Amsterdam', 'Remote'];
-export const STATUS_PLACES_LABEL = 'Berlin, Paris, Amsterdam or remote';
+export const STATUS_PLACES = ['Berlin', 'Munich', 'Paris', 'Amsterdam', 'Remote'];
+export const STATUS_PLACES_LABEL = 'Berlin, Munich, Paris, Amsterdam or remote';

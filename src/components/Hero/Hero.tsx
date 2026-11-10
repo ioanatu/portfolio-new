@@ -1,22 +1,13 @@
 import clsx from 'clsx';
 import { type ReactNode, useState } from 'react';
-import {
-  HERO_HOT_WORD,
-  HERO_LEDE,
-  HERO_LINES,
-  HERO_NAME,
-  STATUS_PLACES,
-  STATUS_PLACES_LABEL,
-  STATUS_TEXT,
-} from '../../content/hero';
+import { HERO_HOT_WORD, HERO_LEDE, HERO_LINES, HERO_NAME } from '../../content/hero';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { buttonClassName } from '../Button/buttonClassName';
 import { Container } from '../Container/Container';
 import { HeroBackground } from '../HeroBackground/HeroBackground';
 import { NamePronunciation, PronunciationButton } from '../NamePronunciation/NamePronunciation';
-import { RotatingWords } from '../RotatingWords/RotatingWords';
+import { PixelMosaic } from '../PixelMosaic/PixelMosaic';
 import { SectionLink } from '../SectionLink/SectionLink';
-import { StatusPill } from '../StatusPill/StatusPill';
 import { TypewriterHeading } from '../TypewriterHeading/TypewriterHeading';
 import styles from './Hero.module.css';
 
@@ -33,9 +24,6 @@ export const Hero = () => {
       <HeroBackground />
       <Container>
         <div className={styles.intro}>
-          <StatusPill className={clsx(styles.rise, styles.status)}>
-            {STATUS_TEXT} <RotatingWords words={STATUS_PLACES} label={STATUS_PLACES_LABEL} />
-          </StatusPill>
           <TypewriterHeading
             id="hero-title"
             className={styles.title}
@@ -53,8 +41,10 @@ export const Hero = () => {
             <SectionLink
               sectionId="skills"
               current={false}
-              className={buttonClassName({ variant: 'glass' })}
+              className={buttonClassName({ variant: 'glass', className: styles.pixelButton })}
             >
+              {/* dark in both themes, like the glass button it replaces */}
+              <PixelMosaic cell={12} theme="dark" vivid />
               Check out my skills
             </SectionLink>
             <SectionLink

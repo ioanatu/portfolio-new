@@ -130,10 +130,18 @@
         var(--surface-2) 70%
       );
       background-size: 200% 100%;
-      animation: skeleton-shimmer 1.4s ease-in-out infinite;
+    }
 
-      @media (prefers-reduced-motion: reduce) {
-        animation: none;
+    /* Only shimmers while the section is near the screen: an animation nobody can see would still
+       make the browser draw a new frame on every screen refresh */
+    &.shimmer {
+      .badge,
+      .line {
+        animation: skeleton-shimmer 1.4s ease-in-out infinite;
+
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
       }
     }
 
