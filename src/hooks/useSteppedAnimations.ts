@@ -29,7 +29,7 @@ export const useSteppedAnimations = (ref: RefObject<Element | null>, fps: number
       elapsed += now - lastTick;
       lastTick = now;
       animations.forEach((animation, index) => {
-        animation.currentTime = startTimes[index] + elapsed;
+        if (animation.playState !== 'idle') animation.currentTime = startTimes[index] + elapsed;
       });
     };
     const start = () => {

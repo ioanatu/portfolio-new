@@ -10,7 +10,7 @@ export type Certification = {
 
 export const CERTIFICATIONS_TITLE = 'Certified on AWS,\nthree times and counting';
 export const CERTIFICATIONS_INTRO =
-  "I'm passionate about cloud computing and invest in my continuous education. Understanding things beyond my frontend role helps me build performant, scalable, and secure applications.";
+  'I\'m passionate about cloud computing and invest in my continuous education. A "full stack" approach helps me build performant, scalable, and secure applications.';
 export const CERTIFICATIONS_SOURCE_NOTES: string[] = [
   'Badges are fetched with lazy loading shortly before section is scrolled into view.',
   'A Lambda function on AWS fetches earned badges directly from Credly API.',

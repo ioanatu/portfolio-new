@@ -1,10 +1,11 @@
 .section {
+  --edu-lift: 50px;
   --edu-o: 0.3;
   --edu-glass: rgba(255, 255, 255, 0.62);
 
   position: relative;
   isolation: isolate;
-  padding-block: var(--section-padding);
+  padding-block: calc(var(--section-padding) - var(--edu-lift)) var(--section-padding);
 
   @media (min-width: 961px) {
     margin-top: -80px;
@@ -45,5 +46,6 @@
 }
 
 section[id].section {
-  scroll-margin-top: calc(var(--section-padding) * -1);
+  /* matches the trimmed top padding, so the nav link still lands on the heading */
+  scroll-margin-top: calc((var(--section-padding) - var(--edu-lift)) * -1);
 }

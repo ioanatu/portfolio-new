@@ -207,7 +207,7 @@ p {
  */
 /* The card groups get their keyframes from RecommendationsSection.tsx, which uses the same spring */
 ::view-transition-group(*) {
-  animation-duration: 1.6s;
+  animation-duration: 1.44s;
   animation-timing-function: cubic-bezier(0.2, 1.15, 0.4, 1);
   animation-timing-function: linear(
     0,

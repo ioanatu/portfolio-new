@@ -48,6 +48,6 @@ export const CV_LINKS = [
 
 export const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/ioanatatu' },
-  { label: 'GitHub', href: 'https://github.com/ioanatatu' },
+  { label: 'GitHub', href: 'https://github.com/ioanatu' },
   { label: 'Behance', href: 'https://behance.net/IoanaTatu' },
 ] as const;

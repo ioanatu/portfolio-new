@@ -37,10 +37,10 @@ const CARD_STYLES: CopiedStyle[] = [
   { property: '--card-backdrop', read: (style) => style.backdropFilter },
 ];
 
-// The same damped spring as the easing in index.css
 const SPRING_DAMPING = 14.52;
 const SPRING_FREQUENCY = 13.2;
 const MORPH_STEPS = 120;
+const TEXT_SETTLED_AT = 0.34;
 
 const spring = (progress: number) =>
   progress >= 1
@@ -56,12 +56,14 @@ const spring = (progress: number) =>
  * bottom ones) are rounded separately in every frame, so an edge that does not move stays exactly
  * where it is, and the box is placed with `left` and `top` rather than with a transform.
  */
-const morphKeyframes = (from: DOMRect, to: DOMRect): Keyframe[] =>
+const morphKeyframes = (from: DOMRect, to: DOMRect, settledAt = 1): Keyframe[] =>
   Array.from({ length: MORPH_STEPS + 1 }, (_, step) => {
     const offset = step / MORPH_STEPS;
+    const settled = offset >= settledAt;
     // The last box is the exact one, so that the real card takes over without any jump
-    const snap = step === MORPH_STEPS ? (value: number) => value : Math.round;
-    const mix = (start: number, end: number) => snap(start + (end - start) * spring(offset));
+    const snap = step === MORPH_STEPS || settled ? (value: number) => value : Math.round;
+    const progress = settled ? 1 : spring(offset);
+    const mix = (start: number, end: number) => snap(start + (end - start) * progress);
     const left = mix(from.left, to.left);
     const top = mix(from.top, to.top);
     return {
@@ -79,7 +81,8 @@ const morphKeyframes = (from: DOMRect, to: DOMRect): Keyframe[] =>
 /**
  * Gives the morph of every card, and of the text inside it, its exact boxes, see `morphKeyframes`.
  * The text must follow the very same steps as its card: if it moved even slightly ahead of the
- * card, it would stick out of the card for a moment.
+ * card, it would stick out of the card for a moment. Only once the new text starts to appear does
+ * it stop following the card's spring and stay in its final box (see `TEXT_SETTLED_AT`).
  */
 const pinCardBoxes = (before: Map<string, DOMRect>, after: Map<string, DOMRect>) => {
   document.getAnimations().forEach((animation) => {
@@ -91,7 +94,8 @@ const pinCardBoxes = (before: Map<string, DOMRect>, after: Map<string, DOMRect>)
     const from = name && before.get(name);
     const to = name && after.get(name);
     if (!from || !to) return;
-    effect.setKeyframes(morphKeyframes(from, to));
+    const isText = name.endsWith('-content');
+    effect.setKeyframes(morphKeyframes(from, to, isText ? TEXT_SETTLED_AT : 1));
   });
 };
 

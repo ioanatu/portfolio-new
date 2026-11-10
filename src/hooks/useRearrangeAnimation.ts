@@ -1,7 +1,7 @@
 import { type RefObject, useCallback, useLayoutEffect, useRef } from 'react';
 import { usePrefersReducedMotion } from './usePrefersReducedMotion';
 
-export const REARRANGE_DURATION_MS = 520;
+export const REARRANGE_DURATION_MS = 468;
 const EASING = 'cubic-bezier(0.2, 0.7, 0.2, 1)';
 const SIZE_TOLERANCE_PX = 1;
 
