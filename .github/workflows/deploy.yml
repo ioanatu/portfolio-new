@@ -8,7 +8,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
     env:
+      NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       VITE_SENTRY_DSN: ${{ vars.VITE_SENTRY_DSN }}
       VITE_APP_VERSION: ${{ github.sha }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -29,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
         shell: bash
-        env:
-          # Lets yarn read the component library from GitHub Packages, see the README
-          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_PACKAGES_TOKEN }}
 
       - name: Perform linting
         run: yarn lint

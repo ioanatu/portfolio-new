@@ -43,14 +43,14 @@ Requires Node 24 (see `.nvmrc`).
 
 ```bash
 corepack enable
-export GITHUB_PACKAGES_TOKEN=<a GitHub token that can read packages>
+export NPM_AUTH_TOKEN=<a GitHub token that can read packages>
 yarn install
 yarn dev
 ```
 
 ### Component library
 
-The hero buttons come from my own [component library](https://github.com/ioanatu/component-library/pkgs/npm/component-library), `@ioanatu/component-library`, which is published on GitHub Packages. GitHub Packages needs a token even to read a package, so `yarn install` expects one in the `GITHUB_PACKAGES_TOKEN` environment variable. `.yarnrc.yml` only points to that variable, so no token is stored in the repo. Use a classic personal access token with the `read:packages` scope.
+The hero buttons come from my own [component library](https://github.com/ioanatu/component-library/pkgs/npm/component-library), `@ioanatu/component-library`, which is published on GitHub Packages. GitHub Packages needs a token even to read a package, so `yarn install` expects one in the `NPM_AUTH_TOKEN` environment variable. `.yarnrc.yml` only points to that variable, so no token is stored in the repo. Use a classic personal access token with the `read:packages` scope.
 
 The library adds its own CSS (colors, fonts and button styles). It only has light colors, so the dark theme restates the colors its buttons use, at the end of the dark block in `src/index.css`.
 
@@ -71,7 +71,7 @@ The library adds its own CSS (colors, fonts and button styles). It only has ligh
 
 ## Deployment
 
-The file `.github/workflows/deploy.yml`, contains the workflow for linting, running tests, and building. Installing the dependencies needs the repository secret `GITHUB_PACKAGES_TOKEN`, the token that can read the component library (see above). The `dist/` is uploaded to S3. Because this is a personal project, it does not use environments, instead it pushes directly to `main`.
+The file `.github/workflows/deploy.yml`, contains the workflow for linting, running tests, and building. Installing the dependencies needs to read the component library: the workflow gives yarn the built-in `GITHUB_TOKEN` as `NPM_AUTH_TOKEN`, so no secret has to be created. That only works while the package `component-library` allows this repository to read it (the package's settings, under "Manage Actions access"). The `dist/` is uploaded to S3. Because this is a personal project, it does not use environments, instead it pushes directly to `main`.
 
 ---
 
